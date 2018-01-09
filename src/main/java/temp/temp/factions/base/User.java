@@ -1,6 +1,8 @@
 package temp.temp.factions.base;
 
-public interface User
+import temp.temp.factions.chat.Messageable;
+
+public interface User extends Messageable
 {
 
 }
