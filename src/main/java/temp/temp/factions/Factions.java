@@ -1,6 +1,8 @@
 package temp.temp.factions;
 
-public class Factions
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Factions extends JavaPlugin
 {
 
 }
