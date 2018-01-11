@@ -1,27 +1,14 @@
-package temp.temp.factions.store;
+package temp.temp.factions.store.mongodb;
 
 import java.util.List;
 
 import temp.temp.factions.base.User;
 import temp.temp.factions.base.Warp;
 import temp.temp.factions.spatial.LazyLocation;
+import temp.temp.factions.store.LoadFaction;
 
-public class TestFaction extends LoadFaction
+public class MongoFaction extends LoadFaction
 {
-
-    @Override
-    public Warp setWarp(String name, LazyLocation lcoation, String password)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Warp setWarp(String name, LazyLocation location)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
     public void removeWarp(String name)
@@ -91,6 +78,13 @@ public class TestFaction extends LoadFaction
     {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    protected Warp createWarp(String name, LazyLocation location, String password)
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
