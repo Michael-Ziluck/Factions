@@ -1,7 +1,10 @@
 package temp.temp.factions.store;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.apache.commons.lang.Validate;
@@ -11,7 +14,9 @@ import com.google.common.collect.Multimap;
 import temp.temp.factions.base.Faction;
 import temp.temp.factions.base.User;
 import temp.temp.factions.base.Warp;
+import temp.temp.factions.base.struct.Flag;
 import temp.temp.factions.base.struct.Role;
+import temp.temp.factions.spatial.LazyLocation;
 
 public abstract class LoadFaction implements Faction
 {
@@ -24,47 +29,77 @@ public abstract class LoadFaction implements Faction
 
     protected String motd;
 
+    protected Type type;
+
     protected Multimap<UUID, String> announcements;
 
-    protected List<Warp> warps;
+    protected Map<String, Warp> warps;
 
     protected User leader;
 
     protected List<User> members;
 
+    protected List<UUID> invites;
+
+    protected Set<Flag> flags;
+
     @Override
     public UUID getUniqueId()
     {
+        if (uniqueId == null)
+        {
+            // TODO load uuid
+        }
         return uniqueId;
     }
 
     @Override
     public String getName()
     {
+        if (name == null)
+        {
+            // TODO load name
+        }
         return name;
     }
 
     @Override
     public String getStub()
     {
+        if (name == null)
+        {
+            // TODO load name
+        }
         return name.toLowerCase();
     }
 
     @Override
     public String getDescription()
     {
+        if (description == null)
+        {
+            // TODO load description
+        }
         return description;
     }
 
     @Override
     public String getMOTD()
     {
+        if (motd != null)
+        {
+            // TODO load motd
+        }
         return motd;
     }
 
     @Override
     public Multimap<UUID, String> getAnnouncements()
     {
+        if (announcements == null)
+        {
+            // TODO load announcements
+        }
         return announcements;
     }
 
@@ -135,7 +170,123 @@ public abstract class LoadFaction implements Faction
     @Override
     public void removeAnnouncements(User user)
     {
-        announcements.removeAll(user);
+        getAnnouncements().removeAll(user);
+    }
+
+    @Override
+    public void addInvite(User user)
+    {
+        getInvites().add(user.getUniqueId());
+    }
+
+    @Override
+    public void removeInvite(User user)
+    {
+        getInvites().remove(user.getUniqueId());
+    }
+
+    @Override
+    public boolean hasInvite(User user)
+    {
+        return getInvites().contains(user.getUniqueId());
+    }
+
+    @Override
+    public List<UUID> getInvites()
+    {
+        if (invites == null)
+        {
+            // TODO load invites
+        }
+        return invites;
+    }
+
+    /**
+     * Retrieves the map of the Warps that exist. This is used almost exclusively for lookup and easy access to values.
+     * 
+     * @return the map of Warps and referenced by their stubs.
+     */
+    protected Map<String, Warp> getWarpsMap()
+    {
+        return warps;
+    }
+
+    @Override
+    public Collection<Warp> getWarps()
+    {
+        if (warps == null)
+        {
+            // TODO load warps
+        }
+        return getWarpsMap().values();
+    }
+
+    @Override
+    public Warp getWarp(String name)
+    {
+        return getWarpsMap().get(name);
+    }
+
+    @Override
+    public boolean isWarp(String name)
+    {
+        return getWarp(name) != null;
+    }
+
+    @Override
+    public Warp setWarp(String name, LazyLocation location)
+    {
+        return setWarp(name, location, null);
+    }
+
+    @Override
+    public Warp setWarp(String name, LazyLocation location, String password)
+    {
+        Warp warp = createWarp(name, location, password);
+    }
+
+    /**
+     * Creates a new Warp object using the proper database implementation.
+     * 
+     * @param name the name of the warp.
+     * @param location the location of the warp.
+     * @param password the password for the warp.
+     * @return the newly created warp.
+     */
+    protected abstract Warp createWarp(String name, LazyLocation location, String password);
+
+    @Override
+    public Type getType()
+    {
+        if (type == null)
+        {
+            // TODO load type
+        }
+        return type;
+    }
+
+    @Override
+    public boolean isNormal()
+    {
+        return getType() == Faction.Type.NORMAL;
+    }
+
+    @Override
+    public boolean isSafezone()
+    {
+        return getType() == Faction.Type.SAFEZONE;
+    }
+
+    @Override
+    public boolean isWarzone()
+    {
+        return getType() == Faction.Type.WARZONE;
+    }
+
+    @Override
+    public boolean isWilderness()
+    {
+        return getType() == Faction.Type.WILDERNESS;
     }
 
     @Override

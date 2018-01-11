@@ -1,5 +1,6 @@
 package temp.temp.factions.base;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -119,7 +120,7 @@ public interface Faction extends Messageable
      * 
      * @return all Faction warps.
      */
-    public List<Warp> getWarps();
+    public Collection<Warp> getWarps();
 
     /**
      * Gets a warp by the given name. This method is case-insensitive. If there is no warp found by the given name,
@@ -149,7 +150,7 @@ public interface Faction extends Messageable
      * @param password the password for the warp.
      * @return the newly created warp.
      */
-    public Warp setWarp(String name, LazyLocation lcoation, String password);
+    public Warp setWarp(String name, LazyLocation location, String password);
 
     /**
      * Creates a new password-less warp for the Faction with the given name and location.
@@ -212,6 +213,13 @@ public interface Faction extends Messageable
     public List<User> getMembers();
 
     /**
+     * Retrieves the {@link Type} of the Faction.
+     * 
+     * @return the Faction Type.
+     */
+    public Type getType();
+
+    /**
      * Checks if this is the Wilderness. The Wilderness will always have a UUID of ffffffff-ffff-ffff-ffff-ffffffffffff.
      * 
      * @return {@code true} if this is the Wilderness.
@@ -251,11 +259,43 @@ public interface Faction extends Messageable
     public boolean isPermanent();
 
     /**
-     * Checks if this
+     * Checks if this Faction is peaceful. Peaceful Factions are not able to partake in PVP. Additionally peaceful
+     * Factions are able to use several more flags that they are not able to normally use.
      * 
-     * @return
+     * @return {@code true} if this Faction is peaceful.
      */
     public boolean isPeaceful();
+
+    /**
+     * Add an invite for the given User. For non-open factions, adding an invite for a User is the only way to allow
+     * players to join a Faction.
+     * 
+     * @param user the user to add an invite for.
+     */
+    public void addInvite(User user);
+
+    /**
+     * Remove an existing invite for the given User.
+     * 
+     * @param user the user whose invite to remove.
+     */
+    public void removeInvite(User user);
+
+    /**
+     * Checks if the given User has an existing invite.
+     * 
+     * @param user the user to check.
+     * @return {@code true} if the User has an invite.
+     */
+    public boolean hasInvite(User user);
+
+    /**
+     * Retrieves all existing invites for this Faction. This list should not be modified directly as it can cause
+     * unexpected side effects. Use {@link #addInvite(User)} and {@link #removeInvite(User)} instead.
+     * 
+     * @return the invites for this faction.
+     */
+    public List<UUID> getInvites();
 
     /**
      * Saves this Faction instance to the designated form of storage. This method will run asynchronously to ensure that
@@ -264,5 +304,13 @@ public interface Faction extends Messageable
      * as much efficiency as possible.
      */
     public void save();
+
+    public static enum Type
+    {
+        NORMAL,
+        WILDERNESS,
+        WARZONE,
+        SAFEZONE;
+    }
 
 }
