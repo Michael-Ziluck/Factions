@@ -166,8 +166,9 @@ public interface Faction extends Messageable
      * This action is permanent so be sure that all necessary checks are done first.
      * 
      * @param name the name to search for.
+     * @return {@code true} if there was a Faction to remove.
      */
-    public void removeWarp(String name);
+    public boolean removeWarp(String name);
 
     /**
      * Removes all the warps from the Faction. This action is permanent so be sure that all necessary checks are done
@@ -211,6 +212,26 @@ public interface Faction extends Messageable
      * @return all members of the Faction.
      */
     public List<User> getMembers();
+
+    /**
+     * Retrieves all the members who have the specific rank. This is a shorthand method for retrieving all members and
+     * filter out all members who aren't the specified role. If there are no members with that role, this will return an
+     * empty list. Important note: this will return only the members with the specified role, not those at or above the
+     * role.
+     * 
+     * @param role the role to look for.
+     * @return the members with the given faction role.
+     */
+    public List<User> getMembers(Role role);
+
+    /**
+     * Retrieves all the trials members of the Faction. This is a shorthand method for retrieving all members and
+     * filtering out all non-trial-members. If there are no trial members, this will return an empty list. Important
+     * note: this will return only trial-members, not any member who is trial or higher.
+     * 
+     * @return the trial members.
+     */
+    public List<User> getTrialMembers();
 
     /**
      * Retrieves the {@link Type} of the Faction.

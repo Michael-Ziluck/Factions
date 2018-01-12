@@ -1,5 +1,6 @@
 package temp.temp.factions.store;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -112,6 +113,9 @@ public abstract class LoadFaction implements Faction
      */
     protected void processAnnouncement(User user, String message)
     {
+        Validate.notNull(user, "User can't be null.");
+        Validate.notNull(message, "Message can't be null.");
+
         if (user.isOnline())
         {
             user.sendMessage(message);
@@ -170,24 +174,32 @@ public abstract class LoadFaction implements Faction
     @Override
     public void removeAnnouncements(User user)
     {
+        Validate.notNull(user, "User can't be null.");
+
         getAnnouncements().removeAll(user);
     }
 
     @Override
     public void addInvite(User user)
     {
+        Validate.notNull(user, "User can't be null.");
+
         getInvites().add(user.getUniqueId());
     }
 
     @Override
     public void removeInvite(User user)
     {
+        Validate.notNull(user, "User can't be null.");
+
         getInvites().remove(user.getUniqueId());
     }
 
     @Override
     public boolean hasInvite(User user)
     {
+        Validate.notNull(user, "User can't be null.");
+
         return getInvites().contains(user.getUniqueId());
     }
 
@@ -208,41 +220,67 @@ public abstract class LoadFaction implements Faction
      */
     protected Map<String, Warp> getWarpsMap()
     {
+        if (warps == null)
+        {
+            // TODO load warps
+        }
         return warps;
     }
 
     @Override
     public Collection<Warp> getWarps()
     {
-        if (warps == null)
-        {
-            // TODO load warps
-        }
         return getWarpsMap().values();
     }
 
     @Override
     public Warp getWarp(String name)
     {
+        Validate.notNull(name, "Name can't be null.");
+
         return getWarpsMap().get(name);
     }
 
     @Override
     public boolean isWarp(String name)
     {
+        Validate.notNull(name, "Name can't be null.");
+
         return getWarp(name) != null;
     }
 
     @Override
     public Warp setWarp(String name, LazyLocation location)
     {
+        Validate.notNull(name, "Name can't be null.");
+        Validate.notNull(location, "Location can't be null.");
+
         return setWarp(name, location, null);
     }
 
     @Override
     public Warp setWarp(String name, LazyLocation location, String password)
     {
+        Validate.notNull(name, "Name can't be null.");
+        Validate.notNull(location, "Location can't be null.");
+
         Warp warp = createWarp(name, location, password);
+        getWarpsMap().put(warp.getStub(), warp);
+        return warp;
+    }
+
+    @Override
+    public boolean removeWarp(String name)
+    {
+        Validate.notNull(name, "Name can't be null.");
+
+        return getWarpsMap().remove(name.toLowerCase()) != null;
+    }
+
+    @Override
+    public void clearWarps()
+    {
+        getWarpsMap().clear();
     }
 
     /**
@@ -287,6 +325,88 @@ public abstract class LoadFaction implements Faction
     public boolean isWilderness()
     {
         return getType() == Faction.Type.WILDERNESS;
+    }
+
+    @Override
+    public User getLeader()
+    {
+        if (leader == null)
+        {
+            // TODO load leader
+        }
+        return leader;
+    }
+
+    @Override
+    public List<User> getMembers()
+    {
+        if (members == null)
+        {
+            // TODO load members
+        }
+        return members;
+    }
+
+    @Override
+    public List<User> getAdmins()
+    {
+        List<User> admins = new ArrayList<>(getMembers());
+        admins.removeIf(u -> u.getFactionRole() != Role.ADMIN);
+        return admins;
+    }
+
+    @Override
+    public List<User> getModerators()
+    {
+        List<User> moderators = new ArrayList<>(getMembers());
+        moderators.removeIf(u -> u.getFactionRole() != Role.MODERATOR);
+        return moderators;
+    }
+
+    @Override
+    public List<User> getTrialMembers()
+    {
+        List<User> trials = new ArrayList<>(getMembers());
+        trials.removeIf(u -> u.getFactionRole() != Role.TRIAL);
+        return trials;
+    }
+
+    @Override
+    public List<User> getMembers(Role role)
+    {
+        Validate.notNull(role, "Role can't be null.");
+
+        List<User> members = new ArrayList<>(getMembers());
+        members.removeIf(u -> u.getFactionRole() != role);
+        return members;
+    }
+
+    @Override
+    public void sendMessage(String message)
+    {
+        Validate.notNull(message, "Message can't be null.");
+
+        addAnnouncement(message);
+    }
+
+    @Override
+    public boolean isPeaceful()
+    {
+        if (flags == null)
+        {
+            // TODO load flags
+        }
+        return flags.contains(Flag.PEACEFUL);
+    }
+
+    @Override
+    public boolean isPermanent()
+    {
+        if (flags == null)
+        {
+            // TODO load flags
+        }
+        return !flags.contains(Flag.TEMPORARY);
     }
 
     @Override
