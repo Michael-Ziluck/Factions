@@ -1,0 +1,6 @@
+# This is used to figure out how the system should optimize itself.
+# Memory: This mode is only advisable if your system is VERY short on memory.
+#     Almost every other use case this is not the preferable approach.
+# Processing: This is the default mode. The system will try to reduce the processing
+#    rather than reduce memory usage wherever possible.
+reduce: memory
