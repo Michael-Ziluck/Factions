@@ -1,4 +1,4 @@
-package net.dnddev.factions.configuration.structs;
+package net.dnddev.factions.configuration.struct;
 
 /**
  * The type of optimization this plugin is going for. For more details, look at the ConfigurationManager.

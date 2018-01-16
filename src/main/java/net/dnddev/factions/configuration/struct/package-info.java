@@ -1,4 +1,4 @@
 /**
  * All enums for configuring the configuration system.
  */
-package net.dnddev.factions.configuration.structs;
+package net.dnddev.factions.configuration.struct;

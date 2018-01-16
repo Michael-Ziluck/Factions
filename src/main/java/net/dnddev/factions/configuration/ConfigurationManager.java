@@ -1,6 +1,6 @@
 package net.dnddev.factions.configuration;
 
-import net.dnddev.factions.configuration.structs.Optimization;
+import net.dnddev.factions.configuration.struct.Optimization;
 
 /**
  * The manager for all configuration settings.
