@@ -1,13 +1,36 @@
 package net.dnddev.factions.base.struct;
 
+/**
+ * Represents the role that a User takes in a Faction.
+ * 
+ * @author Michael Ziluck
+ */
 public enum Role
 {
 
+    /**
+     * The leader of a Faction.
+     */
     LEADER(100),
+    /**
+     * One rank under Leader, admins can do almost everything the Leader can do.
+     */
     ADMIN(80),
+    /**
+     * Those in charge of moderating the regular members.
+     */
     MODERATOR(60),
+    /**
+     * A regular member of a Faction.
+     */
     MEMBER(40),
+    /**
+     * A member whose membership is either temporary or preliminary.
+     */
     TRIAL(20),
+    /**
+     * The Role that those without a Faction have.
+     */
     FACTIONLESS(0);
 
     private int value;
