@@ -2,7 +2,7 @@ net.dnddev.factions
 net.dnddev.factions.base
 net.dnddev.factions.base.struct
 net.dnddev.factions.configuration
-net.dnddev.factions.configuration.structs
+net.dnddev.factions.configuration.struct
 net.dnddev.factions.spatial
 net.dnddev.factions.store
 net.dnddev.factions.store.mongodb
