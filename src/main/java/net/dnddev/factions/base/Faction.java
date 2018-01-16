@@ -10,6 +10,15 @@ import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.chat.Messageable;
 import net.dnddev.factions.spatial.LazyLocation;
 
+/**
+ * The base entity that this API is based around.
+ * <p>
+ * Factions are groups of {@link User Users} that work together to play within a Minecraft server. Factions can claim
+ * land, have a home, set warps, create outposts, and much more.
+ * </p>
+ * 
+ * @author Michael Ziluck
+ */
 public interface Faction extends Messageable
 {
 
@@ -340,11 +349,31 @@ public interface Faction extends Messageable
      */
     public void save();
 
+    /**
+     * Represents the purpose for each Faction. Each enum has a description for the function of each Type.
+     * 
+     * @author Michael Ziluck
+     */
     public static enum Type
     {
+        /**
+         * A normal Faction created and managed by a normal User.
+         */
         NORMAL,
+        /**
+         * Unincorporated land. All players without a Faction are part of the Wilderness, and all land that is not
+         * claimed is also part of the Wilderness.
+         */
         WILDERNESS,
+        /**
+         * Area designed for combat. This is one of the two types of system Factions. A Warzone is set up so that
+         * administrators can create an area that can not be claimed by Users, but also is able to have combat.
+         */
         WARZONE,
+        /**
+         * Area designed for peace. This is one of the two types of system Factions. A Safezone is set up so that
+         * administrators can create an area that can not be claimed by Users, that also blocks combat.
+         */
         SAFEZONE;
     }
 

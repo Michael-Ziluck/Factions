@@ -2,6 +2,12 @@ package net.dnddev.factions.spatial;
 
 import com.conversantmedia.util.collection.spatial.HyperRect;
 
+/**
+ * An area that is bounded by two points. The HyperRect is part of a system called an R-Tree which is a type of spatial
+ * data structure to quickly and easily search for regions and points in a three-dimensional world.
+ * 
+ * @author Michael Ziluck
+ */
 public interface BoundedArea extends HyperRect<BoundedArea>, Comparable<BoundedArea>
 {
 

@@ -10,6 +10,11 @@ import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
 import net.dnddev.factions.spatial.LazyLocation;
 
+/**
+ * The base system to store Factions and the areas that they have claimed.
+ * 
+ * @author Michael Ziluck
+ */
 public interface FactionStore
 {
 

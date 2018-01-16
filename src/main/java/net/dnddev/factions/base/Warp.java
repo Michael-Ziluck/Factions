@@ -2,6 +2,12 @@ package net.dnddev.factions.base;
 
 import net.dnddev.factions.spatial.LazyLocation;
 
+/**
+ * A location set by Factions to be able to easily teleport to. Each Warp must have a name and location set.
+ * Additionally Warps can also have a password set in order to further restrict access within a single Faction.
+ * 
+ * @author Michael Ziluck
+ */
 public interface Warp
 {
 

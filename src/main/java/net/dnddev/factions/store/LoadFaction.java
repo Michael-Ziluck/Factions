@@ -19,6 +19,19 @@ import net.dnddev.factions.base.struct.Flag;
 import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.spatial.LazyLocation;
 
+/**
+ * The in-memory representation of a Faction.
+ * <p>
+ * To help reduce clutter and duplicate code, Factions have an additional middle step between the interface and the
+ * implementation that saves to the database.
+ * </p>
+ * <p>
+ * This should only ever be used if you are making major changes to Factions. Many checks and a lot of logic is done
+ * within this class, so be careful with what exactly is touched. When in doubt, reference the original source code.
+ * </p>
+ * 
+ * @author Michael Ziluck
+ */
 public abstract class LoadFaction implements Faction
 {
 
@@ -405,6 +418,28 @@ public abstract class LoadFaction implements Faction
         Validate.notNull(message, "Message can't be null.");
 
         addAnnouncement(message);
+    }
+
+    @Override
+    public void sendMessage(Collection<String> messages)
+    {
+        Validate.notNull(messages, "Messages can't be null.");
+
+        for (String message : messages)
+        {
+            addAnnouncement(message);
+        }
+    }
+
+    @Override
+    public void sendMessage(String[] messages)
+    {
+        Validate.notNull(messages, "Messages can't be null.");
+
+        for (String message : messages)
+        {
+            addAnnouncement(message);
+        }
     }
 
     @Override
