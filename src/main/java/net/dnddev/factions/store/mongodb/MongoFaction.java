@@ -4,6 +4,11 @@ import net.dnddev.factions.base.Warp;
 import net.dnddev.factions.spatial.LazyLocation;
 import net.dnddev.factions.store.LoadFaction;
 
+/**
+ * Faction implementation for saving to MongoDB.
+ * 
+ * @author Michael Ziluck
+ */
 public class MongoFaction extends LoadFaction
 {
 

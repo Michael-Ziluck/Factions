@@ -4,6 +4,11 @@ import java.util.List;
 
 import net.dnddev.factions.base.Faction;
 
+/**
+ * The FactionStore designed to reduce memory usage.
+ * 
+ * @author Michael Ziluck
+ */
 public abstract class MemoryFactionStore extends LoadFactionStore
 {
 

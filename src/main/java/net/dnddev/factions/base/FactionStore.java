@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import net.dnddev.factions.Factions;
 import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
 import net.dnddev.factions.spatial.LazyLocation;
@@ -17,6 +18,14 @@ import net.dnddev.factions.spatial.LazyLocation;
  */
 public interface FactionStore
 {
+
+    /**
+     * @return the singleton instance stored in the Factions main class.
+     */
+    public static FactionStore getInstance()
+    {
+        return Factions.getInstance().getFactionStore();
+    }
 
     /**
      * Gets a Faction referenced by its name. If none is found this will return Wilderness, not null.

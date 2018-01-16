@@ -6,6 +6,15 @@ import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.Warp;
 import net.dnddev.factions.spatial.LazyLocation;
 
+/**
+ * The in-memory representation of a Warp.
+ * <p>
+ * To help reduce clutter and duplicate code, Warps have an additional middle step between the interface and the
+ * implementation that loads information to the database.
+ * </p>
+ * 
+ * @author Michael Ziluck
+ */
 public abstract class LoadWarp implements Warp
 {
 

@@ -13,6 +13,11 @@ import net.dnddev.factions.spatial.BoundedArea;
 import net.dnddev.factions.spatial.LazyLocation;
 import net.dnddev.factions.store.MemoryFactionStore;
 
+/**
+ * Faction implementation for processing Factions from MongoDB.
+ * 
+ * @author Michael Ziluck
+ */
 public class MongoFactionStore extends MemoryFactionStore
 {
 
