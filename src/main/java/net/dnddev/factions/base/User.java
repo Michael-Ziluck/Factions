@@ -3,7 +3,6 @@ package net.dnddev.factions.base;
 import java.util.UUID;
 
 import net.dnddev.factions.base.struct.Role;
-import net.dnddev.factions.chat.Messageable;
 
 /**
  * The base entity for anyone who interacts with the Faction system.

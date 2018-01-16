@@ -7,7 +7,6 @@ import java.util.UUID;
 import com.google.common.collect.Multimap;
 
 import net.dnddev.factions.base.struct.Role;
-import net.dnddev.factions.chat.Messageable;
 import net.dnddev.factions.spatial.LazyLocation;
 
 /**

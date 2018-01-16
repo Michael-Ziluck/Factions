@@ -1,4 +1,4 @@
-package net.dnddev.factions.chat;
+package net.dnddev.factions.base;
 
 import java.util.Collection;
 
