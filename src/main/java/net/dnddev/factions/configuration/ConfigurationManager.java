@@ -1,5 +1,6 @@
 package net.dnddev.factions.configuration;
 
+import net.dnddev.factions.Factions;
 import net.dnddev.factions.configuration.struct.Optimization;
 
 /**
@@ -7,7 +8,8 @@ import net.dnddev.factions.configuration.struct.Optimization;
  * <p>
  * This plugin is designed to be as configurable as possible in order to make it usable for almost everyone who wants a
  * way to group players together. Almost every single feature can be turned on and off, and this manager allows that to
- * happen.</p>
+ * happen.
+ * </p>
  * <p>
  * One of the biggest things that this plugin allows servers to decide is whether things should be optimized to reduce
  * memory usage or processing power. Any time a new structure is used, this manager helps make the decision of whether
@@ -33,6 +35,14 @@ public class ConfigurationManager
     public Optimization getOptimization()
     {
         return optimization;
+    }
+
+    /**
+     * @return the singleton instance stored in the Factions main class.
+     */
+    public static ConfigurationManager getInstance()
+    {
+        return Factions.getInstance().getConfigManager();
     }
 
 }
