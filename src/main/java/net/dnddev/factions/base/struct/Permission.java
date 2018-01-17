@@ -11,7 +11,11 @@ public enum Permission
     /**
      * The base permission.
      */
-    BASE("factions");
+    BASE("factions"),
+    /**
+     * Create a new Faction.
+     */
+    CREATE("create");
 
     private String permission;
 

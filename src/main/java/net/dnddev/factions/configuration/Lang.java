@@ -38,7 +38,11 @@ public enum Lang
     /**
      * The header and footer for all commands.
      */
-    HEADER_FOOTER("§7§m-----------------------------------");
+    HEADER_FOOTER("§7§m-----------------------------------"),
+    /**
+     * When a User tries to create a Faction with an used name.
+     */
+    USED_FACTION_NAME("§cThat faction name is already in use.");
 
     private String[] message;
 

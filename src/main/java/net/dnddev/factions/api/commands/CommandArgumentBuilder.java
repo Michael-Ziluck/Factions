@@ -138,6 +138,7 @@ public class CommandArgumentBuilder<T>
      * Constructs a new CommandArgumentBuilder of the given type.
      * 
      * @param type the type of the builder.
+     * @param <T> the type of this builder.
      * @return the empty CommandArgumentBuilder.
      */
     public static <T> CommandArgumentBuilder<T> createBuilder(Class<T> type)

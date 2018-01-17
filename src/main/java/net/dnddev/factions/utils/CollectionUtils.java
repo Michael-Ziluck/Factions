@@ -19,6 +19,7 @@ public class CollectionUtils
      * null. If the List is also a Deque, this will return the last element using {@link Deque#peekLast()}.
      * 
      * @param list the list to get the last value of.
+     * @param <T> the type of the list.
      * @return the last value.
      */
     @SuppressWarnings("unchecked")
@@ -61,6 +62,7 @@ public class CollectionUtils
      * every object. More specific use cases like {@link org.bukkit.entity.Player#getName()} etc are not compatible.
      * 
      * @param values the values to convert.
+     * @param <T> the type of the collection.
      * @return the generated list of Strings.
      */
     public static <T> List<String> getStringList(Collection<T> values)
@@ -88,6 +90,7 @@ public class CollectionUtils
      * Searches through the given values for the first non-null value.
      * 
      * @param values the values to find.
+     * @param <T> the type of the array.
      * @return the first non-null value.
      */
     @SafeVarargs
