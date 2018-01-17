@@ -5,13 +5,11 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
-
-import com.doctorzee.fortuneblocks.FortuneBlocks;
 
 import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.configuration.Lang;
+import net.dnddev.factions.utils.StringUtils;
 
 public abstract class ValidBaseCommand extends ValidCommand
 {
@@ -135,6 +133,7 @@ public abstract class ValidBaseCommand extends ValidCommand
      * Get the name all sub commands whose name or one if it's aliases starts with the given string. The name for each
      * command will be whichever piece was provided, whether that be the alias or the name.
      * 
+     * @param sender the person trying to access the sub commands.
      * @param start the beginning of the label.
      * @return the command labels if any are found.
      */
@@ -169,8 +168,8 @@ public abstract class ValidBaseCommand extends ValidCommand
     /**
      * Sends the help content to the player.
      * 
-     * @param sender
-     * @param label
+     * @param sender the one who is sending the command.
+     * @param label the previous pieces of the command and the current alias.
      */
     public void help(CommandSender sender, String label[])
     {

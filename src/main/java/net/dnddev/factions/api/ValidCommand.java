@@ -19,6 +19,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
 import net.dnddev.factions.base.struct.Permission;
+import net.dnddev.factions.configuration.Lang;
 
 public abstract class ValidCommand
 {
@@ -196,6 +197,8 @@ public abstract class ValidCommand
             // this should never happen, it is here exclusively to prevent potential errors that were not caught with exceptions earlier
             if (argument == null)
             {
+                
+                Lang.USAGE.send(sender, );
                 FortuneBlocks.getLangHandler().sendUsageMessage(sender, StringUtils.compile(label), (Object[]) getArgumentNames());
                 return;
             }
@@ -556,6 +559,22 @@ public abstract class ValidCommand
     public String getName()
     {
         return name.toLowerCase();
+    }
+    
+    private String generateUsageMessage(String label, Object... arguments)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("/");
+        sb.append(label);
+
+        for (Object arg : arguments)
+        {
+            sb.append(" [");
+            sb.append(arg);
+            sb.append("]");
+        }
+        
+        
     }
 
 }
