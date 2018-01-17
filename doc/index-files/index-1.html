@@ -74,9 +74,17 @@
 <h2 class="title">A</h2>
 <dl>
 <dt><a href="../net/dnddev/factions/base/struct/Access.html" title="enum in net.dnddev.factions.base.struct"><span class="typeNameLink">Access</span></a> - Enum in <a href="../net/dnddev/factions/base/struct/package-summary.html">net.dnddev.factions.base.struct</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The level of access a User has to a certain Action within a Faction.</div>
+</dd>
 <dt><a href="../net/dnddev/factions/base/struct/Action.html" title="enum in net.dnddev.factions.base.struct"><span class="typeNameLink">Action</span></a> - Enum in <a href="../net/dnddev/factions/base/struct/package-summary.html">net.dnddev.factions.base.struct</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">An Action is something a User is able to do relating to their Faction.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/utils/StringUtils.html#add-java.lang.String:A-java.lang.String-">add(String[], String)</a></span> - Static method in class net.dnddev.factions.utils.<a href="../net/dnddev/factions/utils/StringUtils.html" title="class in net.dnddev.factions.utils">StringUtils</a></dt>
+<dd>
+<div class="block">Constructs a new String[] of a size one larger than the given array.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="../net/dnddev/factions/base/Faction.html#addAnnouncement-java.lang.String-java.util.List-">addAnnouncement(String, List&lt;User&gt;)</a></span> - Method in interface net.dnddev.factions.base.<a href="../net/dnddev/factions/base/Faction.html" title="interface in net.dnddev.factions.base">Faction</a></dt>
 <dd>
 <div class="block">Add a new announcement for the Faction to be sent to the specified Faction members.<br>
@@ -108,13 +116,49 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../net/dnddev/factions/store/LoadFaction.html#addAnnouncement-java.lang.String-net.dnddev.factions.base.struct.Role-boolean-">addAnnouncement(String, Role, boolean)</a></span> - Method in class net.dnddev.factions.store.<a href="../net/dnddev/factions/store/LoadFaction.html" title="class in net.dnddev.factions.store">LoadFaction</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/ValidCommand.html#addArgument-net.dnddev.factions.api.commands.CommandArgument-">addArgument(CommandArgument&lt;?&gt;)</a></span> - Method in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/ValidCommand.html" title="class in net.dnddev.factions.api.commands">ValidCommand</a></dt>
+<dd>
+<div class="block">Adds a new argument to be used by the command.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="../net/dnddev/factions/base/Faction.html#addInvite-net.dnddev.factions.base.User-">addInvite(User)</a></span> - Method in interface net.dnddev.factions.base.<a href="../net/dnddev/factions/base/Faction.html" title="interface in net.dnddev.factions.base">Faction</a></dt>
 <dd>
 <div class="block">Add an invite for the given User.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="../net/dnddev/factions/store/LoadFaction.html#addInvite-net.dnddev.factions.base.User-">addInvite(User)</a></span> - Method in class net.dnddev.factions.store.<a href="../net/dnddev/factions/store/LoadFaction.html" title="class in net.dnddev.factions.store">LoadFaction</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/CommandArgument.html#addSenderValidator-net.dnddev.factions.api.commands.SenderValidator-">addSenderValidator(SenderValidator)</a></span> - Method in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/CommandArgument.html" title="class in net.dnddev.factions.api.commands">CommandArgument</a></dt>
+<dd>
+<div class="block">Adds a new sender validator to the argument.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/CommandArgumentBuilder.html#addSenderValidator-net.dnddev.factions.api.commands.SenderValidator-">addSenderValidator(SenderValidator)</a></span> - Method in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/CommandArgumentBuilder.html" title="class in net.dnddev.factions.api.commands">CommandArgumentBuilder</a></dt>
+<dd>
+<div class="block">Adds a sender validator to be used by the argument.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/ValidCommand.html#addSenderValidator-net.dnddev.factions.api.commands.SenderValidator-">addSenderValidator(SenderValidator)</a></span> - Method in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/ValidCommand.html" title="class in net.dnddev.factions.api.commands">ValidCommand</a></dt>
+<dd>
+<div class="block">Adds a validator to be run on the player before the command itself starts processing the information.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/ValidBaseCommand.html#addSubCommand-net.dnddev.factions.api.commands.ValidCommand-">addSubCommand(ValidCommand)</a></span> - Method in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/ValidBaseCommand.html" title="class in net.dnddev.factions.api.commands">ValidBaseCommand</a></dt>
+<dd>
+<div class="block">Add a new sub command to this base command.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/CommandArgument.html#addValidator-net.dnddev.factions.api.commands.Validator-">addValidator(Validator&lt;T&gt;)</a></span> - Method in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/CommandArgument.html" title="class in net.dnddev.factions.api.commands">CommandArgument</a></dt>
+<dd>
+<div class="block">Adds a new validator to the argument.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/CommandArgumentBuilder.html#addValidator-net.dnddev.factions.api.commands.Validator-">addValidator(Validator&lt;T&gt;)</a></span> - Method in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/CommandArgumentBuilder.html" title="class in net.dnddev.factions.api.commands">CommandArgumentBuilder</a></dt>
+<dd>
+<div class="block">Adds a validator to be used by the argument.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/ValidCommand.html#aliases">aliases</a></span> - Variable in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/ValidCommand.html" title="class in net.dnddev.factions.api.commands">ValidCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/CommandArgument.html#allowsConsole">allowsConsole</a></span> - Variable in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/CommandArgument.html" title="class in net.dnddev.factions.api.commands">CommandArgument</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/CommandArgument.html#allowsConsole--">allowsConsole()</a></span> - Method in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/CommandArgument.html" title="class in net.dnddev.factions.api.commands">CommandArgument</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../net/dnddev/factions/store/LoadFaction.html#announcements">announcements</a></span> - Variable in class net.dnddev.factions.store.<a href="../net/dnddev/factions/store/LoadFaction.html" title="class in net.dnddev.factions.store">LoadFaction</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="../net/dnddev/factions/api/commands/ValidCommand.html#arguments">arguments</a></span> - Variable in class net.dnddev.factions.api.commands.<a href="../net/dnddev/factions/api/commands/ValidCommand.html" title="class in net.dnddev.factions.api.commands">ValidCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../net/dnddev/factions/store/LoadWarp.html#assertLoaded--">assertLoaded()</a></span> - Method in class net.dnddev.factions.store.<a href="../net/dnddev/factions/store/LoadWarp.html" title="class in net.dnddev.factions.store">LoadWarp</a></dt>
 <dd>&nbsp;</dd>
