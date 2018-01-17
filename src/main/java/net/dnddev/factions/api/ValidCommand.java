@@ -7,20 +7,24 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import com.doctorzee.fortuneblocks.FortuneBlocks;
-import com.doctorzee.fortuneblocks.utils.CollectionUtils;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
 import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.configuration.Lang;
+import net.dnddev.factions.utils.CollectionUtils;
+import net.dnddev.factions.utils.StringUtils;
 
+/**
+ * Represents a command that can be used by Users on the server.
+ * 
+ * @author Michael Ziluck
+ */
 public abstract class ValidCommand
 {
 
@@ -172,7 +176,7 @@ public abstract class ValidCommand
     {
         if (rawArguments.length < getMinimumLength() || rawArguments.length > getMaximumLength())
         {
-            FortuneBlocks.getLangHandler().sendUsageMessage(sender, StringUtils.compile(label), (Object[]) getArgumentNames());
+            sender.sendMessage(generateUsageMessage(StringUtils.compile(label), (Object[]) getArgumentNames()));
             return;
         }
         for (SenderValidator senderValidator : senderValidators)
@@ -185,7 +189,7 @@ public abstract class ValidCommand
 
         if (rawArguments.length == 0 && blocksConsole() && sender instanceof ConsoleCommandSender)
         {
-            FortuneBlocks.getLangHandler().sendRenderMessage(sender, "only_players");
+            Lang.NO_CONSOLE.send(sender);
             return;
         }
 
@@ -197,15 +201,13 @@ public abstract class ValidCommand
             // this should never happen, it is here exclusively to prevent potential errors that were not caught with exceptions earlier
             if (argument == null)
             {
-                
-                Lang.USAGE.send(sender, );
-                FortuneBlocks.getLangHandler().sendUsageMessage(sender, StringUtils.compile(label), (Object[]) getArgumentNames());
+                sender.sendMessage(generateUsageMessage(StringUtils.compile(label), (Object[]) getArgumentNames()));
                 return;
             }
 
             if (blocksConsole() && !argument.allowsConsole() && sender instanceof ConsoleCommandSender)
             {
-                FortuneBlocks.getLangHandler().sendRenderMessage(sender, "only_players");
+                Lang.NO_CONSOLE.send(sender);
                 return;
             }
 
@@ -517,6 +519,8 @@ public abstract class ValidCommand
     }
 
     /**
+     * Checks if this command is not usable by the console.
+     * 
      * @return {@code true} if this command is unusable by the console unless overridden by an argument.
      */
     public boolean blocksConsole()
@@ -524,6 +528,11 @@ public abstract class ValidCommand
         return blocksConsole;
     }
 
+    /**
+     * Checks if this command has a permission set.
+     * 
+     * @return {@code true} if this ValidCommand has a permission set.
+     */
     public boolean hasPermission()
     {
         return permission != null;
@@ -560,8 +569,15 @@ public abstract class ValidCommand
     {
         return name.toLowerCase();
     }
-    
-    private String generateUsageMessage(String label, Object... arguments)
+
+    /**
+     * Generates the usage message for the given label and arguments.
+     * 
+     * @param label the label from which the command was sent.
+     * @param arguments the arguments used.
+     * @return the compiled String
+     */
+    private String[] generateUsageMessage(String label, Object... arguments)
     {
         StringBuilder sb = new StringBuilder();
         sb.append("/");
@@ -573,8 +589,8 @@ public abstract class ValidCommand
             sb.append(arg);
             sb.append("]");
         }
-        
-        
+
+        return Lang.USAGE.getMessage("{usage}", sb.toString());
     }
 
 }

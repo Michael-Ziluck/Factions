@@ -5,6 +5,12 @@ import java.util.List;
 
 import org.bukkit.command.CommandSender;
 
+/**
+ * Used to convert passed arguments from Strings to their proper type.
+ * 
+ * @author Michael Ziluck
+ * @param <T> the type to convert the String to.
+ */
 public interface Parser<T>
 {
 

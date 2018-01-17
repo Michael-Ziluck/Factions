@@ -2,6 +2,12 @@ package net.dnddev.factions.api;
 
 import org.bukkit.command.CommandSender;
 
+/**
+ * Validate a feature unique to an argument in relation to the sender.
+ * 
+ * @author Michael Ziluck
+ * @param <T> the type that this validator can process.
+ */
 public interface Validator<T>
 {
 

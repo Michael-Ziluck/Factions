@@ -8,7 +8,7 @@ import net.dnddev.factions.base.Messageable;
 import net.dnddev.factions.utils.CollectionUtils;
 
 /**
- * The system for processesing and sending messages to players.
+ * The system for processing and sending messages to players.
  * 
  * @author Michael Ziluck
  */
@@ -77,7 +77,7 @@ public enum Lang
      */
     public void send(Messageable messageable, Object... parameters)
     {
-        messageable.sendMessage(message);
+        messageable.sendMessage(getMessage(parameters));
     }
 
     /**
@@ -89,7 +89,7 @@ public enum Lang
      */
     public void send(CommandSender sender, Object... parameters)
     {
-        sender.sendMessage(message);
+        sender.sendMessage(getMessage(parameters));
     }
 
     /**
@@ -99,9 +99,14 @@ public enum Lang
      * @param parameters all additional arguments to fill placeholders.
      * @return the compiled message.
      */
-    public String getMessage(Object... parameters)
+    public String[] getMessage(Object... parameters)
     {
-        // TODO generate message
+        String[] args = Arrays.copyOf(message, message.length);
+        for (int i = 0; i < args.length; i++)
+        {
+            args[i] = renderString(args[i], parameters);
+        }
+        return args;
     }
 
     /**

@@ -2,6 +2,11 @@ package net.dnddev.factions.api;
 
 import org.bukkit.command.CommandSender;
 
+/**
+ * Validate a feature unique to the Sender.
+ * 
+ * @author Michael Ziluck
+ */
 public interface SenderValidator
 {
 

@@ -11,6 +11,11 @@ import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.configuration.Lang;
 import net.dnddev.factions.utils.StringUtils;
 
+/**
+ * A type of {@link ValidCommand} that has added sub-commands.
+ * 
+ * @author Michael Ziluck
+ */
 public abstract class ValidBaseCommand extends ValidCommand
 {
 
