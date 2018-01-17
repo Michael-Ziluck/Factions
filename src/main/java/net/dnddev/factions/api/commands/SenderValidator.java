@@ -1,4 +1,4 @@
-package net.dnddev.factions.api;
+package net.dnddev.factions.api.commands;
 
 import org.bukkit.command.CommandSender;
 

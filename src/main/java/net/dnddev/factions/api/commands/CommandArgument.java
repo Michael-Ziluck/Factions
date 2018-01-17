@@ -1,4 +1,4 @@
-package net.dnddev.factions.api;
+package net.dnddev.factions.api.commands;
 
 import java.util.Collections;
 import java.util.LinkedList;
