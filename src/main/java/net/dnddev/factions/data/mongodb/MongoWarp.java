@@ -1,4 +1,4 @@
-package net.dnddev.factions.store.mongodb;
+package net.dnddev.factions.data.mongodb;
 
 import java.util.UUID;
 
@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.Preconditions;
 
 import net.dnddev.factions.base.Faction;
+import net.dnddev.factions.data.LoadWarp;
 import net.dnddev.factions.spatial.LazyLocation;
-import net.dnddev.factions.store.LoadWarp;
 
 /**
  * Warp implementation for saving to MongoDB.

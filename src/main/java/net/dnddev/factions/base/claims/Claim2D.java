@@ -1,4 +1,4 @@
-package net.dnddev.factions.base;
+package net.dnddev.factions.base.claims;
 
 /**
  * The two-dimensional implementation of a {@link Claim}.

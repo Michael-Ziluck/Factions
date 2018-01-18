@@ -1,8 +1,8 @@
-package net.dnddev.factions.store.mongodb;
+package net.dnddev.factions.data.mongodb;
 
 import net.dnddev.factions.base.Warp;
+import net.dnddev.factions.data.LoadFaction;
 import net.dnddev.factions.spatial.LazyLocation;
-import net.dnddev.factions.store.LoadFaction;
 
 /**
  * Faction implementation for saving to MongoDB.

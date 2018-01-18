@@ -1,4 +1,4 @@
-package net.dnddev.factions.store;
+package net.dnddev.factions.data;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

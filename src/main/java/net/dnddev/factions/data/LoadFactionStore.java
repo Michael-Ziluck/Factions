@@ -1,4 +1,4 @@
-package net.dnddev.factions.store;
+package net.dnddev.factions.data;
 
 import java.util.Map;
 import java.util.UUID;
@@ -7,8 +7,8 @@ import org.bukkit.World;
 
 import com.conversantmedia.util.collection.spatial.RTree;
 
-import net.dnddev.factions.base.Claim;
 import net.dnddev.factions.base.FactionStore;
+import net.dnddev.factions.base.claims.Claim;
 
 /**
  * The in-memory representation of a FactionStore.

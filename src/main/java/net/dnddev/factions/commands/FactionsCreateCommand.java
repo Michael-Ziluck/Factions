@@ -36,8 +36,7 @@ public class FactionsCreateCommand extends ValidCommand
     @Override
     public void validRun(CommandSender sender, String[] label, List<CommandArgument<?>> arguments)
     {
-        // TODO Auto-generated method stub
-
+        
     }
 
 }

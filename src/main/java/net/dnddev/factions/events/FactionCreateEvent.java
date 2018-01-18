@@ -2,6 +2,9 @@ package net.dnddev.factions.events;
 
 import org.bukkit.event.HandlerList;
 
+import net.dnddev.factions.base.Faction;
+import net.dnddev.factions.base.User;
+
 /**
  * When a Faction is created for the first time.
  * 
@@ -11,6 +14,25 @@ public class FactionCreateEvent extends CancellableFactionEvent
 {
 
     protected static HandlerList handlers;
+
+    protected User user;
+
+    protected double cost;
+
+    /**
+     * Constructs a new FactionCreateEvent for the given Faction and it's founder. This event will only fire if the User
+     * definitely has the necessary balances.
+     * 
+     * @param faction the Faction to be created.
+     * @param user the User creating the Faction.
+     * @param cost the cost of creating the Faction.
+     */
+    public FactionCreateEvent(Faction faction, User user, double cost)
+    {
+        super(faction);
+        this.user = user;
+        this.cost = cost;
+    }
 
     @Override
     public HandlerList getHandlers()

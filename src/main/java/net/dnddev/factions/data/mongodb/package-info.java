@@ -1,4 +1,4 @@
 /**
  * Saving Factions entities to MongoDB
  */
-package net.dnddev.factions.store.mongodb;
+package net.dnddev.factions.data.mongodb;

@@ -94,4 +94,9 @@ public interface FactionStore
      */
     public Faction getFaction(Player player);
 
+    /**
+     * Load the Factions from the database to run time.
+     */
+    public void loadFactions();
+
 }

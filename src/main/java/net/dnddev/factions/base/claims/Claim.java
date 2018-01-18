@@ -1,10 +1,14 @@
-package net.dnddev.factions.base;
+package net.dnddev.factions.base.claims;
 
 import java.util.Collection;
 import java.util.Set;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+
+import net.dnddev.factions.base.Faction;
+import net.dnddev.factions.base.Purchasable;
+import net.dnddev.factions.base.User;
 
 /**
  * Used to represent an area claimed by a {@link Faction}.
