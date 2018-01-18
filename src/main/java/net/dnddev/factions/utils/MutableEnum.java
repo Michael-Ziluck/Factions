@@ -6,17 +6,17 @@ package net.dnddev.factions.utils;
  * @author Michael Ziluck
  * @param <T> the type this MutableObject wraps.
  */
-public class MutableObject<T>
+public class MutableEnum<T extends Enum<T>>
 {
 
-    private T value;
+    private Enum<T> value;
 
     /**
      * Creates a new MutableObject wrapper for the given value.
      * 
      * @param value the value to wrap.
      */
-    public MutableObject(T value)
+    public MutableEnum(T value)
     {
         this.value = value;
     }
@@ -24,7 +24,7 @@ public class MutableObject<T>
     /**
      * @return the currently wrapped value.
      */
-    public T getValue()
+    public Enum<T> getValue()
     {
         return value;
     }
@@ -42,4 +42,13 @@ public class MutableObject<T>
         }
         this.value = value;
     }
+
+    /**
+     * @return the class type of the contained Enum.
+     */
+    public Class<T> getType()
+    {
+        return value.getDeclaringClass();
+    }
+
 }

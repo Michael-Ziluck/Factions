@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import net.dnddev.factions.Factions;
 import net.dnddev.factions.configuration.struct.Optimization;
-import net.dnddev.factions.utils.MutableObject;
+import net.dnddev.factions.utils.MutableEnum;
 
 /**
  * The manager for all configuration settings.
@@ -37,7 +37,7 @@ public final class Config
     /**
      * What the plugin is currently optimizing for.
      */
-    public static MutableObject<Optimization> OPTIMIZATION = new MutableObject<Optimization>(Optimization.PROCESS);
+    public static MutableEnum<Optimization> OPTIMIZATION = new MutableEnum<Optimization>(Optimization.PROCESS);
 
     /**
      * The cost to create a Faction. -1 or 0 refers to no cost.
@@ -83,11 +83,11 @@ public final class Config
         }
     }
 
-    private static void updateValue(FileConfiguration config, String location, MutableObject<?> mutable)
+    private static <T extends Enum<T>> void updateValue(FileConfiguration config, String location, MutableEnum<T> mutable)
     {
-        if (!config.isSet(location) || !successful(() -> mutable.setValue(config.getInt(location))))
+        if (!config.isSet(location) || !successful(() -> mutable.setValue(Enum.valueOf(mutable.getType(), config.getString(location)))))
         {
-            config.set(location, mutable.intValue());
+            config.set(location, mutable.getValue());
         }
     }
 
