@@ -77,4 +77,11 @@ public class MongoFactionStore extends MemoryFactionStore
         return null;
     }
 
+    @Override
+    public void loadFactions()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
