@@ -35,7 +35,7 @@ import net.dnddev.factions.spatial.LazyLocation;
 public abstract class LoadFaction implements Faction
 {
 
-    protected UUID uniqueId;
+    protected UUID uuid;
 
     protected String name;
 
@@ -59,14 +59,22 @@ public abstract class LoadFaction implements Faction
 
     protected Set<Flag> flags;
 
+    public LoadFaction()
+    {
+    }
+
+    public LoadFaction(UUID uuid, String name, User leader, Type type)
+    {
+    }
+
     @Override
     public UUID getUniqueId()
     {
-        if (uniqueId == null)
+        if (uuid == null)
         {
             // TODO load uuid
         }
-        return uniqueId;
+        return uuid;
     }
 
     @Override

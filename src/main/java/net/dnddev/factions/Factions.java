@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.FactionStore;
 import net.dnddev.factions.base.User;
+import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
 import net.dnddev.factions.spatial.LazyLocation;
@@ -33,6 +34,14 @@ public class Factions extends JavaPlugin
     public void onEnable()
     {
         instance = this;
+
+    }
+
+    protected void processFiles()
+    {
+        saveDefaultConfig();
+        Config.update();
+
     }
 
     /**

@@ -5,3 +5,26 @@
 #    rather than reduce memory usage wherever possible.
 optimization: processing
 
+# The maximum number of factions allowed on the server.
+# Set this to -1 to disable the feature entirely.
+max-factions: -1
+
+# Configuration for how the system stores the Faction data.
+storage:
+  # The type of storage to use. The options available are:
+  # mongodb, json, mysql
+  type: mongodb
+  # Database options. Only relevant if you chose mongodb or mysql.
+  database:
+    hostname: localhost
+    port: 27017
+    username: root
+    password: password
+    database: factions 
+
+# All configuration related to creating a new Faction
+create:
+  # The economy cost of creating a Faction
+  cost: 0
+  # If the command to run a command can be cancelled by another plugin.
+  cancellable: true

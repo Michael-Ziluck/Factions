@@ -1,14 +1,27 @@
 package net.dnddev.factions.data.mongodb;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.jongo.Jongo;
+import org.jongo.MongoCollection;
+
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.User;
-import net.dnddev.factions.data.MemoryFactionStore;
+import net.dnddev.factions.configuration.Config;
+import net.dnddev.factions.configuration.struct.Optimization;
+import net.dnddev.factions.data.LoadFactionStore;
 import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
 import net.dnddev.factions.spatial.LazyLocation;
@@ -18,11 +31,76 @@ import net.dnddev.factions.spatial.LazyLocation;
  * 
  * @author Michael Ziluck
  */
-public class MongoFactionStore extends MemoryFactionStore
+public class MongoFactionStore extends LoadFactionStore
 {
 
+    /**
+     * Used if the system optimizes to reduce processing power.
+     */
+    private HashMap<String, Faction> factionsByName;
+
+    /**
+     * Used if the system optimizes to reduce memory usage.
+     */
+    private List<Faction> factionsList;
+
+    private final Faction WILDERNESS;
+
+    private ServerAddress addr;
+    private MongoCredential creds;
+    private MongoClient mc;
+    private DB db;
+    private Jongo jongo;
+    private MongoCollection store;
+
+    /**
+     * Construct a new MongoFactionStore. This will grab the information from the config file.
+     */
+    @SuppressWarnings("deprecation")
+    public MongoFactionStore()
+    {
+        WILDERNESS = new MongoFaction();
+        addr = new ServerAddress(Config.DATABASE_HOSTNAME.getValue(), Config.DATABASE_PORT.intValue());
+
+        creds = MongoCredential.createCredential(Config.DATABASE_USERNAME.getValue(), Config.DATABASE_DATABASE.getValue(), Config.DATABASE_PASSWORD.getValue().toCharArray());
+
+        mc = new MongoClient(addr, creds, MongoClientOptions.builder().description("Factions MongoDB Connection").build());
+
+        db = mc.getDB(Config.DATABASE_DATABASE.getValue());
+
+        jongo = new Jongo(db);
+
+        store = jongo.getCollection("factions");
+
+        int count = Math.toIntExact(store.count());
+
+        if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
+        {
+            factionsList = new ArrayList<>(count);
+        }
+        else if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
+        {
+            factionsByName = new HashMap<>(count);
+        }
+    }
+
     @Override
-    public Faction getFaction(String name)
+    public Faction getFaction(final String name)
+    {
+        Faction faction = null;
+        if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
+        {
+            faction = searchList(f -> f.getStub().equals(name.toLowerCase()));
+        }
+        else if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
+        {
+            faction = factionsByName.get(name.toLowerCase());
+        }
+        return faction == null ? WILDERNESS : faction;
+    }
+
+    @Override
+    public Faction getCasedFaction(String name)
     {
         // TODO Auto-generated method stub
         return null;
@@ -77,11 +155,22 @@ public class MongoFactionStore extends MemoryFactionStore
         return null;
     }
 
+    private Faction searchList(Predicate<Faction> predicate)
+    {
+        for (Faction faction : factionsList)
+        {
+            if (predicate.test(faction))
+            {
+                return faction;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void loadFactions()
     {
-        // TODO Auto-generated method stub
-        
+
     }
 
 }

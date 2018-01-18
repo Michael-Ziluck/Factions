@@ -1,12 +1,15 @@
 package net.dnddev.factions.configuration;
 
+import org.apache.commons.lang.mutable.MutableBoolean;
 import org.apache.commons.lang.mutable.MutableDouble;
 import org.apache.commons.lang.mutable.MutableInt;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import net.dnddev.factions.Factions;
 import net.dnddev.factions.configuration.struct.Optimization;
+import net.dnddev.factions.configuration.struct.Storage;
 import net.dnddev.factions.utils.MutableEnum;
+import net.dnddev.factions.utils.MutableString;
 
 /**
  * The manager for all configuration settings.
@@ -37,12 +40,52 @@ public final class Config
     /**
      * What the plugin is currently optimizing for.
      */
-    public static MutableEnum<Optimization> OPTIMIZATION = new MutableEnum<Optimization>(Optimization.PROCESS);
+    public static final MutableEnum<Optimization> OPTIMIZATION = new MutableEnum<Optimization>(Optimization.PROCESS);
+
+    /**
+     * The maximum amount of Factions allowed on the server.
+     */
+    public static final MutableInt FACTION_LIMIT = new MutableInt(-1);
 
     /**
      * The cost to create a Faction. -1 or 0 refers to no cost.
      */
-    public static MutableDouble CREATE_COST = new MutableDouble(0);
+    public static final MutableDouble CREATE_COST = new MutableDouble(0);
+
+    /**
+     * Whether or not the create event can be cancelled.
+     */
+    public static final MutableBoolean CREATE_CANCELLABLE = new MutableBoolean(true);
+
+    /**
+     * The type of Storage the system uses.
+     */
+    public static final MutableEnum<Storage> STORAGE = new MutableEnum<Storage>(Storage.MONGODB);
+
+    /**
+     * The hostname of the database if one is used.
+     */
+    public static final MutableString DATABASE_HOSTNAME = new MutableString("localhost");
+
+    /**
+     * The port of the database if one is used.
+     */
+    public static final MutableInt DATABASE_PORT = new MutableInt(27017);
+
+    /**
+     * The username of the user for the database if one is used.
+     */
+    public static final MutableString DATABASE_USERNAME = new MutableString("root");
+
+    /**
+     * The password of the database user if one is used.
+     */
+    public static final MutableString DATABASE_PASSWORD = new MutableString("password");
+
+    /**
+     * The database to use in the database if one is used.
+     */
+    public static final MutableString DATABASE_DATABASE = new MutableString("factions");
 
     /**
      * Update the values from the database.
@@ -50,63 +93,131 @@ public final class Config
     public static void update()
     {
         FileConfiguration config = Factions.getInstance().getConfig();
-        if (config.isSet("optimization"))
-        {
-            try
-            {
-                OPTIMIZATION.setValue(Optimization.valueOf(config.getString("optimization")));
-            }
-            catch (Exception ex)
-            {
-                config.set("optimization", OPTIMIZATION.getValue().name());
-            }
-        }
-        else
-        {
-            config.set("optimization", OPTIMIZATION.getValue().name());
-        }
 
-        if (config.isSet("create.cost"))
-        {
-            try
-            {
-                CREATE_COST = new MutableDouble(config.getDouble("create.cost"));
-            }
-            catch (Exception ex)
-            {
-                config.set("cretae.cost", CREATE_COST.doubleValue());
-            }
-        }
-        else
-        {
-            config.set("cretae.cost", CREATE_COST.doubleValue());
-        }
+        updateValue(config, "optimization", OPTIMIZATION);
+        updateValue(config, "faction-limit", FACTION_LIMIT);
+        updateValue(config, "create.cost", CREATE_COST);
+        updateValue(config, "create.cancellable", CREATE_CANCELLABLE);
+        updateValue(config, "STORAGE", STORAGE);
+        updateValue(config, "storage.database.hostname", DATABASE_HOSTNAME);
+        updateValue(config, "storage.database.port", DATABASE_PORT);
+        updateValue(config, "storage.database.username", DATABASE_USERNAME);
+        updateValue(config, "storage.database.password", DATABASE_PASSWORD);
+        updateValue(config, "storage.database.database", DATABASE_DATABASE);
     }
 
-    private static <T extends Enum<T>> void updateValue(FileConfiguration config, String location, MutableEnum<T> mutable)
+    /**
+     * Updates the configuration with the given information. If the value fails to load from the config because it does
+     * not exist or it is in an invalid format, the system will notify the console.
+     * 
+     * @param config the config file to load/update.
+     * @param location the location in the config.
+     * @param mutable the mutable value to update.
+     * @return {@code true} if the value loads from the config properly<br>
+     *         {@code false} if the value did not exist in the config or it had an error loading.
+     */
+    private static <T extends Enum<T>> boolean updateValue(FileConfiguration config, String location, MutableEnum<T> mutable)
     {
         if (!config.isSet(location) || !successful(() -> mutable.setValue(Enum.valueOf(mutable.getType(), config.getString(location)))))
         {
             config.set(location, mutable.getValue());
+            error(location);
+            return false;
         }
+        return true;
     }
 
-    private static void updateValue(FileConfiguration config, String location, MutableInt mutable)
+    /**
+     * Updates the configuration with the given information. If the value fails to load from the config because it does
+     * not exist or it is in an invalid format, the system will notify the console.
+     * 
+     * @param config the config file to load/update.
+     * @param location the location in the config.
+     * @param mutable the mutable value to update.
+     * @return {@code true} if the value loads from the config properly<br>
+     *         {@code false} if the value did not exist in the config or it had an error loading.
+     */
+    private static <T extends Enum<T>> boolean updateValue(FileConfiguration config, String location, MutableString mutable)
+    {
+        if (!config.isSet(location) || !successful(() -> mutable.setValue(config.getString(location))))
+        {
+            config.set(location, mutable.getValue());
+            error(location);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Updates the configuration with the given information. If the value fails to load from the config because it does
+     * not exist or it is in an invalid format, the system will notify the console.
+     * 
+     * @param config the config file to load/update.
+     * @param location the location in the config.
+     * @param mutable the mutable value to update.
+     * @return {@code true} if the value loads from the config properly<br>
+     *         {@code false} if the value did not exist in the config or it had an error loading.
+     */
+    private static boolean updateValue(FileConfiguration config, String location, MutableInt mutable)
     {
         if (!config.isSet(location) || !successful(() -> mutable.setValue(config.getInt(location))))
         {
             config.set(location, mutable.intValue());
+            error(location);
+            return false;
         }
+        return true;
     }
 
-    private static void updateValue(FileConfiguration config, String location, MutableDouble mutable)
+    /**
+     * Updates the configuration with the given information. If the value fails to load from the config because it does
+     * not exist or it is in an invalid format, the system will notify the console.
+     * 
+     * @param config the config file to load/update.
+     * @param location the location in the config.
+     * @param mutable the mutable value to update.
+     * @return {@code true} if the value loads from the config properly<br>
+     *         {@code false} if the value did not exist in the config or it had an error loading.
+     */
+    private static boolean updateValue(FileConfiguration config, String location, MutableDouble mutable)
     {
         if (!config.isSet(location) || !successful(() -> mutable.setValue(config.getDouble(location))))
         {
             config.set(location, mutable.doubleValue());
+            error(location);
+            return false;
         }
+        return true;
     }
 
+    /**
+     * Updates the configuration with the given information. If the value fails to load from the config because it does
+     * not exist or it is in an invalid format, the system will notify the console.
+     * 
+     * @param config the config file to load/update.
+     * @param location the location in the config.
+     * @param mutable the mutable value to update.
+     * @return {@code true} if the value loads from the config properly<br>
+     *         {@code false} if the value did not exist in the config or it had an error loading.
+     */
+    private static boolean updateValue(FileConfiguration config, String location, MutableBoolean mutable)
+    {
+        if (!config.isSet(location) || !successful(() -> mutable.setValue(config.getBoolean(location))))
+        {
+            config.set(location, mutable.booleanValue());
+            error(location);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Used to check if an operation throws an exception with ease.
+     * 
+     * @param runnable the operation to run.
+     * @return {@code true} if the operation does NOT throw an exception.<br>
+     *         {@code false} if the operation DOES throw an exception.
+     */
     private static boolean successful(Runnable runnable)
     {
         try
@@ -118,6 +229,16 @@ public final class Config
         {
             return false;
         }
+    }
+
+    /**
+     * Alerts the console that there was an error loading a config value.
+     * 
+     * @param location the location that caused an error.
+     */
+    private static void error(String location)
+    {
+        Factions.getInstance().getLogger().severe("Error loading the config value '" + location + "'. Reverted it to default.");
     }
 
 }

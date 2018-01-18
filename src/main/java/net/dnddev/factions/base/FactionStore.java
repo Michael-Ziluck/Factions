@@ -28,12 +28,21 @@ public interface FactionStore
     }
 
     /**
-     * Gets a Faction referenced by its name. If none is found this will return Wilderness, not null.
+     * Gets a Faction referenced by its name. If none is found this will return Wilderness, not null. Also, this method
+     * is not case-sensitive. For case sensitive name lookup, use {@link #getCasedFaction(String)}.
      * 
      * @param name the name of the Faction.
      * @return the Faction if one exists.
      */
     public Faction getFaction(String name);
+
+    /**
+     * Same as {@link #getFaction(String)}, but it is case-sensitive.
+     * 
+     * @param name the name of the Faction.
+     * @return the Faction if one exists.
+     */
+    public Faction getCasedFaction(String name);
 
     /**
      * Gets a Faction referenced by a player's UUID. If none is found this will return Wilderness, not null.

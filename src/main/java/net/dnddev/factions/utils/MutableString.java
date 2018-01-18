@@ -1,22 +1,21 @@
 package net.dnddev.factions.utils;
 
 /**
- * Designed to wrap enums to force them to behave mutably.
+ * Designed to wrap Strings to force them to behave mutably.
  * 
  * @author Michael Ziluck
- * @param <T> the type this MutableEnum wraps.
  */
-public class MutableEnum<T extends Enum<T>>
+public class MutableString
 {
 
-    private Enum<T> value;
+    private String value;
 
     /**
-     * Creates a new MutableEnum wrapper for the given value.
+     * Creates a new MutableString wrapper for the given value.
      * 
      * @param value the value to wrap.
      */
-    public MutableEnum(T value)
+    public MutableString(String value)
     {
         this.value = value;
     }
@@ -24,7 +23,7 @@ public class MutableEnum<T extends Enum<T>>
     /**
      * @return the currently wrapped value.
      */
-    public Enum<T> getValue()
+    public String getValue()
     {
         return value;
     }
@@ -34,21 +33,13 @@ public class MutableEnum<T extends Enum<T>>
      * 
      * @param value the new wrapped value.
      */
-    public void setValue(T value)
+    public void setValue(String value)
     {
         if (value == null)
         {
             throw new NullPointerException("Value can't be null.");
         }
         this.value = value;
-    }
-
-    /**
-     * @return the class type of the contained Enum.
-     */
-    public Class<T> getType()
-    {
-        return value.getDeclaringClass();
     }
 
 }
