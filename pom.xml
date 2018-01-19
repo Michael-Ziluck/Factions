@@ -8,11 +8,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-		<!-- R-Tree API -->
+		<!-- R-Tree -->
 		<dependency>
-			<groupId>com.conversantmedia</groupId>
+			<groupId>com.github.davidmoten</groupId>
 			<artifactId>rtree</artifactId>
-			<version>1.0.3</version>
+			<version>0.8-RC10</version>
 		</dependency>
 		<!-- Spigot API -->
 		<dependency>
@@ -119,7 +119,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>3.1.0</version>
-				
+
 				<executions>
 					<execution>
 						<phase>package</phase>

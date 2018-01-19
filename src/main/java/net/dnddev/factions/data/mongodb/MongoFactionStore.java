@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 
+import com.conversantmedia.util.collection.spatial.RTree;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
@@ -19,6 +20,7 @@ import com.mongodb.ServerAddress;
 
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.User;
+import net.dnddev.factions.base.claims.Claim;
 import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.configuration.struct.Optimization;
 import net.dnddev.factions.data.LoadFactionStore;
@@ -102,22 +104,46 @@ public class MongoFactionStore extends LoadFactionStore
     @Override
     public Faction getCasedFaction(String name)
     {
-        // TODO Auto-generated method stub
-        return null;
+        Faction faction = null;
+        if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
+        {
+            faction = searchList(f -> f.getStub().equals(name.toLowerCase()));
+        }
+        else if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
+        {
+            faction = factionsByName.get(name.toLowerCase());
+            if (faction != null && !faction.getName().equals(name))
+            {
+                faction = null;
+            }
+        }
+        return faction == null ? WILDERNESS : faction;
     }
 
     @Override
     public Faction getFaction(UUID uuid)
     {
-        // TODO Auto-generated method stub
-        return null;
+        Faction faction = null;
+        if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
+        {
+            faction = searchList(f -> f.getUniqueId().equals(uuid));
+        }
+        else if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
+        {
+            faction = searchMap(f -> f.getUniqueId().equals(uuid));
+        }
+        return faction == null ? WILDERNESS : faction;
     }
 
     @Override
     public Faction getFaction(Location location)
     {
-        // TODO Auto-generated method stub
-        return null;
+        RTree<Claim> tree = claims.get(location.getWorld().getUID());
+        if (tree == null)
+        {
+            claims.put(location.getWorld().getUID(), new RTree<Claim>(null, 0, 0, null));
+            return null;
+        }
     }
 
     @Override
@@ -158,6 +184,18 @@ public class MongoFactionStore extends LoadFactionStore
     private Faction searchList(Predicate<Faction> predicate)
     {
         for (Faction faction : factionsList)
+        {
+            if (predicate.test(faction))
+            {
+                return faction;
+            }
+        }
+        return null;
+    }
+
+    private Faction searchMap(Predicate<Faction> predicate)
+    {
+        for (Faction faction : factionsByName.values())
         {
             if (predicate.test(faction))
             {

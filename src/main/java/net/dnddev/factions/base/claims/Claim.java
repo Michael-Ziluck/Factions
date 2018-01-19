@@ -13,9 +13,8 @@ import net.dnddev.factions.base.User;
 /**
  * Used to represent an area claimed by a {@link Faction}.
  * <p>
- * Claims are able to be both two-dimensional and three-dimensional. To better represent this, there are two additional
- * interfaces that are used. {@link Claim2D} and {@link Claim3D} are individually used depending on the settings in the
- * configuration.
+ * Claims exist from the bottom to the top of the world. {@link Claim2D} are individually used depending on the settings
+ * in the configuration.
  * </p>
  * <p>
  * Additionally, Claims are able to be owned by one or more {@link User Users}. Additional users can be added to Claims

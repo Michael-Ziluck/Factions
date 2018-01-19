@@ -58,13 +58,31 @@ public abstract class LoadFaction implements Faction
     protected List<UUID> invites;
 
     protected Set<Flag> flags;
+    
+    protected boolean loaded;
 
-    public LoadFaction()
+    /**
+     * An empty constructor for ORMs to use.
+     */
+    protected LoadFaction()
     {
+        loaded = true;
     }
 
+    /**
+     * Constructs a new LoadFaction with the given values.
+     * @param uuid the uuid of the Faction.
+     * @param name the name of the Faction.
+     * @param leader the one who created the Faction.
+     * @param type the type of Faction being created.
+     */
     public LoadFaction(UUID uuid, String name, User leader, Type type)
     {
+        this();
+        this.uuid = uuid;
+        this.name = name;
+        this.leader = leader;
+        this.type = type;
     }
 
     @Override

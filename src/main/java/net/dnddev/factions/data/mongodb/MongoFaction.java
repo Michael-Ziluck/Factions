@@ -25,26 +25,27 @@ public class MongoFaction extends LoadFaction
      */
     public MongoFaction()
     {
+        super();
     }
 
     /**
      * Create a new Faction with the given information. This should only be used when a new Faction is made, not to load
      * an already existing Faction.
      * 
-     * @param uuid
-     * @param name
-     * @param leader
-     * @param type
+     * @param uuid the uuid of the Faction.
+     * @param name the name of the Faction.
+     * @param leader the person making the new Faction.
+     * @param type the type of the Faction.
      */
     public MongoFaction(UUID uuid, String name, User leader, Type type)
     {
-
+        super(uuid, name, leader, type);
     }
 
     @Override
     public void save()
     {
-
+        
     }
 
     @Override
