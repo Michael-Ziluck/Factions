@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
@@ -159,6 +160,17 @@ public class BlockColumn implements Rectangle
     public Geometry geometry()
     {
         return this;
+    }
+
+    /**
+     * Constructs a new {@link BlockColumn} from the given location.
+     * 
+     * @param location the location to use as a base.
+     * @return the newly created BlockColumn.
+     */
+    public static BlockColumn fromLocation(Location location)
+    {
+        return new BlockColumn(location.getBlockX(), location.getBlockZ(), location.getWorld());
     }
 
 }

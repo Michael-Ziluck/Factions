@@ -47,8 +47,12 @@ public class MongoUserStore extends LoadUserStore
     @Override
     public User getUser(String name, boolean includeOffline)
     {
-        // TODO Auto-generated method stub
-        return null;
+        User user = getUser(name);
+        if (includeOffline && user == null)
+        {
+            user = store.findOne("{name: '" + name + "'}").as(MongoUser.class);
+        }
+        return user;
     }
 
 }

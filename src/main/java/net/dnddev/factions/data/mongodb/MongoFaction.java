@@ -1,13 +1,12 @@
 package net.dnddev.factions.data.mongodb;
 
-import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.jongo.marshall.jackson.oid.MongoId;
 
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.Warp;
-import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.data.LoadFaction;
 import net.dnddev.factions.spatial.LazyLocation;
 
@@ -53,9 +52,13 @@ public class MongoFaction extends LoadFaction
     @Override
     protected Warp createWarp(String name, LazyLocation location, String password)
     {
-        // TODO Auto-generated method stub
-        return null;
+        MongoWarp warp = new MongoWarp(this, name, location, password != null, DigestUtils.md5Hex(password));
+
+        getWarpsMap().put(warp.getStub(), warp);
+
+        save();
+
+        return warp;
     }
 
-   
 }

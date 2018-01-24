@@ -1,8 +1,12 @@
 package net.dnddev.factions.spatial;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 
 import com.github.davidmoten.rtree.geometry.Geometry;
 import com.github.davidmoten.rtree.geometry.Rectangle;
@@ -10,19 +14,25 @@ import com.github.davidmoten.rtree.geometry.Rectangle;
 import net.dnddev.factions.utils.GeometryUtils;
 
 /**
+ * Represents a two-dimensional bounded area.
+ * <p>
+ * BoundedArea also implements the R-Tree interface {@link Rectangle}. This allows spatial and geometric operations to
+ * be performed on it with ease.
+ * </p>
+ * 
  * @author Michael Ziluck
  */
 public class BoundedArea implements Rectangle
 {
 
-    private int x1;
-    private int z1;
-    private int x2;
-    private int z2;
+    protected int x1;
+    protected int z1;
+    protected int x2;
+    protected int z2;
 
-    private String world;
+    protected String world;
 
-    private World parsedWorld;
+    protected World parsedWorld;
 
     /**
      * Constructs a new BoundedArea with the given coordinates.
@@ -310,6 +320,45 @@ public class BoundedArea implements Rectangle
     public final float getWidth()
     {
         return x2() - x1() + 1;
+    }
+
+    /**
+     * Get the Blocks that make up the walls of this BoundedArea. This will also return the floor and roof.
+     * 
+     * @return the Blocks of the walls.
+     */
+    public Set<Block> getWalls()
+    {
+        HashSet<Block> walls = new HashSet<>();
+        int i, j;
+        World w = getWorld();
+
+        for (i = this.x1; i <= this.x2; i++)
+        {
+            for (j = 0; j <= w.getMaxHeight(); j++)
+            {
+                walls.add(w.getBlockAt(i, j, getMinZ()));
+                walls.add(w.getBlockAt(i, j, getMaxZ()));
+            }
+        }
+        for (i = this.z1; i <= this.z2; i++)
+        {
+            for (j = 0; j <= w.getMaxHeight(); j++)
+            {
+                walls.add(w.getBlockAt(getMinX(), j, i));
+                walls.add(w.getBlockAt(getMaxX(), j, i));
+            }
+        }
+        for (i = this.x1; i <= this.x2; i++)
+        {
+            for (j = this.z1; j <= this.z2; j++)
+            {
+                walls.add(w.getBlockAt(i, 0, j));
+                walls.add(w.getBlockAt(i, w.getMaxHeight(), j));
+            }
+        }
+        return walls;
+
     }
 
     @Override

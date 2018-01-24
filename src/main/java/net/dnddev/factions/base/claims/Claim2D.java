@@ -1,26 +1,31 @@
 package net.dnddev.factions.base.claims;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.User;
+import net.dnddev.factions.base.UserStore;
+import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
+import net.dnddev.factions.spatial.LazyLocation;
 
 /**
  * The two-dimensional implementation of a {@link Claim}.
  * 
  * @author Michael Ziluck
  */
-public class Claim2D extends BoundedArea implements Claim
+public abstract class Claim2D extends BoundedArea implements Claim
 {
 
     protected double cost;
 
     protected Faction faction;
+
+    protected Set<User> owners;
 
     @Override
     public boolean hasCost()
@@ -43,43 +48,39 @@ public class Claim2D extends BoundedArea implements Claim
     @Override
     public Collection<User> getWithin()
     {
-        // TODO Auto-generated method stub
-        return null;
+        Set<User> users = new HashSet<>();
+        for (User user : UserStore.getInstance().getOnlineUsers())
+        {
+            if (intersects(BlockColumn.fromLocation(user.getLastLocation().asBukkitLocation())))
+            {
+                users.add(user);
+            }
+        }
+        return users;
     }
 
     @Override
     public Collection<User> getOwners()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return owners;
     }
 
     @Override
     public boolean isWithin(User user)
     {
-        // TODO Auto-generated method stub
-        return false;
+        return isWithin(user.getLastLocation().asBukkitLocation());
     }
 
     @Override
     public boolean isWithin(Location location)
     {
-        // TODO Auto-generated method stub
-        return false;
+        return getWorld() == location.getWorld() && BlockColumn.fromLocation(location).intersects(this);
     }
 
     @Override
-    public Set<Block> getWalls()
+    public LazyLocation getCenter()
     {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Location getCenter()
-    {
-        // TODO Auto-generated method stub
-        return null;
+        return new LazyLocation((x1 + x2) / 2, (0 + getWorld().getMaxHeight()) / 2, (z1 + z2) / 2, getWorld());
     }
 
 }

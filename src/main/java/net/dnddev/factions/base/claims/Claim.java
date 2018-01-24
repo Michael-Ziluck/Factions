@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.Purchasable;
 import net.dnddev.factions.base.User;
+import net.dnddev.factions.spatial.LazyLocation;
 
 /**
  * Used to represent an area claimed by a {@link Faction}.
@@ -68,8 +69,7 @@ public interface Claim extends Purchasable
     public boolean isWithin(Location location);
 
     /**
-     * Get the Blocks that make up the walls of this Claim. If the Claim is three dimensional, it will also return the
-     * floors and roof.
+     * Get the Blocks that make up the walls of this Claim. It also includes the floor and roof.
      * 
      * @return the Blocks of the walls.
      */
@@ -81,6 +81,6 @@ public interface Claim extends Purchasable
      * 
      * @return the center of the Claim.
      */
-    public Location getCenter();
+    public LazyLocation getCenter();
 
 }

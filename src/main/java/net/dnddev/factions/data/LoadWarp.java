@@ -4,6 +4,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.Warp;
+import net.dnddev.factions.configuration.Config;
+import net.dnddev.factions.configuration.struct.Optimization;
 import net.dnddev.factions.spatial.LazyLocation;
 
 /**
@@ -49,7 +51,15 @@ public abstract class LoadWarp implements Warp
     @Override
     public String getStub()
     {
-        return getName().toLowerCase();
+        if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
+        {
+            return getName().toLowerCase();
+        }
+        else if (stub == null)
+        {
+            stub = getName().toLowerCase();
+        }
+        return stub;
     }
 
     @Override

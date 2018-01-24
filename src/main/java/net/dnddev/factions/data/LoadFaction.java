@@ -30,6 +30,16 @@ import net.dnddev.factions.spatial.LazyLocation;
  * This should only ever be used if you are making major changes to Factions. Many checks and a lot of logic is done
  * within this class, so be careful with what exactly is touched. When in doubt, reference the original source code.
  * </p>
+ * <p>
+ * Saving is done in the following places:
+ * <ul>
+ * <li>{@link #createWarp(String, LazyLocation, String)}</li>
+ * <li></li>
+ * <li></li>
+ * <li></li>
+ * <li></li>
+ * </ul>
+ * </p>
  * 
  * @author Michael Ziluck
  */
@@ -288,24 +298,40 @@ public abstract class LoadFaction implements Faction
     @Override
     public void addAnnouncements(String[] messages, Role role, boolean superiors)
     {
-        Validate.notNull(messages, "Messages can't be null.");
-        Validate.notNull(role, "Role can't be null.");
-        
-        
+        if (!superiors)
+        {
+            addAnnouncements(messages, role);
+        }
+        else
+        {
+            Validate.notNull(messages, "Messages can't be null.");
+            Validate.notNull(role, "Role can't be null.");
 
+            List<User> users = new LinkedList<>(getMembers());
+            users.removeIf(u -> u.getFactionRole().inferior(role));
+            addAnnouncements(messages, users);
+        }
     }
 
     @Override
     public void addAnnouncements(String[] messages, User user)
     {
-        // TODO Auto-generated method stub
+        Validate.notNull(messages, "Messages can't be null.");
+        Validate.notNull(user, "User can't be null.");
 
+        processAnnouncement(user, messages);
     }
 
     @Override
     public void addAnnouncements(String[] messages, Collection<User> users)
     {
-        // TODO Auto-generated method stub
+        Validate.notNull(messages, "Messages can't be null.");
+        Validate.notNull(users, "Users can't be null.");
+
+        for (User user : users)
+        {
+            processAnnouncement(user, messages);
+        }
     }
 
     @Override

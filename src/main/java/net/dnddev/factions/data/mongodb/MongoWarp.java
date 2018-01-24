@@ -1,7 +1,5 @@
 package net.dnddev.factions.data.mongodb;
 
-import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.Preconditions;
 
@@ -18,7 +16,7 @@ import net.dnddev.factions.spatial.LazyLocation;
 public final class MongoWarp extends LoadWarp
 {
 
-    protected UUID factionUuid;
+    protected long factionId;
 
     /**
      * An empty constructor that sets loaded to true. Jongo requires an empty constructor in order to load things
@@ -30,7 +28,7 @@ public final class MongoWarp extends LoadWarp
     }
 
     /**
-     * Creates a new Warp with the given paramters. If locked is set to true, a {@link NullPointerException} will be
+     * Creates a new Warp with the given parameters. If locked is set to true, a {@link NullPointerException} will be
      * thrown if the password is null.
      * 
      * @param faction the faction that created the warp.
@@ -49,7 +47,7 @@ public final class MongoWarp extends LoadWarp
         {
             Preconditions.checkNotNull(password, "Password can't be null if the warp is locked.");
         }
-        this.factionUuid = faction.getUniqueId();
+        this.factionId = faction.getId();
         this.faction = faction;
         this.name = name;
         this.stub = name.toLowerCase();
