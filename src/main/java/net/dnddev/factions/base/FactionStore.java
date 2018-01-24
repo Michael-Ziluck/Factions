@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import net.dnddev.factions.Factions;
+import net.dnddev.factions.base.claims.Claim;
 import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
 import net.dnddev.factions.spatial.LazyLocation;
@@ -86,6 +87,15 @@ public interface FactionStore
      * @return all Factions if any exist.
      */
     public List<Faction> getFactions(BoundedArea area);
+
+    /**
+     * Gets all Claims within the given bounded area. If none are found, this returns an <b>EMPTY</b> List. It will
+     * <i>not</i> return a List with the Wilderness in it. This method will never return null.
+     * 
+     * @param area the area to search within.
+     * @return all Factions if any exist.
+     */
+    public List<Claim> getClaims(BoundedArea area);
 
     /**
      * Gets the Faction of the given User. If none is found this will return Wilderness, not null.

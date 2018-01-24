@@ -1,12 +1,34 @@
 package net.dnddev.factions.utils;
 
+import static java.lang.Float.max;
+
 import com.github.davidmoten.rtree.geometry.Geometries;
 import com.github.davidmoten.rtree.geometry.Rectangle;
+import com.google.common.base.Preconditions;
 
 import net.dnddev.factions.spatial.BlockColumn;
+import net.dnddev.factions.spatial.BoundedArea;
 
+/**
+ * Basic geometric math utilities.
+ * 
+ * @author Michael Ziluck
+ */
 public class GeometryUtils
 {
+    /**
+     * Get the distance between two rectangles.
+     * 
+     * @param x1 x1 of shape one.
+     * @param y1 y1 of shape one.
+     * @param x2 x2 of shape one.
+     * @param y2 y2 of shape one.
+     * @param a1 x1 of shape two.
+     * @param b1 y1 of shape two.
+     * @param a2 x2 of shape two.
+     * @param b2 y2 of shape two.
+     * @return the distance between the two rectangles.
+     */
     public static double distance(float x1, float y1, float x2, float y2, float a1, float b1, float a2, float b2)
     {
         if (intersects(x1, y1, x2, y2, a1, b1, a2, b2))
@@ -29,37 +51,76 @@ public class GeometryUtils
         return Math.sqrt(xDifference * xDifference + yDifference * yDifference);
     }
 
+    /**
+     * Check if two rectangles intersect one another.
+     * 
+     * @param x1 x1 of shape one.
+     * @param y1 y1 of shape one.
+     * @param x2 x2 of shape one.
+     * @param y2 y2 of shape one.
+     * @param a1 x1 of shape two.
+     * @param b1 y1 of shape two.
+     * @param a2 x2 of shape two.
+     * @param b2 y2 of shape two.
+     * @return {@code true} if the rectangles intersect.
+     */
     public static boolean intersects(float x1, float y1, float x2, float y2, float a1, float b1, float a2, float b2)
     {
         return x1 <= a2 && a1 <= x2 && y1 <= b2 && b1 <= y2;
     }
 
-    private static float max(float a, float b)
-    {
-        if (a < b)
-            return b;
-        else
-            return a;
-    }
-
+    /**
+     * Create a new Rectangle with the given coordinates.
+     * 
+     * @param x1 the x1.
+     * @param y1 the y1.
+     * @param x2 the x2.
+     * @param y2 the y2.
+     * @return the new Rectangle.
+     */
     public static Rectangle create(double x1, double y1, double x2, double y2)
     {
         return Geometries.rectangle(x1, y1, x2, y2);
     }
 
+    /**
+     * Create a new Rectangle with the given coordinates.
+     * 
+     * @param x1 the x1.
+     * @param y1 the y1.
+     * @param x2 the x2.
+     * @param y2 the y2.
+     * @return the new Rectangle.
+     */
     public static Rectangle create(float x1, float y1, float x2, float y2)
     {
         return Geometries.rectangle(x1, y1, x2, y2);
     }
 
+    /**
+     * Get the area between the two points.
+     * 
+     * @param pointOne the first point.
+     * @param pointTwo the second point.
+     * @return the area.
+     */
     public static int getArea(BlockColumn pointOne, BlockColumn pointTwo)
     {
-        return (int) new BoundedArea(pointOne, pointTwo).area();
+        return (int) getBoundedArea(pointOne, pointTwo).area();
     }
 
+    /**
+     * Construct a new BoundedArea with the two given points.
+     * 
+     * @param pointOne the first point.
+     * @param pointTwo the second point.
+     * @return the new BoundedArea.
+     */
     public static BoundedArea getBoundedArea(BlockColumn pointOne, BlockColumn pointTwo)
     {
+        Preconditions.checkNotNull(pointOne, "Point One can't be null");
+        Preconditions.checkNotNull(pointTwo, "Points Two can't be null");
         return new BoundedArea(pointOne, pointTwo);
     }
-    
+
 }

@@ -1,11 +1,13 @@
 package net.dnddev.factions.data.mongodb;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.jongo.marshall.jackson.oid.MongoId;
 
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.Warp;
+import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.data.LoadFaction;
 import net.dnddev.factions.spatial.LazyLocation;
 
@@ -32,20 +34,20 @@ public class MongoFaction extends LoadFaction
      * Create a new Faction with the given information. This should only be used when a new Faction is made, not to load
      * an already existing Faction.
      * 
-     * @param uuid the uuid of the Faction.
+     * @param id the uuid of the Faction.
      * @param name the name of the Faction.
      * @param leader the person making the new Faction.
      * @param type the type of the Faction.
      */
-    public MongoFaction(UUID uuid, String name, User leader, Type type)
+    public MongoFaction(long id, String name, User leader, Type type)
     {
-        super(uuid, name, leader, type);
+        super(id, name, leader, type);
     }
 
     @Override
     public void save()
     {
-        
+        // TODO finish implementation
     }
 
     @Override
@@ -55,4 +57,5 @@ public class MongoFaction extends LoadFaction
         return null;
     }
 
+   
 }

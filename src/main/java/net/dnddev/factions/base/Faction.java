@@ -2,6 +2,7 @@ package net.dnddev.factions.base;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
@@ -22,12 +23,11 @@ public interface Faction extends Messageable
 {
 
     /**
-     * Retrieves the unique id of the Faction. This is generated when the Faction is created and will not be reused.
-     * Wilderness will always have a UUID of ffffffff-ffff-ffff-ffff-ffffffffffff.
+     * Retrieves the id of the Faction. This will auto-increment in the database. The Wilderness will have an id of -1.
      * 
-     * @return the uuid of the Faction.
+     * @return the id of the Faction.
      */
-    public UUID getUniqueId();
+    public long getId();
 
     /**
      * Retrieves the case-sensitive name of the Faction. This should not be used for lookup as requiring
@@ -70,18 +70,31 @@ public interface Faction extends Messageable
     public Multimap<UUID, String> getAnnouncements();
 
     /**
-     * Add a new announcement for the Faction to be sent to the specified Faction members.<br>
-     * <br>
+     * Adds a new announcement for the Faction to be sent to the specified Faction members.<br>
+     * <p>
      * This will automatically send the message to all online targeted members of the Faction and store it for all
      * offline targeted members for the next time they join.
+     * </p>
      * 
      * @param message the message to be announced.
      * @param users the users to receive the message.
      */
-    public void addAnnouncement(String message, List<User> users);
+    public void addAnnouncement(String message, Collection<User> users);
 
     /**
-     * Add a new announcement for the Faction to be sent to all members.<br>
+     * Adds a new announcement for the Faction to be sent to the specified Faction member.<br>
+     * <p>
+     * This will automatically send the message to the User if they are online, or store it if they are offline for the
+     * next time they join.
+     * </p>
+     * 
+     * @param message the message to be announced.
+     * @param user the users to receive the message.
+     */
+    public void addAnnouncement(String message, User user);
+
+    /**
+     * Adds a new announcement for the Faction to be sent to all members.<br>
      * <br>
      * This will automatically send the message to all online members of the Faction and store it for all offline
      * members for the next time they join.
@@ -91,7 +104,7 @@ public interface Faction extends Messageable
     public void addAnnouncement(String message);
 
     /**
-     * Add a new announcement for the Faction to be sent to all members with the specified rank. Important note: this
+     * Adds a new announcement for the Faction to be sent to all members with the specified rank. Important note: this
      * will not send it to the rank's superiors as well. To also send to superiors, use
      * {@link #addAnnouncement(String, Role, boolean)}. <br>
      * <br>
@@ -113,6 +126,64 @@ public interface Faction extends Messageable
      * @param superiors whether or not to also send to the role's superiors.
      */
     public void addAnnouncement(String message, Role role, boolean superiors);
+
+    /**
+     * Adds new announcements for the Faction to be sent to the specified Faction members.<br>
+     * <p>
+     * This will automatically send the messages to all online targeted members of the Faction and store it for all
+     * offline targeted members for the next time they join.
+     * </p>
+     * 
+     * @param messages the message to be announced.
+     * @param users the users to receive the message.
+     */
+    public void addAnnouncements(String[] messages, Collection<User> users);
+
+    /**
+     * Adds new announcements for the Faction to be sent to the specified Faction member.<br>
+     * <p>
+     * This will automatically send the messages to the User if they are online, or store it if they are offline for the
+     * next time they join.
+     * </p>
+     * 
+     * @param messages the messages to be announced.
+     * @param user the users to receive the message.
+     */
+    public void addAnnouncements(String[] messages, User user);
+
+    /**
+     * Adds new announcements for the Faction to be sent to all members.<br>
+     * <br>
+     * This will automatically send the messages to all online members of the Faction and store it for all offline
+     * members for the next time they join.
+     * 
+     * @param messages the messages to be announced.
+     */
+    public void addAnnouncements(String[] messages);
+
+    /**
+     * Adds new announcements for the Faction to be sent to all members with the specified rank. Important note: this
+     * will not send it to the rank's superiors as well. To also send to superiors, use
+     * {@link #addAnnouncement(String, Role, boolean)}. <br>
+     * <br>
+     * This will automatically send the message to all online targeted members of the Faction and store it for all
+     * offline targeted members for the next time they join.
+     * 
+     * @param messages the messages to be announced.
+     * @param role the role to receive the message.
+     */
+    public void addAnnouncements(String[] messages, Role role);
+
+    /**
+     * Adds new announcement for the Faction to be sent to all members with the specified rank with the ability to
+     * include superiors. This will automatically send the messages to all online targeted members of the Faction and
+     * store it for all offline targeted members for the next time they join.
+     * 
+     * @param messages the messages to be announced.
+     * @param role the to receive message.
+     * @param superiors whether or not to also send to the role's superiors.
+     */
+    public void addAnnouncements(String[] messages, Role role, boolean superiors);
 
     /**
      * Remove all announcements for the specified user. This will have no effect on online users as they won't have any
@@ -213,7 +284,7 @@ public interface Faction extends Messageable
      * 
      * @return all admins of the Faction.
      */
-    public List<User> getAdmins();
+    public Set<User> getAdmins();
 
     /**
      * Retrieves all the moderators of the Faction. This is a shorthand method for retrieving all members and filtering
@@ -222,7 +293,7 @@ public interface Faction extends Messageable
      * 
      * @return all moderators of the Faction.
      */
-    public List<User> getModerators();
+    public Set<User> getModerators();
 
     /**
      * Retrieves all the members of the Faction. This includes the leader.<br>
@@ -233,7 +304,7 @@ public interface Faction extends Messageable
      * 
      * @return all members of the Faction.
      */
-    public List<User> getMembers();
+    public Set<User> getMembers();
 
     /**
      * Retrieves all the members who have the specific rank. This is a shorthand method for retrieving all members and
@@ -244,7 +315,7 @@ public interface Faction extends Messageable
      * @param role the role to look for.
      * @return the members with the given faction role.
      */
-    public List<User> getMembers(Role role);
+    public Set<User> getMembers(Role role);
 
     /**
      * Retrieves all the trials members of the Faction. This is a shorthand method for retrieving all members and
@@ -253,7 +324,7 @@ public interface Faction extends Messageable
      * 
      * @return the trial members.
      */
-    public List<User> getTrialMembers();
+    public Set<User> getTrialMembers();
 
     /**
      * Retrieves the {@link Type} of the Faction.
@@ -263,7 +334,7 @@ public interface Faction extends Messageable
     public Type getType();
 
     /**
-     * Checks if this is the Wilderness. The Wilderness will always have a UUID of ffffffff-ffff-ffff-ffff-ffffffffffff.
+     * Checks if this is the Wilderness. The Wilderness will always have an id of -1.
      * 
      * @return {@code true} if this is the Wilderness.
      */

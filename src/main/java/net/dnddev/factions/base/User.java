@@ -30,6 +30,13 @@ public interface User extends Messageable
     public boolean isOffline();
 
     /**
+     * Returns the internal id of the user.
+     * 
+     * @return the internal id of the user.
+     */
+    public long getId();
+
+    /**
      * Retrieves the UUID of the User. This is the same as the UUID of the related Bukkit Player.
      * 
      * @return the UUID of the User.
@@ -83,12 +90,12 @@ public interface User extends Messageable
     public Faction getFaction();
 
     /**
-     * Retrieves the UUID of the User's Faction. If they do not have a Faction, this will return the UUID for the
+     * Retrieves the id of the User's Faction. If they do not have a Faction, this will return the id for the
      * Wilderness.
      * 
-     * @return the UUID of the User's current Faction.
+     * @return the id of the User's current Faction.
      */
-    public UUID getFactionUniqueId();
+    public long getFactionId();
 
     /**
      * Retrieves the last known Location of the User. If the player is connecting for the first time, this will most

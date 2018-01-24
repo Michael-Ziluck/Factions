@@ -1,14 +1,26 @@
 package net.dnddev.factions.data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
+import org.bukkit.Location;
 import org.bukkit.World;
 
-import com.conversantmedia.util.collection.spatial.RTree;
+import com.github.davidmoten.rtree.Entry;
+import com.github.davidmoten.rtree.RTree;
 
+import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.FactionStore;
 import net.dnddev.factions.base.claims.Claim;
+import net.dnddev.factions.base.claims.Claim2D;
+import net.dnddev.factions.data.mongodb.MongoFaction;
+import net.dnddev.factions.spatial.BlockColumn;
+import net.dnddev.factions.spatial.BoundedArea;
+import net.dnddev.factions.spatial.LazyLocation;
 
 /**
  * The in-memory representation of a FactionStore.
@@ -25,6 +37,124 @@ public abstract class LoadFactionStore implements FactionStore
     /**
      * The Map of the claims in each {@link World}. The {@link World}'s UUID is used to speed of retrieval efficiency.
      */
-    protected Map<UUID, RTree<Claim>> claims;
+    protected Map<UUID, RTree<Faction, Claim2D>> claims;
+
+    /**
+     * {@code true} once the FactionStore has been loaded from the database.
+     */
+    protected boolean loaded;
+
+    /**
+     * The Wilderness.
+     */
+    protected final Faction WILDERNESS;
+
+    /**
+     * Construct a new LoadFactionStore. This will initialize the Wilderness.
+     */
+    public LoadFactionStore()
+    {
+        WILDERNESS = new MongoFaction();
+    }
+
+    @Override
+    public Faction getFaction(Location location)
+    {
+        RTree<Faction, Claim2D> tree = claims.get(location.getWorld().getUID());
+        if (tree == null)
+        {
+            claims.put(location.getWorld().getUID(), RTree.create());
+            return WILDERNESS;
+        }
+
+        BlockColumn blockColumn = new BlockColumn(location.getBlockX(), location.getBlockZ(), location.getWorld());
+
+        try
+        {
+            return tree.search(blockColumn).toBlocking().toFuture().get().value();
+        }
+        catch (InterruptedException | ExecutionException ex)
+        {
+            return WILDERNESS;
+        }
+    }
+
+    @Override
+    public Faction getFaction(LazyLocation location)
+    {
+        RTree<Faction, Claim2D> tree = claims.get(location.getWorld().getUID());
+        if (tree == null)
+        {
+            claims.put(location.getWorld().getUID(), RTree.create());
+            return WILDERNESS;
+        }
+
+        BlockColumn blockColumn = new BlockColumn((int) location.getX(), (int) location.getZ(), location.getWorld());
+
+        try
+        {
+            return tree.search(blockColumn).toBlocking().toFuture().get().value();
+        }
+        catch (InterruptedException | ExecutionException ex)
+        {
+            return WILDERNESS;
+        }
+    }
+
+    @Override
+    public Faction getFaction(BlockColumn column)
+    {
+        RTree<Faction, Claim2D> tree = claims.get(column.getWorld().getUID());
+        if (tree == null)
+        {
+            claims.put(column.getWorld().getUID(), RTree.create());
+            return WILDERNESS;
+        }
+
+        try
+        {
+            return tree.search(column).toBlocking().toFuture().get().value();
+        }
+        catch (InterruptedException | ExecutionException ex)
+        {
+            return WILDERNESS;
+        }
+    }
+
+    @Override
+    public List<Faction> getFactions(BoundedArea area)
+    {
+        RTree<Faction, Claim2D> tree = claims.get(area.getWorld().getUID());
+        if (tree == null)
+        {
+            claims.put(area.getWorld().getUID(), RTree.create());
+            return Arrays.asList(WILDERNESS);
+        }
+
+        ArrayList<Faction> values = new ArrayList<>();
+        for (Entry<Faction, Claim2D> claim : tree.search(area).toBlocking().toIterable())
+        {
+            values.add(claim.value());
+        }
+        return values;
+    }
+
+    @Override
+    public List<Claim> getClaims(BoundedArea area)
+    {
+        RTree<Faction, Claim2D> tree = claims.get(area.getWorld().getUID());
+        if (tree == null)
+        {
+            claims.put(area.getWorld().getUID(), RTree.create());
+            return Arrays.asList();
+        }
+
+        ArrayList<Claim> values = new ArrayList<>();
+        for (Entry<Faction, Claim2D> claim : tree.search(area).toBlocking().toIterable())
+        {
+            values.add(claim.geometry());
+        }
+        return values;
+    }
 
 }

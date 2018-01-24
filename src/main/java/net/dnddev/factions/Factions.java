@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.FactionStore;
 import net.dnddev.factions.base.User;
+import net.dnddev.factions.base.UserStore;
 import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
@@ -30,6 +31,7 @@ public class Factions extends JavaPlugin
     private static Factions instance;
 
     private FactionStore factionStore;
+    private UserStore userStore;
 
     public void onEnable()
     {
@@ -50,6 +52,14 @@ public class Factions extends JavaPlugin
     public FactionStore getFactionStore()
     {
         return factionStore;
+    }
+
+    /**
+     * @return the currently used UserStore.
+     */
+    public UserStore getUserStore()
+    {
+        return userStore;
     }
 
     /**

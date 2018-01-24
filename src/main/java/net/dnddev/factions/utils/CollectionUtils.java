@@ -106,4 +106,15 @@ public class CollectionUtils
         return null;
     }
 
+    /**
+     * Converts the given String collection into a String array.
+     * 
+     * @param collection the collection to convert.
+     * @return the newly created array.
+     */
+    public static String[] toArray(Collection<String> collection)
+    {
+        return collection.toArray(new String[collection.size()]);
+    }
+
 }

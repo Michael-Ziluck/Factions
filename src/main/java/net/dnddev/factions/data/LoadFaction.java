@@ -1,7 +1,8 @@
 package net.dnddev.factions.data;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ import net.dnddev.factions.spatial.LazyLocation;
 public abstract class LoadFaction implements Faction
 {
 
-    protected UUID uuid;
+    protected long id;
 
     protected String name;
 
@@ -53,12 +54,12 @@ public abstract class LoadFaction implements Faction
 
     protected User leader;
 
-    protected List<User> members;
+    protected Set<User> members;
 
     protected List<UUID> invites;
 
     protected Set<Flag> flags;
-    
+
     protected boolean loaded;
 
     /**
@@ -71,28 +72,25 @@ public abstract class LoadFaction implements Faction
 
     /**
      * Constructs a new LoadFaction with the given values.
-     * @param uuid the uuid of the Faction.
+     * 
+     * @param id the uuid of the Faction.
      * @param name the name of the Faction.
      * @param leader the one who created the Faction.
      * @param type the type of Faction being created.
      */
-    public LoadFaction(UUID uuid, String name, User leader, Type type)
+    public LoadFaction(long id, String name, User leader, Type type)
     {
         this();
-        this.uuid = uuid;
+        this.id = id;
         this.name = name;
         this.leader = leader;
         this.type = type;
     }
 
     @Override
-    public UUID getUniqueId()
+    public long getId()
     {
-        if (uuid == null)
-        {
-            // TODO load uuid
-        }
-        return uuid;
+        return id;
     }
 
     @Override
@@ -167,15 +165,47 @@ public abstract class LoadFaction implements Faction
         }
     }
 
-    @Override
-    public void addAnnouncement(String message, List<User> users)
+    /**
+     * Performs the check to see if the User is online. If they are this method will send the announcement immediately.
+     * Otherwise it will add it to the pending announcements.
+     * 
+     * @param user the user to check.
+     * @param messages the message to process.
+     */
+    protected void processAnnouncement(User user, String[] messages)
     {
-        Validate.notNull(message, "Message can't be null.");
-        Validate.notNull(users, "Users can't be null.");
+        Validate.notNull(user, "User can't be null.");
+        Validate.notNull(messages, "Message can't be null.");
 
-        for (User user : users)
+        if (user.isOnline())
         {
-            processAnnouncement(user, message);
+            user.sendMessage(messages);
+        }
+        else
+        {
+            getAnnouncements().putAll(user.getUniqueId(), Arrays.asList(messages));
+        }
+    }
+
+    /**
+     * Performs the check to see if the User is online. If they are this method will send the announcement immediately.
+     * Otherwise it will add it to the pending announcements.
+     * 
+     * @param user the user to check.
+     * @param messages the message to process.
+     */
+    protected void processAnnouncement(User user, Collection<String> messages)
+    {
+        Validate.notNull(user, "User can't be null.");
+        Validate.notNull(messages, "Message can't be null.");
+
+        if (user.isOnline())
+        {
+            user.sendMessage(messages);
+        }
+        else
+        {
+            getAnnouncements().putAll(user.getUniqueId(), messages);
         }
     }
 
@@ -210,6 +240,72 @@ public abstract class LoadFaction implements Faction
         List<User> users = new LinkedList<>(getMembers());
         users.removeIf(u -> u.getFactionRole().inferior(role));
         addAnnouncement(message, users);
+    }
+
+    @Override
+    public void addAnnouncement(String message, User user)
+    {
+        Validate.notNull(message, "Message can't be null.");
+        Validate.notNull(user, "User can't be null.");
+
+        processAnnouncement(user, message);
+    }
+
+    @Override
+    public void addAnnouncement(String message, Collection<User> users)
+    {
+        Validate.notNull(message, "Message can't be null.");
+        Validate.notNull(users, "Users can't be null.");
+
+        for (User user : users)
+        {
+            processAnnouncement(user, message);
+        }
+    }
+
+    @Override
+    public void addAnnouncements(String[] messages)
+    {
+        Validate.notNull(messages, "Messages can't be null.");
+
+        for (User user : getMembers())
+        {
+            processAnnouncement(user, messages);
+        }
+    }
+
+    @Override
+    public void addAnnouncements(String[] messages, Role role)
+    {
+        Validate.notNull(messages, "Messages can't be null.");
+        Validate.notNull(role, "Role can't be null.");
+
+        List<User> users = new LinkedList<>(getMembers());
+        users.removeIf(u -> u.getFactionRole() != role);
+        addAnnouncements(messages, users);
+    }
+
+    @Override
+    public void addAnnouncements(String[] messages, Role role, boolean superiors)
+    {
+        Validate.notNull(messages, "Messages can't be null.");
+        Validate.notNull(role, "Role can't be null.");
+        
+        
+
+    }
+
+    @Override
+    public void addAnnouncements(String[] messages, User user)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addAnnouncements(String[] messages, Collection<User> users)
+    {
+        // TODO Auto-generated method stub
     }
 
     @Override
@@ -395,7 +491,7 @@ public abstract class LoadFaction implements Faction
     }
 
     @Override
-    public List<User> getMembers()
+    public Set<User> getMembers()
     {
         if (members == null)
         {
@@ -405,35 +501,35 @@ public abstract class LoadFaction implements Faction
     }
 
     @Override
-    public List<User> getAdmins()
+    public Set<User> getAdmins()
     {
-        List<User> admins = new ArrayList<>(getMembers());
+        Set<User> admins = new HashSet<>(getMembers());
         admins.removeIf(u -> u.getFactionRole() != Role.ADMIN);
         return admins;
     }
 
     @Override
-    public List<User> getModerators()
+    public Set<User> getModerators()
     {
-        List<User> moderators = new ArrayList<>(getMembers());
+        Set<User> moderators = new HashSet<>(getMembers());
         moderators.removeIf(u -> u.getFactionRole() != Role.MODERATOR);
         return moderators;
     }
 
     @Override
-    public List<User> getTrialMembers()
+    public Set<User> getTrialMembers()
     {
-        List<User> trials = new ArrayList<>(getMembers());
+        Set<User> trials = new HashSet<>(getMembers());
         trials.removeIf(u -> u.getFactionRole() != Role.TRIAL);
         return trials;
     }
 
     @Override
-    public List<User> getMembers(Role role)
+    public Set<User> getMembers(Role role)
     {
         Validate.notNull(role, "Role can't be null.");
 
-        List<User> members = new ArrayList<>(getMembers());
+        Set<User> members = new HashSet<>(getMembers());
         members.removeIf(u -> u.getFactionRole() != role);
         return members;
     }
@@ -491,7 +587,7 @@ public abstract class LoadFaction implements Faction
     @Override
     public int hashCode()
     {
-        return getUniqueId().hashCode();
+        return Long.hashCode(getId());
     }
 
 }
