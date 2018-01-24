@@ -55,4 +55,15 @@ public class MongoUserStore extends LoadUserStore
         return user;
     }
 
+    @Override
+    public User getUser(long id, boolean includeOffline)
+    {
+        User user = getUser(id);
+        if (includeOffline && user == null)
+        {
+            user = store.findOne("{_id: " + id + "}").as(MongoUser.class);
+        }
+        return user;
+    }
+
 }

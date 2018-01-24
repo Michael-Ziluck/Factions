@@ -37,14 +37,12 @@ public abstract class LoadWarp implements Warp
     @Override
     public Faction getFaction()
     {
-        assertLoaded();
         return faction;
     }
 
     @Override
     public String getName()
     {
-        assertLoaded();
         return name;
     }
 
@@ -65,14 +63,12 @@ public abstract class LoadWarp implements Warp
     @Override
     public LazyLocation getLocation()
     {
-        assertLoaded();
         return location;
     }
 
     @Override
     public String getPassword()
     {
-        assertLoaded();
         return password;
     }
 
@@ -96,15 +92,6 @@ public abstract class LoadWarp implements Warp
     public void setPassword(String password)
     {
         this.password = DigestUtils.md5Hex(password);
-    }
-
-    protected void assertLoaded()
-    {
-        if (!loaded)
-        {
-            // TODO load
-        }
-        loaded = true;
     }
 
 }

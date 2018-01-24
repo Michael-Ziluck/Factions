@@ -61,6 +61,20 @@ public interface Faction extends Messageable
     public String getMOTD();
 
     /**
+     * Gets the default Role of a new member.
+     * 
+     * @return the default Role.
+     */
+    public Role getDefaultRole();
+
+    /**
+     * Sets the Role that new members are set to when they join a Faction.
+     * 
+     * @param role the new default role.
+     */
+    public void setDefaultRole(Role role);
+
+    /**
      * Retrieves all announcements for each player. Announcements are messages stored with the data that are going to be
      * sent to the players the next time they connect to the server. Players that are currently connected to the server
      * should not have any pending announcements as any new announcement added for a player is sent to them immediately.
@@ -256,6 +270,13 @@ public interface Faction extends Messageable
     public void clearWarps();
 
     /**
+     * Checks if this Faction has a Home set.
+     * 
+     * @return {@code true} if the home is set.
+     */
+    public boolean hasHome();
+
+    /**
      * Get the LazyLocation for the Faction's home.
      * 
      * @return the home.
@@ -263,11 +284,17 @@ public interface Faction extends Messageable
     public LazyLocation getHome();
 
     /**
-     * Sets a new LazyLocation for the Faction's home.
+     * Sets a new LazyLocation for the Faction's home. The home is not allowed to be null. If you want to clear the
+     * Faction home, use {@link #clearHome()}.
      * 
      * @param home the new home.
      */
     public void setHome(LazyLocation home);
+
+    /**
+     * Removes the home the Faction has set.
+     */
+    public void clearHome();
 
     /**
      * Retrieves the leader of the Faction. This is the only member-related method that does not search through the
@@ -294,6 +321,13 @@ public interface Faction extends Messageable
      * @return all moderators of the Faction.
      */
     public Set<User> getModerators();
+
+    /**
+     * Add a new member to the Faction.
+     * 
+     * @param user the user to add.
+     */
+    public void addMember(User user);
 
     /**
      * Retrieves all the members of the Faction. This includes the leader.<br>
@@ -418,6 +452,12 @@ public interface Faction extends Messageable
      * as much efficiency as possible.
      */
     public void save();
+
+    /**
+     * Loads all the Users that are a member of this Faction. This is not called when the Faction starts to reduce the
+     * number of Users that need to be kept loaded at a given time.
+     */
+    public void loadMembers();
 
     /**
      * Represents the purpose for each Faction. Each enum has a description for the function of each Type.

@@ -12,6 +12,7 @@ import org.jongo.MongoCollection;
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.UserStore;
+import net.dnddev.factions.base.Faction.Type;
 import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.configuration.struct.Optimization;
 import net.dnddev.factions.data.LoadFactionStore;
@@ -45,7 +46,7 @@ public class MongoFactionStore extends LoadFactionStore
 
         store = MongoWrapper.getInstance().getJongo().getCollection("factions");
 
-        int count = Math.toIntExact(store.count());
+        int count = Math.toIntExact(store.count() + 5);
 
         if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
         {
@@ -56,7 +57,7 @@ public class MongoFactionStore extends LoadFactionStore
             factionsByName = new HashMap<>(count);
         }
 
-        // TODO load factions from the database.
+        loadFactions();
     }
 
     @Override
@@ -146,7 +147,31 @@ public class MongoFactionStore extends LoadFactionStore
     @Override
     public void loadFactions()
     {
+        for (MongoFaction faction : store.find().as(MongoFaction.class))
+        {
+            if (faction.getId() == -1)
+            {
+                WILDERNESS = faction;
+            }
+            if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
+            {
+                factionsByName.put(faction.getStub(), faction);
+            }
+            else
+            {
+                factionsList.add(faction);
+            }
+        }
+        if (WILDERNESS == null)
+        {
+            WILDERNESS = new MongoFaction(-1, "WILDERNESS", null, Type.WILDERNESS);
+        }
+    }
 
+    @Override
+    public void save(Faction faction)
+    {
+        store.save(faction);
     }
 
 }

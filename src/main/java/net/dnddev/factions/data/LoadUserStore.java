@@ -48,6 +48,20 @@ public abstract class LoadUserStore implements UserStore
         }
     }
 
+    @Override
+    public User getUser(long id)
+    {
+        Predicate<User> predicate = user -> user.getId() == id;
+        if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
+        {
+            return searchMap(predicate);
+        }
+        else
+        {
+            return searchList(predicate);
+        }
+    }
+
     // TODO add javadoc
     private User searchMap(Predicate<User> predicate)
     {

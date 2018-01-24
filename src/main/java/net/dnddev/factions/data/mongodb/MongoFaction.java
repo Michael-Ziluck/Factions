@@ -1,11 +1,18 @@
 package net.dnddev.factions.data.mongodb;
 
-import java.util.UUID;
+import java.util.HashSet;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang.ArrayUtils;
+import org.bukkit.Bukkit;
 import org.jongo.marshall.jackson.oid.MongoId;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import net.dnddev.factions.Factions;
+import net.dnddev.factions.base.FactionStore;
 import net.dnddev.factions.base.User;
+import net.dnddev.factions.base.UserStore;
 import net.dnddev.factions.base.Warp;
 import net.dnddev.factions.data.LoadFaction;
 import net.dnddev.factions.spatial.LazyLocation;
@@ -15,11 +22,14 @@ import net.dnddev.factions.spatial.LazyLocation;
  * 
  * @author Michael Ziluck
  */
+@JsonIgnoreProperties({ "stub", "announcements", "loaded", "members" })
 public class MongoFaction extends LoadFaction
 {
 
     @MongoId
-    protected UUID uuid;
+    protected long id;
+
+    protected long[] memberIds;
 
     /**
      * Empty constructor for the ORM to use.
@@ -46,7 +56,7 @@ public class MongoFaction extends LoadFaction
     @Override
     public void save()
     {
-        // TODO finish implementation
+        Bukkit.getScheduler().runTaskAsynchronously(Factions.getInstance(), () -> FactionStore.getInstance().save(this));
     }
 
     @Override
@@ -59,6 +69,22 @@ public class MongoFaction extends LoadFaction
         save();
 
         return warp;
+    }
+
+    @Override
+    public void loadMembers()
+    {
+        members = new HashSet<>(memberIds.length);
+        for (long id : memberIds)
+        {
+            members.add(UserStore.getInstance().getUser(id));
+        }
+    }
+
+    @Override
+    protected void processNewMember(User user)
+    {
+        memberIds = ArrayUtils.add(memberIds, user.getId());
     }
 
 }

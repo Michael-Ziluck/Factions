@@ -118,4 +118,11 @@ public interface FactionStore
      */
     public void loadFactions();
 
+    /**
+     * Saves the given Faction to the database.
+     * 
+     * @param faction the faction to save.
+     */
+    public void save(Faction faction);
+
 }

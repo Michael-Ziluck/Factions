@@ -17,7 +17,6 @@ import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.FactionStore;
 import net.dnddev.factions.base.claims.Claim;
 import net.dnddev.factions.base.claims.Claim2D;
-import net.dnddev.factions.data.mongodb.MongoFaction;
 import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
 import net.dnddev.factions.spatial.LazyLocation;
@@ -47,14 +46,14 @@ public abstract class LoadFactionStore implements FactionStore
     /**
      * The Wilderness.
      */
-    protected final Faction WILDERNESS;
+    protected Faction WILDERNESS;
 
     /**
-     * Construct a new LoadFactionStore. This will initialize the Wilderness.
+     * Construct a new LoadFactionStore.
      */
     public LoadFactionStore()
     {
-        WILDERNESS = new MongoFaction();
+        
     }
 
     @Override

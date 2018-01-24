@@ -1,7 +1,10 @@
 package net.dnddev.factions.data;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +21,8 @@ import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.Warp;
 import net.dnddev.factions.base.struct.Flag;
 import net.dnddev.factions.base.struct.Role;
+import net.dnddev.factions.configuration.Config;
+import net.dnddev.factions.configuration.struct.Optimization;
 import net.dnddev.factions.spatial.LazyLocation;
 
 /**
@@ -50,11 +55,15 @@ public abstract class LoadFaction implements Faction
 
     protected String name;
 
+    protected String stub;
+
     protected String description;
 
     protected String motd;
 
     protected Type type;
+
+    protected Role defaultRole;
 
     protected Multimap<UUID, String> announcements;
 
@@ -95,6 +104,7 @@ public abstract class LoadFaction implements Faction
         this.name = name;
         this.leader = leader;
         this.type = type;
+        this.defaultRole = Role.MEMBER;
     }
 
     @Override
@@ -106,50 +116,51 @@ public abstract class LoadFaction implements Faction
     @Override
     public String getName()
     {
-        if (name == null)
-        {
-            // TODO load name
-        }
         return name;
     }
 
     @Override
     public String getStub()
     {
-        if (name == null)
+        if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
         {
-            // TODO load name
+            return getName().toLowerCase();
         }
-        return name.toLowerCase();
+        else if (stub == null)
+        {
+            stub = getName().toLowerCase();
+        }
+
+        return stub;
     }
 
     @Override
     public String getDescription()
     {
-        if (description == null)
-        {
-            // TODO load description
-        }
         return description;
     }
 
     @Override
     public String getMOTD()
     {
-        if (motd != null)
-        {
-            // TODO load motd
-        }
         return motd;
+    }
+
+    @Override
+    public Role getDefaultRole()
+    {
+        return defaultRole;
+    }
+
+    @Override
+    public void setDefaultRole(Role role)
+    {
+        this.defaultRole = role;
     }
 
     @Override
     public Multimap<UUID, String> getAnnouncements()
     {
-        if (announcements == null)
-        {
-            // TODO load announcements
-        }
         return announcements;
     }
 
@@ -371,7 +382,7 @@ public abstract class LoadFaction implements Faction
     {
         if (invites == null)
         {
-            // TODO load invites
+            invites = new ArrayList<>();
         }
         return invites;
     }
@@ -385,7 +396,7 @@ public abstract class LoadFaction implements Faction
     {
         if (warps == null)
         {
-            // TODO load warps
+            warps = new HashMap<>();
         }
         return warps;
     }
@@ -447,19 +458,29 @@ public abstract class LoadFaction implements Faction
     }
 
     @Override
+    public boolean hasHome()
+    {
+        return getHome() != null;
+    }
+
+    @Override
     public LazyLocation getHome()
     {
-        if (home == null)
-        {
-            // TODO load home
-        }
         return home;
     }
 
     @Override
     public void setHome(LazyLocation home)
     {
+        Validate.notNull(home);
+
         this.home = home;
+    }
+
+    @Override
+    public void clearHome()
+    {
+        this.home = null;
     }
 
     /**
@@ -475,10 +496,6 @@ public abstract class LoadFaction implements Faction
     @Override
     public Type getType()
     {
-        if (type == null)
-        {
-            // TODO load type
-        }
         return type;
     }
 
@@ -511,17 +528,34 @@ public abstract class LoadFaction implements Faction
     {
         if (leader == null)
         {
-            // TODO load leader
+            loadMembers();
         }
         return leader;
     }
+
+    @Override
+    public void addMember(User user)
+    {
+        getMembers().add(user);
+        user.setFactionRole(getDefaultRole());
+        processNewMember(user);
+    }
+
+    /**
+     * Handle adding a new member to the database. Users are a special case within the system as the entire chunk of
+     * information for a user is not also stored in a Faction. As such, this method allows each individual databsae set
+     * up to handle it manually.
+     * 
+     * @param user the new user to process
+     */
+    protected abstract void processNewMember(User user);
 
     @Override
     public Set<User> getMembers()
     {
         if (members == null)
         {
-            // TODO load members
+            loadMembers();
         }
         return members;
     }
@@ -593,21 +627,25 @@ public abstract class LoadFaction implements Faction
     @Override
     public boolean isPeaceful()
     {
-        if (flags == null)
-        {
-            // TODO load flags
-        }
+        assertFlags();
+
         return flags.contains(Flag.PEACEFUL);
     }
 
     @Override
     public boolean isPermanent()
     {
+        assertFlags();
+
+        return !flags.contains(Flag.TEMPORARY);
+    }
+
+    protected void assertFlags()
+    {
         if (flags == null)
         {
-            // TODO load flags
+            flags = EnumSet.noneOf(Flag.class);
         }
-        return !flags.contains(Flag.TEMPORARY);
     }
 
     @Override
