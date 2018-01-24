@@ -131,6 +131,11 @@
 							<artifactSet>
 								<includes>
 									<include>commons-codec:commons-codec</include>
+									<include>com.github.davidmoten:rtree</include>
+									<include>org.jongo:jongo</include>
+									<include>com.fasterxml.jackson.core</include>
+									<include>de.undercouch</include>
+									<include>org.mongodb</include>
 								</includes>
 							</artifactSet>
 						</configuration>
