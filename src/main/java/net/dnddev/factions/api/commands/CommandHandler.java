@@ -23,6 +23,8 @@ import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.dnddev.factions.Factions;
+import net.dnddev.factions.base.User;
+import net.dnddev.factions.base.UserStore;
 import net.dnddev.factions.configuration.Lang;
 
 /**
@@ -52,12 +54,13 @@ public class CommandHandler implements CommandExecutor, TabCompleter
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
+        User user = UserStore.getInstance().getUser(sender);
         ValidCommand command = getCommand(label);
         if (command != null)
         {
             if (sender.hasPermission(command.getPermission().getPermission()))
             {
-                command.process(sender, new String[] { label }, args);
+                command.process(user, new String[] { label }, args);
             }
             else
             {
@@ -75,10 +78,11 @@ public class CommandHandler implements CommandExecutor, TabCompleter
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args)
     {
+        User user = UserStore.getInstance().getUser(sender);
         ValidCommand command = getCommand(alias);
         if (command != null)
         {
-            return command.processTabComplete(sender, args);
+            return command.processTabComplete(user, args);
         }
 
         return Arrays.asList();
@@ -237,7 +241,7 @@ public class CommandHandler implements CommandExecutor, TabCompleter
      * @param lastWord the beginning of the typed argument.
      * @return the name of all players visible to the sender.
      */
-    public static List<String> defaultTabComplete(CommandSender sender, String lastWord)
+    public static List<String> defaultTabComplete(User sender, String lastWord)
     {
         // if the lastWord is null, something went wrong we should exit
         if (lastWord == null)

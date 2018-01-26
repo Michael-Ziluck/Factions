@@ -98,11 +98,42 @@ public interface User extends Messageable
     public long getFactionId();
 
     /**
+     * Sets the faction that this User currently is in.
+     * 
+     * @param faction the new faction.
+     */
+    public void setFaction(Faction faction);
+
+    /**
      * Retrieves the last known Location of the User. If the player is connecting for the first time, this will most
      * likely return null.
      * 
      * @return the last known location of the User.
      */
     public LazyLocation getLastLocation();
+
+    /**
+     * Checks if this user has the given permission.
+     * 
+     * @param permission the permission to check for.
+     * @return {@code true} if the User has the permission.
+     */
+    public boolean hasPermission(String permission);
+
+    /**
+     * Checks if this User is the User wrapper for the console.
+     * 
+     * @return {@code true} if this User is the console.
+     */
+    public boolean isConsole();
+
+    // comment copied from Faction
+    /**
+     * Saves this User to the designed form of storage. This method will run asynchronously to ensure that it does not
+     * cause hesitation in the main thread. This means that saving very often causes no issues except traffic either to
+     * the database or the file system itself. Regardless, it should still be used sparingly to ensure as much
+     * efficiency as possible.
+     */
+    public void save();
 
 }

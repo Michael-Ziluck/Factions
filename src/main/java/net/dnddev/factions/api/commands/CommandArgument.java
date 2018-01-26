@@ -4,8 +4,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.bukkit.command.CommandSender;
-
+import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.configuration.Lang;
 
@@ -59,7 +58,7 @@ public class CommandArgument<T>
      * @param argument the raw string argument to be processed.
      * @return {@code true} if the process was successful. Otherwise, returns {@code false}.
      */
-    protected boolean process(CommandSender sender, String[] label, String argument)
+    protected boolean process(User sender, String[] label, String argument)
     {
         if (hasPermission() && !sender.hasPermission(permission.getPermission()))
         {
@@ -102,7 +101,7 @@ public class CommandArgument<T>
      * @param lastWord the last word in the player's tab complete.
      * @return all argument options.
      */
-    protected List<String> getRecommendations(CommandSender sender, String lastWord)
+    protected List<String> getRecommendations(User sender, String lastWord)
     {
         List<String> recommendations = parser.getRecommendations(sender, lastWord);
         if (recommendations == null)

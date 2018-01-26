@@ -7,7 +7,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import net.dnddev.factions.Factions;
+import net.dnddev.factions.base.Faction.Type;
 import net.dnddev.factions.base.claims.Claim;
+import net.dnddev.factions.events.FactionCreateEvent;
 import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
 import net.dnddev.factions.spatial.LazyLocation;
@@ -112,6 +114,28 @@ public interface FactionStore
      * @return the Faction if one exists.
      */
     public Faction getFaction(Player player);
+
+    /**
+     * Returns the Wilderness.
+     * 
+     * @return the Wilderness.
+     */
+    public Faction getWilderness();
+
+    /**
+     * Creates a new Faction with the given creator, the given name, and the given type.
+     * 
+     * @param creator the User that created the Faction.
+     * @param name the name of the new Faction.
+     * @param type the type of the Faction.
+     * @return the newly created Faction.
+     */
+    public FactionCreateEvent createFaction(User creator, String name, Type type);
+
+    /**
+     * Increment the id given to the next Faction.
+     */
+    public void incrementNextId();
 
     /**
      * Load the Factions from the database to run time.

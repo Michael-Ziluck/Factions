@@ -4,9 +4,17 @@ import org.bukkit.event.HandlerList;
 
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.User;
+import net.dnddev.factions.base.struct.Role;
 
 /**
  * When a Faction is created for the first time.
+ * <p>
+ * It is important to note that in order to see who is creating the Faction, you must use
+ * <p>
+ * For a Faction to finish being created, the {@link #complete()} method <i>must</i> be called. If it is not, the id
+ * will not be incremented, the User will not be added to the Faction, and the Faction will not be saved to the
+ * database.
+ * </p>
  * 
  * @author Michael Ziluck
  */
@@ -30,8 +38,30 @@ public class FactionCreateEvent extends CancellableFactionEvent
     public FactionCreateEvent(Faction faction, User user, double cost)
     {
         super(faction);
+
         this.user = user;
         this.cost = cost;
+    }
+
+    /**
+     * Updates the User and the Faction with the proper values.
+     */
+    public void complete()
+    {
+        getCreator().setFaction(getFaction());
+        getCreator().setFactionRole(Role.LEADER);
+        getCreator().save();
+        getFaction().save();
+    }
+
+    /**
+     * Returns the user that is creating the Faction.
+     * 
+     * @return the user that is creating the Faction.
+     */
+    public User getCreator()
+    {
+        return user;
     }
 
     @Override

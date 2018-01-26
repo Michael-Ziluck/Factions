@@ -1,9 +1,10 @@
 package net.dnddev.factions.events;
 
-import org.bukkit.command.CommandSender;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+
+import net.dnddev.factions.base.User;
 
 /**
  * The event that is fired when a player attempts to create a new Faction, and the server checks if the name is used.
@@ -18,7 +19,7 @@ public class FactionUnusedNameCheckEvent extends Event implements Cancellable
 
     protected String name;
 
-    protected CommandSender sender;
+    protected User sender;
 
     /**
      * Constructs a new FactionUnusedNameCheckEvent with the given CommandSender and the name they attempted to use.
@@ -26,7 +27,7 @@ public class FactionUnusedNameCheckEvent extends Event implements Cancellable
      * @param sender the sender of the command.
      * @param name the name they attempted to use.
      */
-    public FactionUnusedNameCheckEvent(CommandSender sender, String name)
+    public FactionUnusedNameCheckEvent(User sender, String name)
     {
         this.sender = sender;
         this.name = name;

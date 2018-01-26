@@ -1,6 +1,6 @@
 package net.dnddev.factions.api.commands;
 
-import org.bukkit.command.CommandSender;
+import net.dnddev.factions.base.User;
 
 /**
  * Validate a feature unique to the Sender.
@@ -16,6 +16,6 @@ public interface SenderValidator
      * @param sender the person sending the command.
      * @return {@code true} if the sender is valid.
      */
-    public boolean validate(CommandSender sender);
+    public boolean validate(User sender);
 
 }

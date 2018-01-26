@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import com.google.common.collect.Multimap;
 
+import net.dnddev.factions.base.claims.Claim;
 import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.spatial.LazyLocation;
 
@@ -368,6 +369,13 @@ public interface Faction extends Messageable
     public Type getType();
 
     /**
+     * Returns all the areas claimed by the Faction.
+     * 
+     * @return all the areas claimed by the Faction.
+     */
+    public Collection<Claim> getClaims();
+
+    /**
      * Checks if this is the Wilderness. The Wilderness will always have an id of -1.
      * 
      * @return {@code true} if this is the Wilderness.
@@ -445,6 +453,7 @@ public interface Faction extends Messageable
      */
     public List<UUID> getInvites();
 
+    // comment copied from User
     /**
      * Saves this Faction instance to the designated form of storage. This method will run asynchronously to ensure that
      * it does not cause hesitation in the main thread. This means that saving very often causes no issues except

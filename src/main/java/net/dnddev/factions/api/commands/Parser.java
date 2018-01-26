@@ -3,7 +3,7 @@ package net.dnddev.factions.api.commands;
 import java.util.Iterator;
 import java.util.List;
 
-import org.bukkit.command.CommandSender;
+import net.dnddev.factions.base.User;
 
 /**
  * Used to convert passed arguments from Strings to their proper type.
@@ -22,17 +22,17 @@ public interface Parser<T>
      * @param rawArgument the argument to be parsed.
      * @return the successfully parsed argument.
      */
-    public T parseArgument(CommandSender sender, String[] label, String rawArgument);
+    public T parseArgument(User sender, String[] label, String rawArgument);
 
     /**
      * Get tab complete recommendations for an argument with this given parser. If the default is wanted, it exists in
-     * {@link CommandHandler#defaultTabComplete(CommandSender, String)}.
+     * {@link CommandHandler#defaultTabComplete(User, String)}.
      * 
      * @param sender the sender of the tab complete.
      * @param lastWord the content of the item so far.
      * @return the recommendations.
      */
-    public List<String> getRecommendations(CommandSender sender, String lastWord);
+    public List<String> getRecommendations(User sender, String lastWord);
 
     /**
      * Filter out values from the list of Strings that do not start with the given last word.

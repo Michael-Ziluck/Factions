@@ -1,6 +1,6 @@
 package net.dnddev.factions.api.commands;
 
-import org.bukkit.command.CommandSender;
+import net.dnddev.factions.base.User;
 
 /**
  * Validate a feature unique to an argument in relation to the sender.
@@ -20,6 +20,6 @@ public interface Validator<T>
      * @param arg the argument to be validated.
      * @return {@code true} if the argument is valid. {@code false} of the argument is not valid.
      */
-    public boolean validateArgument(CommandSender sender, String[] label, T arg);
+    public boolean validateArgument(User sender, String[] label, T arg);
 
 }

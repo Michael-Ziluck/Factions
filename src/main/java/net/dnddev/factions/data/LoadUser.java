@@ -24,21 +24,21 @@ import net.dnddev.factions.utils.CollectionUtils;
 public abstract class LoadUser implements User
 {
 
-    private long id;
+    protected long id;
 
-    private UUID uuid;
+    protected UUID uuid;
 
-    private String name;
+    protected String name;
 
-    private boolean online;
+    protected boolean online;
 
-    private String title;
+    protected String title;
 
-    private Role factionRole;
+    protected Role factionRole;
 
-    private Faction faction;
+    protected Faction faction;
 
-    private LazyLocation lastLocation;
+    protected LazyLocation lastLocation;
 
     @Override
     public long getId()
@@ -150,6 +150,19 @@ public abstract class LoadUser implements User
         {
             getFaction().addAnnouncements(array, this);
         }
+    }
+
+    @Override
+    public boolean hasPermission(String permission)
+    {
+        return isConsole() || (isOnline() && getPlayer().hasPermission(permission));
+    }
+
+    @Override
+    public boolean isConsole()
+    {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

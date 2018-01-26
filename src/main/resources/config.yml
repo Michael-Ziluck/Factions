@@ -29,4 +29,6 @@ create:
   # The economy cost of creating a Faction
   cost: 0
   # If the command to run a command can be cancelled by another plugin.
-  cancellable: true
+  cancellable:
+    enabled: true
+    silent: false

@@ -58,9 +58,14 @@ public final class Config
     public static final MutableBoolean CREATE_CANCELLABLE = new MutableBoolean(true);
 
     /**
+     * When a create event is cancelled, this determines if they are given a message from Factions.
+     */
+    public static final MutableBoolean CREATE_SILENT_CANCEL = new MutableBoolean(false);
+
+    /**
      * The type of Storage the system uses.
      */
-    public static final MutableEnum<Storage> STORAGE = new MutableEnum<Storage>(Storage.MONGODB);
+    public static final MutableEnum<Storage> STORAGE_TYPE = new MutableEnum<Storage>(Storage.MONGODB);
 
     /**
      * The hostname of the database if one is used.
@@ -97,8 +102,9 @@ public final class Config
         updateValue(config, "optimization", OPTIMIZATION);
         updateValue(config, "faction-limit", FACTION_LIMIT);
         updateValue(config, "create.cost", CREATE_COST);
-        updateValue(config, "create.cancellable", CREATE_CANCELLABLE);
-        updateValue(config, "STORAGE", STORAGE);
+        updateValue(config, "create.cancellable.enabled", CREATE_CANCELLABLE);
+        updateValue(config, "create.cancellable.silent", CREATE_CANCELLABLE);
+        updateValue(config, "storage.type", STORAGE_TYPE);
         updateValue(config, "storage.database.hostname", DATABASE_HOSTNAME);
         updateValue(config, "storage.database.port", DATABASE_PORT);
         updateValue(config, "storage.database.username", DATABASE_USERNAME);

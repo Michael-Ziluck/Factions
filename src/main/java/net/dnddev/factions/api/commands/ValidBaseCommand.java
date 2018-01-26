@@ -5,8 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.bukkit.command.CommandSender;
-
+import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.configuration.Lang;
 import net.dnddev.factions.utils.StringUtils;
@@ -72,7 +71,7 @@ public abstract class ValidBaseCommand extends ValidCommand
     }
 
     @Override
-    protected void process(CommandSender sender, String[] label, String[] rawArguments)
+    protected void process(User sender, String[] label, String[] rawArguments)
     {
         ValidCommand sub;
         if (rawArguments.length == 0 || (sub = getSubCommand(rawArguments[0])) == null)
@@ -93,7 +92,7 @@ public abstract class ValidBaseCommand extends ValidCommand
     }
 
     @Override
-    public List<String> processTabComplete(CommandSender sender, String[] rawArguments)
+    public List<String> processTabComplete(User sender, String[] rawArguments)
     {
         if (rawArguments.length == 1)
         {
@@ -142,7 +141,7 @@ public abstract class ValidBaseCommand extends ValidCommand
      * @param start the beginning of the label.
      * @return the command labels if any are found.
      */
-    public List<String> getSubCommandNames(CommandSender sender, String start)
+    public List<String> getSubCommandNames(User sender, String start)
     {
         List<String> commandNames = new LinkedList<>();
         if (!hasPermission() || sender.hasPermission(getPermission().getPermission()))
@@ -176,7 +175,7 @@ public abstract class ValidBaseCommand extends ValidCommand
      * @param sender the one who is sending the command.
      * @param label the previous pieces of the command and the current alias.
      */
-    public void help(CommandSender sender, String label[])
+    public void help(User sender, String label[])
     {
         List<ValidCommand> allowedSubs = new LinkedList<>();
         for (ValidCommand sub : subCommands)
@@ -202,7 +201,7 @@ public abstract class ValidBaseCommand extends ValidCommand
     }
 
     @Override
-    public void validRun(CommandSender sender, String[] label, List<CommandArgument<?>> arguments)
+    public void validRun(User sender, String[] label, List<CommandArgument<?>> arguments)
     {
     }
 

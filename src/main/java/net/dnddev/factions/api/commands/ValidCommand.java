@@ -8,13 +8,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
+import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.configuration.Lang;
 import net.dnddev.factions.utils.CollectionUtils;
@@ -172,7 +171,7 @@ public abstract class ValidCommand
      * @param label the label from which the command was sent
      * @param rawArguments the unparsed and non-validated arguments.
      */
-    protected void process(CommandSender sender, String[] label, String[] rawArguments)
+    protected void process(User sender, String[] label, String[] rawArguments)
     {
         if (rawArguments.length < getMinimumLength() || rawArguments.length > getMaximumLength())
         {
@@ -187,7 +186,7 @@ public abstract class ValidCommand
             }
         }
 
-        if (rawArguments.length == 0 && blocksConsole() && sender instanceof ConsoleCommandSender)
+        if (rawArguments.length == 0 && blocksConsole() && sender.isConsole())
         {
             Lang.NO_CONSOLE.send(sender);
             return;
@@ -205,7 +204,7 @@ public abstract class ValidCommand
                 return;
             }
 
-            if (blocksConsole() && !argument.allowsConsole() && sender instanceof ConsoleCommandSender)
+            if (blocksConsole() && !argument.allowsConsole() && sender.isConsole())
             {
                 Lang.NO_CONSOLE.send(sender);
                 return;
@@ -245,7 +244,7 @@ public abstract class ValidCommand
      * @param rawArguments the arguments already typed by the player.
      * @return the suggestions for tab complete.
      */
-    public List<String> processTabComplete(CommandSender sender, String[] rawArguments)
+    public List<String> processTabComplete(User sender, String[] rawArguments)
     {
         Iterator<CommandArgument<?>> it = arguments.iterator();
         int i = 0;
@@ -279,9 +278,9 @@ public abstract class ValidCommand
      * 
      * @param sender the sender of the command.
      * @param label the label of the command.
-     * @param arguments the arguments of the command.
+     * @param args the arguments of the command.
      */
-    public abstract void validRun(CommandSender sender, String[] label, List<CommandArgument<?>> arguments);
+    public abstract void validRun(User sender, String[] label, List<CommandArgument<?>> args);
 
     /**
      * The table of the already processed values. -1 corresponds to the sender. Every other number corresponds to the

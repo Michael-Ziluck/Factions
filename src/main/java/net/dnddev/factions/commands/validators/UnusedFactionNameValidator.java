@@ -1,10 +1,10 @@
 package net.dnddev.factions.commands.validators;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 
 import net.dnddev.factions.Factions;
 import net.dnddev.factions.api.commands.Validator;
+import net.dnddev.factions.base.User;
 import net.dnddev.factions.configuration.Lang;
 import net.dnddev.factions.events.FactionUnusedNameCheckEvent;
 
@@ -17,7 +17,7 @@ public class UnusedFactionNameValidator implements Validator<String>
 {
 
     @Override
-    public boolean validateArgument(CommandSender sender, String[] label, String arg)
+    public boolean validateArgument(User sender, String[] label, String arg)
     {
         FactionUnusedNameCheckEvent event = new FactionUnusedNameCheckEvent(sender, arg);
         Bukkit.getPluginManager().callEvent(event);

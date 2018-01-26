@@ -19,6 +19,7 @@ import com.google.common.collect.Multimap;
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.Warp;
+import net.dnddev.factions.base.claims.Claim;
 import net.dnddev.factions.base.struct.Flag;
 import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.configuration.Config;
@@ -64,6 +65,8 @@ public abstract class LoadFaction implements Faction
     protected Type type;
 
     protected Role defaultRole;
+    
+    protected long founded;
 
     protected Multimap<UUID, String> announcements;
 
@@ -78,6 +81,8 @@ public abstract class LoadFaction implements Faction
     protected List<UUID> invites;
 
     protected Set<Flag> flags;
+    
+    protected List<Claim> claims;
 
     protected boolean loaded;
 
@@ -622,6 +627,13 @@ public abstract class LoadFaction implements Faction
         {
             addAnnouncement(message);
         }
+    }
+
+    @Override
+    public Collection<Claim> getClaims()
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override

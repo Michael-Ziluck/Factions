@@ -42,7 +42,11 @@ public enum Lang
     /**
      * When a User tries to create a Faction with an used name.
      */
-    USED_FACTION_NAME("§cThat faction name is already in use.");
+    USED_FACTION_NAME("§cThat faction name is already in use."),
+    /**
+     * When a create event gets cancelled for an unknown reason.
+     */
+    CREATE_CANCELLED("§cFaction creation cancelled.");
 
     private String[] message;
 

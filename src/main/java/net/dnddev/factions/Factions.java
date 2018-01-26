@@ -28,6 +28,11 @@ import net.dnddev.factions.spatial.LazyLocation;
 public class Factions extends JavaPlugin
 {
 
+    /**
+     * The UUID used to represent the console.
+     */
+    public static final UUID consoleUuid = UUID.fromString("10101010-1010-1010-1010-101010101010");
+
     private static Factions instance;
 
     private FactionStore factionStore;

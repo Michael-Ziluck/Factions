@@ -10,12 +10,13 @@ import org.bukkit.entity.Player;
 import org.jongo.MongoCollection;
 
 import net.dnddev.factions.base.Faction;
+import net.dnddev.factions.base.Faction.Type;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.UserStore;
-import net.dnddev.factions.base.Faction.Type;
 import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.configuration.struct.Optimization;
 import net.dnddev.factions.data.LoadFactionStore;
+import net.dnddev.factions.events.FactionCreateEvent;
 
 /**
  * Faction implementation for processing Factions from MongoDB.
@@ -72,7 +73,7 @@ public class MongoFactionStore extends LoadFactionStore
         {
             faction = factionsByName.get(name.toLowerCase());
         }
-        return faction == null ? WILDERNESS : faction;
+        return faction == null ? wilderness : faction;
     }
 
     @Override
@@ -91,7 +92,7 @@ public class MongoFactionStore extends LoadFactionStore
                 faction = null;
             }
         }
-        return faction == null ? WILDERNESS : faction;
+        return faction == null ? wilderness : faction;
     }
 
     @Override
@@ -151,7 +152,7 @@ public class MongoFactionStore extends LoadFactionStore
         {
             if (faction.getId() == -1)
             {
-                WILDERNESS = faction;
+                wilderness = faction;
             }
             if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
             {
@@ -161,17 +162,30 @@ public class MongoFactionStore extends LoadFactionStore
             {
                 factionsList.add(faction);
             }
+            // TODO load claims
         }
-        if (WILDERNESS == null)
+        if (wilderness == null)
         {
-            WILDERNESS = new MongoFaction(-1, "WILDERNESS", null, Type.WILDERNESS);
+            wilderness = new MongoFaction(-1, "WILDERNESS", null, Type.WILDERNESS);
         }
+
+        nextId = store.findOne().orderBy("{_id: -1}").as(MongoUser.class).getId() + 1;
     }
 
     @Override
     public void save(Faction faction)
     {
         store.save(faction);
+    }
+
+    @Override
+    public synchronized FactionCreateEvent createFaction(User creator, String name, Type type)
+    {
+        MongoFaction faction = new MongoFaction(nextId, name, creator, type);
+
+        FactionCreateEvent event = new FactionCreateEvent(faction, creator, Config.CREATE_COST.doubleValue());
+
+        return event;
     }
 
 }
