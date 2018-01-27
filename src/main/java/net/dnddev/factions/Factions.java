@@ -12,6 +12,9 @@ import net.dnddev.factions.base.FactionStore;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.UserStore;
 import net.dnddev.factions.configuration.Config;
+import net.dnddev.factions.configuration.struct.Storage;
+import net.dnddev.factions.data.mongodb.MongoFactionStore;
+import net.dnddev.factions.data.mongodb.MongoUserStore;
 import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
 import net.dnddev.factions.spatial.LazyLocation;
@@ -41,6 +44,14 @@ public class Factions extends JavaPlugin
     public void onEnable()
     {
         instance = this;
+
+        processFiles();
+
+        if (Config.STORAGE_TYPE.getValue() == Storage.MONGODB)
+        {
+            factionStore = new MongoFactionStore();
+            userStore = new MongoUserStore();
+        }
 
     }
 

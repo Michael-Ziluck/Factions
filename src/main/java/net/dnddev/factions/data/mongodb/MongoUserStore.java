@@ -34,7 +34,6 @@ public class MongoUserStore extends LoadUserStore
      */
     public MongoUserStore()
     {
-        super();
 
         store = MongoWrapper.getInstance().getJongo().getCollection("users");
 
@@ -53,6 +52,8 @@ public class MongoUserStore extends LoadUserStore
         {
             loadUser(player);
         }
+        
+        initialize();
     }
 
     @Override
