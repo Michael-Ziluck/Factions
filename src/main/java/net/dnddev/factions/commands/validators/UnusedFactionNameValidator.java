@@ -20,12 +20,15 @@ public class UnusedFactionNameValidator implements Validator<String>
     public boolean validateArgument(User sender, String[] label, String arg)
     {
         FactionUnusedNameCheckEvent event = new FactionUnusedNameCheckEvent(sender, arg);
+        
         Bukkit.getPluginManager().callEvent(event);
-        if (event.isCancelled() || Factions.getFaction(arg) != null)
+                
+        if (event.isCancelled() || Factions.getFaction(arg).isWilderness())
         {
             Lang.USED_FACTION_NAME.send(sender);
             return false;
         }
+        
         return true;
     }
 
