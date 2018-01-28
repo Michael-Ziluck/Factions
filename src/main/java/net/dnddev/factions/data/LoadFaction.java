@@ -65,7 +65,7 @@ public abstract class LoadFaction implements Faction
     protected Type type;
 
     protected Role defaultRole;
-    
+
     protected long founded;
 
     protected Multimap<UUID, String> announcements;
@@ -81,7 +81,7 @@ public abstract class LoadFaction implements Faction
     protected List<UUID> invites;
 
     protected Set<Flag> flags;
-    
+
     protected List<Claim> claims;
 
     protected boolean loaded;
@@ -161,6 +161,18 @@ public abstract class LoadFaction implements Faction
     public void setDefaultRole(Role role)
     {
         this.defaultRole = role;
+    }
+
+    @Override
+    public long getFounded()
+    {
+        return founded;
+    }
+
+    @Override
+    public void setFounded(long founded)
+    {
+        this.founded = founded;
     }
 
     @Override

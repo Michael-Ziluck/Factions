@@ -50,6 +50,7 @@ public class FactionCreateEvent extends CancellableFactionEvent
     {
         getCreator().setFaction(getFaction());
         getCreator().setFactionRole(Role.LEADER);
+        getFaction().setFounded(System.currentTimeMillis());
         getCreator().save();
         getFaction().save();
     }

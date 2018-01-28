@@ -76,6 +76,20 @@ public interface Faction extends Messageable
     public void setDefaultRole(Role role);
 
     /**
+     * Returns the Unix timestamp from when this Faction was made.
+     * 
+     * @return the Unix timestamp from when this Faction was made.
+     */
+    public long getFounded();
+
+    /**
+     * Sets when the Faction was created.
+     * 
+     * @param created the Unix timestamp from when this Faction was made.
+     */
+    public void setFounded(long created);
+
+    /**
      * Retrieves all announcements for each player. Announcements are messages stored with the data that are going to be
      * sent to the players the next time they connect to the server. Players that are currently connected to the server
      * should not have any pending announcements as any new announcement added for a player is sent to them immediately.
