@@ -7,10 +7,12 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import net.dnddev.factions.api.commands.CommandHandler;
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.FactionStore;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.UserStore;
+import net.dnddev.factions.commands.FactionsBaseCommand;
 import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.configuration.struct.Storage;
 import net.dnddev.factions.data.mongodb.MongoFactionStore;
@@ -53,13 +55,21 @@ public class Factions extends JavaPlugin
             userStore = new MongoUserStore();
         }
 
+        registerCommands();
     }
 
     protected void processFiles()
     {
         saveDefaultConfig();
         Config.update();
-
+    }
+    
+    protected void registerCommands()
+    {
+        CommandHandler.initialize();
+        CommandHandler handler = CommandHandler.getInstance();
+        
+        handler.registerCommand(new FactionsBaseCommand(), this);
     }
 
     /**

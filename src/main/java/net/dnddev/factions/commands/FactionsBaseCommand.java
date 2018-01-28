@@ -10,9 +10,14 @@ import net.dnddev.factions.api.commands.ValidBaseCommand;
 public class FactionsBaseCommand extends ValidBaseCommand
 {
 
-    protected FactionsBaseCommand()
+    /**
+     * Construct a new FactionsBaseCommand
+     */
+    public FactionsBaseCommand()
     {
         super("factions", "Anything and everything Factions.", new String[] { "faction", "f", "fact" });
+        
+        addSubCommand(new FactionsCreateCommand());
     }
 
 }
