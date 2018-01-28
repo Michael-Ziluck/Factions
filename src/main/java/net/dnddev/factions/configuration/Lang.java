@@ -34,7 +34,7 @@ public enum Lang
     /**
      * When a player misuses a command.
      */
-    USAGE("§6§lUSAGE §e» §f{usage}§e."),
+    USAGE("§6Usage: §e§f{usage}§e."),
     /**
      * The header and footer for all commands.
      */
