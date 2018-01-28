@@ -11,7 +11,7 @@ public enum Permission
     /**
      * The base permission.
      */
-    BASE("factions"),
+    BASE("factions", true),
     /**
      * Create a new Faction.
      */
@@ -19,9 +19,17 @@ public enum Permission
 
     private String permission;
 
+    private boolean excludePrefix;
+
     private Permission(String permission)
     {
         this.permission = permission;
+    }
+
+    private Permission(String permission, boolean excludePrefix)
+    {
+        this.permission = permission;
+        this.excludePrefix = excludePrefix;
     }
 
     /**
@@ -29,7 +37,7 @@ public enum Permission
      */
     public String getPermission()
     {
-        return permission;
+        return (excludePrefix ? "" : BASE.getPermission()) + permission;
     }
 
 }

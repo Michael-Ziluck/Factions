@@ -58,7 +58,7 @@ public class CommandHandler implements CommandExecutor, TabCompleter
         ValidCommand command = getCommand(label);
         if (command != null)
         {
-            if (sender.hasPermission(command.getPermission().getPermission()))
+            if (!command.hasPermission() || sender.hasPermission(command.getPermission().getPermission()))
             {
                 command.process(user, new String[] { label }, args);
             }
