@@ -166,7 +166,8 @@ public class MongoFactionStore extends LoadFactionStore
         }
         if (wilderness == null)
         {
-            wilderness = new MongoFaction(-1, "WILDERNESS", null, Type.WILDERNESS);
+            wilderness = new MongoFaction(-1, "WILDERNESS", UserStore.getInstance().getConsole(), Type.WILDERNESS);
+            wilderness.save();
         }
 
         MongoUser user = store.findOne().orderBy("{_id: -1}").as(MongoUser.class);

@@ -6,6 +6,7 @@ import org.apache.commons.lang.mutable.MutableInt;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import net.dnddev.factions.Factions;
+import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.configuration.struct.Optimization;
 import net.dnddev.factions.configuration.struct.Storage;
 import net.dnddev.factions.utils.MutableEnum;
@@ -43,31 +44,6 @@ public final class Config
     public static final MutableEnum<Optimization> OPTIMIZATION = new MutableEnum<Optimization>(Optimization.PROCESS);
 
     /**
-     * The maximum amount of Factions allowed on the server.
-     */
-    public static final MutableInt FACTION_LIMIT = new MutableInt(-1);
-
-    /**
-     * The cost to create a Faction. -1 or 0 refers to no cost.
-     */
-    public static final MutableDouble CREATE_COST = new MutableDouble(0);
-
-    /**
-     * Whether or not the create event can be cancelled.
-     */
-    public static final MutableBoolean CREATE_CANCELLABLE = new MutableBoolean(true);
-
-    /**
-     * When a create event is cancelled, this determines if they are given a message from Factions.
-     */
-    public static final MutableBoolean CREATE_SILENT_CANCEL = new MutableBoolean(false);
-
-    /**
-     * Whether or not to broadcast when a faction is created.
-     */
-    public static final MutableBoolean CREATE_BROADCAST = new MutableBoolean(true);
-
-    /**
      * The type of Storage the system uses.
      */
     public static final MutableEnum<Storage> STORAGE_TYPE = new MutableEnum<Storage>(Storage.MONGODB);
@@ -96,6 +72,41 @@ public final class Config
      * The database to use in the database if one is used.
      */
     public static final MutableString DATABASE_DATABASE = new MutableString("factions");
+
+    /**
+     * The maximum amount of Factions allowed on the server.
+     */
+    public static final MutableInt FACTION_LIMIT = new MutableInt(-1);
+
+    /**
+     * The cost to create a Faction. -1 or 0 refers to no cost.
+     */
+    public static final MutableDouble CREATE_COST = new MutableDouble(0);
+
+    /**
+     * Whether or not the create event can be cancelled.
+     */
+    public static final MutableBoolean CREATE_CANCELLABLE = new MutableBoolean(true);
+
+    /**
+     * When a create event is cancelled, this determines if they are given a message from Factions.
+     */
+    public static final MutableBoolean CREATE_SILENT_CANCEL = new MutableBoolean(false);
+
+    /**
+     * Whether or not to broadcast when a faction is created.
+     */
+    public static final MutableBoolean CREATE_BROADCAST = new MutableBoolean(true);
+
+    /**
+     * The default role that Factions have when they are first created.
+     */
+    public static final MutableEnum<Role> FACTION_DEFAULT_ROLE = new MutableEnum<>(Role.MEMBER);
+
+    /**
+     * Whether or not Factions are able to change the default role.
+     */
+    public static final MutableBoolean FACTION_DEFAULT_ROLE_CHANGABLE = new MutableBoolean(true);
 
     /**
      * Update the values from the database.
