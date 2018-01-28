@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 
+import net.dnddev.factions.Factions;
 import net.dnddev.factions.api.commands.CommandArgument;
 import net.dnddev.factions.api.commands.CommandArgumentBuilder;
 import net.dnddev.factions.api.commands.ValidCommand;
@@ -30,7 +31,7 @@ public class FactionsCreateCommand extends ValidCommand
      */
     public FactionsCreateCommand()
     {
-        super("create", "Create a new Faction.", Permission.CREATE, new String[] { "new" });
+        super("create", "Create a new Faction.", Permission.CREATE, true, new String[] { "new" });
 
         addArgument(CommandArgumentBuilder.createBuilder(String.class)
                 .setName("name")
@@ -58,6 +59,18 @@ public class FactionsCreateCommand extends ValidCommand
         }
 
         event.complete();
+
+        if (Config.CREATE_BROADCAST.booleanValue())
+        {
+            Factions.broadcastMessage(Lang.CREATE_BROADCAST.getMessage(
+                    "{faction}", event.getFaction().getName(),
+                    "{user}", sender.getName()));
+        }
+        else
+        {
+            Lang.CREATE_SUCCESS.send(sender,
+                    "{faction}", event.getFaction().getName());
+        }
     }
 
 }

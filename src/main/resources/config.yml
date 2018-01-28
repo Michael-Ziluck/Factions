@@ -28,6 +28,8 @@ storage:
 create:
   # The economy cost of creating a Faction
   cost: 0
+  # If the creation of the faction should be broadcast.
+  broadcast: true
   # If the command to run a command can be cancelled by another plugin.
   cancellable:
     enabled: true

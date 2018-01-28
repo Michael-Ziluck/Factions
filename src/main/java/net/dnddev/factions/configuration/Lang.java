@@ -46,7 +46,15 @@ public enum Lang
     /**
      * When a create event gets cancelled for an unknown reason.
      */
-    CREATE_CANCELLED("§cFaction creation cancelled.");
+    CREATE_CANCELLED("§cFaction creation cancelled."),
+    /**
+     * What is broadcasted when a faction is created.
+     */
+    CREATE_BROADCAST("§6Faction §e{faction} §6created by §e{user}§6."),
+    /**
+     * What is sent to the user when they create a faction.
+     */
+    CREATE_SUCCESS("§6Faction §e{faction}§6 created.");
 
     private String[] message;
 

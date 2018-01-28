@@ -3,6 +3,7 @@ package net.dnddev.factions;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -63,12 +64,12 @@ public class Factions extends JavaPlugin
         saveDefaultConfig();
         Config.update();
     }
-    
+
     protected void registerCommands()
     {
         CommandHandler.initialize();
         CommandHandler handler = CommandHandler.getInstance();
-        
+
         handler.registerCommand(new FactionsBaseCommand(), this);
     }
 
@@ -189,6 +190,21 @@ public class Factions extends JavaPlugin
     public static Faction getFaction(Player player)
     {
         return getInstance().getFactionStore().getFaction(player);
+    }
+
+    /**
+     * Broadcast a message to all players.
+     * <p>
+     * This is the same as calling {@link Bukkit#broadcastMessage(String)} for all the messages in the list.
+     *
+     * @param messages the messages
+     */
+    public static void broadcastMessage(String... messages)
+    {
+        for (String message : messages)
+        {
+            Bukkit.broadcastMessage(message);
+        }
     }
 
 }

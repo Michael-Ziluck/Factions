@@ -63,6 +63,11 @@ public final class Config
     public static final MutableBoolean CREATE_SILENT_CANCEL = new MutableBoolean(false);
 
     /**
+     * Whether or not to broadcast when a faction is created.
+     */
+    public static final MutableBoolean CREATE_BROADCAST = new MutableBoolean(true);
+
+    /**
      * The type of Storage the system uses.
      */
     public static final MutableEnum<Storage> STORAGE_TYPE = new MutableEnum<Storage>(Storage.MONGODB);
@@ -103,7 +108,8 @@ public final class Config
         updateValue(config, "faction-limit", FACTION_LIMIT);
         updateValue(config, "create.cost", CREATE_COST);
         updateValue(config, "create.cancellable.enabled", CREATE_CANCELLABLE);
-        updateValue(config, "create.cancellable.silent", CREATE_CANCELLABLE);
+        updateValue(config, "create.cancellable.silent", CREATE_SILENT_CANCEL);
+        updateValue(config, "create.broadcast", CREATE_BROADCAST);
         updateValue(config, "storage.type", STORAGE_TYPE);
         updateValue(config, "storage.database.hostname", DATABASE_HOSTNAME);
         updateValue(config, "storage.database.port", DATABASE_PORT);
