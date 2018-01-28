@@ -22,13 +22,15 @@ import net.dnddev.factions.spatial.LazyLocation;
  * 
  * @author Michael Ziluck
  */
-@JsonIgnoreProperties({ "stub", "announcements", "loaded", "members" })
+@JsonIgnoreProperties({ "stub", "announcements", "loaded", "members", "leader" })
 public class MongoFaction extends LoadFaction
 {
 
     @MongoId
     protected long id;
 
+    protected long leaderId;
+    
     protected long[] memberIds;
 
     /**
@@ -37,6 +39,8 @@ public class MongoFaction extends LoadFaction
     public MongoFaction()
     {
         super();
+        
+        this.leader = UserStore.getInstance().loadUser(leaderId);
     }
 
     /**
@@ -51,6 +55,8 @@ public class MongoFaction extends LoadFaction
     public MongoFaction(long id, String name, User leader, Type type)
     {
         super(id, name, leader, type);
+        
+        this.leaderId = leader.getId();
     }
 
     @Override

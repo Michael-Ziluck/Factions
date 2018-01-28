@@ -149,6 +149,27 @@ public abstract class LoadUserStore implements UserStore
     }
 
     @Override
+    public User loadUser(long id)
+    {
+        User user = getUser(id, true);
+        if (user == null)
+        {
+            throw new IllegalArgumentException("No User by that id exists.");
+        }
+
+        if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
+        {
+            onlineUsersMap.put(user.getUniqueId(), user);
+        }
+        else
+        {
+            onlineUsersList.add(user);
+        }
+
+        return user;
+    }
+
+    @Override
     public void initialize()
     {
         createConsole();

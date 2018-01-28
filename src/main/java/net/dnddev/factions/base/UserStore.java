@@ -114,6 +114,14 @@ public interface UserStore
     public User loadUser(Player player);
 
     /**
+     * Load the User that has the given id. If a user is not found, this will throw an {@link IllegalArgumentException}.
+     * 
+     * @param id the id of the User to load.
+     * @return the loaded User.
+     */
+    public User loadUser(long id);
+
+    /**
      * Creates a new User for the given Player.
      * <p>
      * Important to know that this method does <strong><i>not</i></strong> check if the Player already has a User so use
