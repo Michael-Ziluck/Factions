@@ -119,6 +119,10 @@ public abstract class LoadUser implements User
         {
             getPlayer().sendMessage(message);
         }
+        else if (isConsole())
+        {
+            Bukkit.getConsoleSender().sendMessage(message);
+        }
         else
         {
             getFaction().addAnnouncement(message, this);
@@ -131,6 +135,10 @@ public abstract class LoadUser implements User
         if (isOnline())
         {
             getPlayer().sendMessage(messages);
+        }
+        else if (isConsole())
+        {
+            Bukkit.getConsoleSender().sendMessage(messages);
         }
         else
         {
@@ -145,6 +153,10 @@ public abstract class LoadUser implements User
         if (isOnline())
         {
             getPlayer().sendMessage(array);
+        }
+        else if (isConsole())
+        {
+            Bukkit.getConsoleSender().sendMessage(messages.toArray(new String[messages.size()]));
         }
         else
         {
