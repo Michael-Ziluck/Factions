@@ -50,10 +50,11 @@ public class Factions extends JavaPlugin
 
         processFiles();
 
+        // UserStores must be loaded first as when the Wilderness is created, it uses the console user.
         if (Config.STORAGE_TYPE.getValue() == Storage.MONGODB)
         {
-            factionStore = new MongoFactionStore();
             userStore = new MongoUserStore();
+            factionStore = new MongoFactionStore();
         }
 
         registerCommands();

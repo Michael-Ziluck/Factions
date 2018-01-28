@@ -62,6 +62,22 @@ public class MongoFactionStore extends LoadFactionStore
     }
 
     @Override
+    public Faction getFaction(long id)
+    {
+        Faction faction = null;
+        Predicate<Faction> predicate = f -> f.getId() == id;
+        if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
+        {
+            faction = searchList(predicate);
+        }
+        else if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
+        {
+            faction = searchMap(predicate);
+        }
+        return faction == null ? wilderness : faction;
+    }
+
+    @Override
     public Faction getFaction(final String name)
     {
         Faction faction = null;
@@ -101,7 +117,7 @@ public class MongoFactionStore extends LoadFactionStore
         User user = UserStore.getInstance().getUser(uuid);
         if (user == null)
         {
-            return null;
+            return wilderness;
         }
         return user.getFaction();
     }

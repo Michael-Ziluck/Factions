@@ -96,12 +96,6 @@ public abstract class LoadUser implements User
     }
 
     @Override
-    public Faction getFaction()
-    {
-        return faction;
-    }
-
-    @Override
     public long getFactionId()
     {
         return getFaction().getId();

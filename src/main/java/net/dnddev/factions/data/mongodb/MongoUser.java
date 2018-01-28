@@ -49,7 +49,16 @@ public class MongoUser extends LoadUser
         this.uuid = uuid;
         this.name = name;
         this.factionRole = Role.FACTIONLESS;
-        this.faction = FactionStore.getInstance().getWilderness();
+    }
+    
+    @Override
+    public Faction getFaction()
+    {
+        if (faction== null && factionId > 0)
+        {
+            faction = FactionStore.getInstance().getFaction(factionId);
+        }
+        return faction;
     }
 
     @Override

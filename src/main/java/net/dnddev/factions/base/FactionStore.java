@@ -31,6 +31,14 @@ public interface FactionStore
     }
 
     /**
+     * Get a faction referenced by its internal id. If none is found this will return Wilderness, not null.
+     * 
+     * @param id the internal id of the Faction.
+     * @return the Faction if one exists.
+     */
+    public Faction getFaction(long id);
+
+    /**
      * Gets a Faction referenced by its name. If none is found this will return Wilderness, not null. Also, this method
      * is not case-sensitive. For case sensitive name lookup, use {@link #getCasedFaction(String)}.
      * 
@@ -46,14 +54,6 @@ public interface FactionStore
      * @return the Faction if one exists.
      */
     public Faction getCasedFaction(String name);
-
-    /**
-     * Gets a Faction referenced by a player's UUID. If none is found this will return Wilderness, not null.
-     * 
-     * @param uuid the uuid of the Player.
-     * @return the Faction if one exists.
-     */
-    public Faction getFaction(UUID uuid);
 
     /**
      * Gets a Faction that has a claim at a particular Location. If none is found this will return Wilderness, not null.
@@ -98,6 +98,14 @@ public interface FactionStore
      * @return all Factions if any exist.
      */
     public List<Claim> getClaims(BoundedArea area);
+
+    /**
+     * Gets a Faction referenced by a player's UUID. If none is found this will return Wilderness, not null.
+     * 
+     * @param uuid the uuid of the Player.
+     * @return the Faction if one exists.
+     */
+    public Faction getFaction(UUID uuid);
 
     /**
      * Gets the Faction of the given User. If none is found this will return Wilderness, not null.
