@@ -34,9 +34,14 @@ public class MongoWrapper
     {
         instance = this;
 
-        addr = new ServerAddress(Config.DATABASE_HOSTNAME.getValue(), Config.DATABASE_PORT.intValue());
+        addr = new ServerAddress(
+                Config.DATABASE_HOSTNAME.getValue(),
+                Config.DATABASE_PORT.intValue());
 
-        creds = MongoCredential.createCredential(Config.DATABASE_USERNAME.getValue(), Config.DATABASE_DATABASE.getValue(), Config.DATABASE_PASSWORD.getValue().toCharArray());
+        creds = MongoCredential.createCredential(
+                Config.DATABASE_USERNAME.getValue(),
+                Config.DATABASE_DATABASE.getValue(),
+                Config.DATABASE_PASSWORD.getValue().toCharArray());
 
         mc = new MongoClient(addr, creds, MongoClientOptions.builder().description("Factions MongoDB Connection").build());
 
