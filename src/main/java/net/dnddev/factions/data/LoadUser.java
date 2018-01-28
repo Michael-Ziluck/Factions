@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.User;
+import net.dnddev.factions.base.UserStore;
 import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.spatial.LazyLocation;
 import net.dnddev.factions.utils.CollectionUtils;
@@ -173,8 +174,7 @@ public abstract class LoadUser implements User
     @Override
     public boolean isConsole()
     {
-        // TODO Auto-generated method stub
-        return false;
+        return UserStore.getInstance().getConsole().getId() == getId();
     }
 
 }
