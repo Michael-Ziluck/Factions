@@ -169,7 +169,15 @@ public class MongoFactionStore extends LoadFactionStore
             wilderness = new MongoFaction(-1, "WILDERNESS", null, Type.WILDERNESS);
         }
 
-        nextId = store.findOne().orderBy("{_id: -1}").as(MongoUser.class).getId() + 1;
+        MongoUser user = store.findOne().orderBy("{_id: -1}").as(MongoUser.class);
+        if (user == null)
+        {
+            nextId = 0;
+        }
+        else
+        {
+            nextId = user.getId() + 1;
+        }
     }
 
     @Override

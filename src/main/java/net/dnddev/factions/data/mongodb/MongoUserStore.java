@@ -26,7 +26,7 @@ public class MongoUserStore extends LoadUserStore
 {
 
     protected MongoCollection store;
-    
+
     protected long nextId;
 
     /**
@@ -46,13 +46,21 @@ public class MongoUserStore extends LoadUserStore
             onlineUsersMap = new HashMap<>();
         }
 
-        nextId = store.findOne().orderBy("{_id: -1}").as(MongoUser.class).getId() + 1;
-        
+        MongoUser user = store.findOne().orderBy("{_id: -1}").as(MongoUser.class);
+        if (user != null)
+        {
+            nextId = user.getId() + 1;
+        }
+        else
+        {
+            nextId = 0;
+        }
+
         for (Player player : Bukkit.getOnlinePlayers())
         {
             loadUser(player);
         }
-        
+
         initialize();
     }
 
