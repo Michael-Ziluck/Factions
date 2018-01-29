@@ -8,6 +8,7 @@ import java.util.UUID;
 import com.google.common.collect.Multimap;
 
 import net.dnddev.factions.base.claims.Claim;
+import net.dnddev.factions.base.struct.Flag;
 import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.spatial.LazyLocation;
 
@@ -437,12 +438,26 @@ public interface Faction extends Messageable
     public boolean isPeaceful();
 
     /**
+     * Checks if this Faction is open. Open Factions do not require an invitation in order to join them.
+     * 
+     * @return {@code true} if this Faction is open.
+     */
+    public boolean isOpen();
+
+    /**
      * Add an invite for the given User. For non-open factions, adding an invite for a User is the only way to allow
      * players to join a Faction.
      * 
      * @param user the user to add an invite for.
      */
     public void addInvite(User user);
+
+    /**
+     * Returns all the flags that the Faction has.
+     * 
+     * @return all the flags that the Faction has.
+     */
+    public Set<Flag> getFlags();
 
     /**
      * Remove an existing invite for the given User.

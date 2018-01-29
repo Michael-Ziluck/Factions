@@ -11,15 +11,19 @@ public enum Flag
 {
 
     /**
-     * Represents a {@link Faction} that does not engage in pvp.
+     * A {@link Faction} that does not engage in pvp.
      */
     PEACEFUL,
     /**
-     * Represents a {@link Faction} that expires.
+     * A {@link Faction} that does not require an invitation to join.
+     */
+    OPEN,
+    /**
+     * A {@link Faction} that expires.
      */
     TEMPORARY,
     /**
-     * Represents a {@link Faction} that is owned by the server, not a player.
+     * A {@link Faction} that is owned by the server, not a player.
      */
     SYSTEM;
 

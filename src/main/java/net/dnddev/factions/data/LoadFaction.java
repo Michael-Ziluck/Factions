@@ -507,6 +507,12 @@ public abstract class LoadFaction implements Faction
     }
 
     @Override
+    public boolean isOpen()
+    {
+        return getFlags().contains(Flag.OPEN);
+    }
+
+    @Override
     public User getLeader()
     {
         if (leader == null)
@@ -617,9 +623,7 @@ public abstract class LoadFaction implements Faction
     @Override
     public boolean isPeaceful()
     {
-        assertFlags();
-
-        return flags.contains(Flag.PEACEFUL);
+        return getFlags().contains(Flag.PEACEFUL);
     }
 
     @Override
@@ -627,7 +631,15 @@ public abstract class LoadFaction implements Faction
     {
         assertFlags();
 
-        return !flags.contains(Flag.TEMPORARY);
+        return !getFlags().contains(Flag.TEMPORARY);
+    }
+
+    @Override
+    public Set<Flag> getFlags()
+    {
+        assertFlags();
+
+        return flags;
     }
 
     protected void assertFlags()

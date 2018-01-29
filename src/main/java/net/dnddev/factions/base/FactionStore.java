@@ -1,5 +1,6 @@
 package net.dnddev.factions.base;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -129,6 +130,14 @@ public interface FactionStore
      * @return the Wilderness.
      */
     public Faction getWilderness();
+
+    /**
+     * Returns all factions. The collection that this method returns should NOT be modified at all. If it is, an
+     * {@link UnsupportedOperationException} will be thrown.
+     * 
+     * @return all factions.
+     */
+    public Collection<Faction> getFactions();
 
     /**
      * Creates a new Faction with the given creator, the given name, and the given type.

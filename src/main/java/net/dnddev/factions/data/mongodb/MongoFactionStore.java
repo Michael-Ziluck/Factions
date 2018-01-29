@@ -1,6 +1,8 @@
 package net.dnddev.factions.data.mongodb;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -132,6 +134,20 @@ public class MongoFactionStore extends LoadFactionStore
     public Faction getFaction(Player player)
     {
         return UserStore.getInstance().getUser(player.getUniqueId(), true).getFaction();
+    }
+
+    @Override
+    public Collection<Faction> getFactions()
+    {
+        if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
+        {
+            return Collections.unmodifiableCollection(factionsList);
+        }
+        else if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
+        {
+            return Collections.unmodifiableCollection(factionsByName.values());
+        }
+        return null;
     }
 
     // TODO add javadoc

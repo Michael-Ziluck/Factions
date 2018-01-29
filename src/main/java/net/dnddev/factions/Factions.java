@@ -45,6 +45,7 @@ public class Factions extends JavaPlugin
     private FactionStore factionStore;
     private UserStore userStore;
 
+    @Override
     public void onEnable()
     {
         instance = this;
@@ -60,6 +61,12 @@ public class Factions extends JavaPlugin
 
         registerCommands();
         registerListeners();
+    }
+
+    @Override
+    public void onDisable()
+    {
+
     }
 
     protected void processFiles()

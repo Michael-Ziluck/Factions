@@ -15,7 +15,15 @@ public enum Permission
     /**
      * Create a new Faction.
      */
-    CREATE("create");
+    CREATE("create"),
+    /**
+     * Lookup another Faction.
+     */
+    LOOKUP("faction.other"),
+    /**
+     * Lookup your own Faction.
+     */
+    LOOKUP_SELF("faction.self");
 
     private String permission;
 

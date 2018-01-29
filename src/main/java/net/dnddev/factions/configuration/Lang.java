@@ -54,7 +54,19 @@ public enum Lang
     /**
      * What is sent to the user when they create a faction.
      */
-    CREATE_SUCCESS("§eYou created the faction §6{faction}.");
+    CREATE_SUCCESS("§eYou created the faction §6{faction}."),
+    /**
+     * When a player tries to look up a faction that does not exist.
+     */
+    FACTION_NOT_FOUND("§cNo faction by that name exists."),
+    /**
+     * Display information about a faction.
+     */
+    FACTION_SHOW("§6______________.[ §a {faction}§6 ].______________",
+            "§6Description: §e{description}",
+            "§6Age: §e{age}",
+            "§6Flags: {open} §c| {peaceful}",
+            "§6Balance: §e{balance}");
 
     private String[] message;
 

@@ -17,8 +17,9 @@ public class FactionsBaseCommand extends ValidBaseCommand
     public FactionsBaseCommand()
     {
         super("factions", "Anything and everything Factions.", Permission.BASE, new String[] { "faction", "f", "fact" });
-        
+
         addSubCommand(new FactionsCreateCommand());
+        addSubCommand(new FactionFactionCommand());
     }
 
 }
