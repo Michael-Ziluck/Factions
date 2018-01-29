@@ -1,7 +1,6 @@
 package net.dnddev.factions.data;
 
 import java.util.Collection;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,8 +24,6 @@ import net.dnddev.factions.utils.CollectionUtils;
 public abstract class LoadUser implements User
 {
 
-    protected UUID uuid;
-
     protected String name;
 
     protected boolean online;
@@ -38,12 +35,6 @@ public abstract class LoadUser implements User
     protected Faction faction;
 
     protected LazyLocation lastLocation;
-
-    @Override
-    public UUID getUniqueId()
-    {
-        return uuid;
-    }
 
     @Override
     public String getName()
@@ -60,7 +51,7 @@ public abstract class LoadUser implements User
     @Override
     public Player getPlayer()
     {
-        return isOnline() ? Bukkit.getPlayer(uuid) : null;
+        return isOnline() ? Bukkit.getPlayer(getUniqueId()) : null;
     }
 
     @Override

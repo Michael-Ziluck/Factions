@@ -50,11 +50,11 @@ public enum Lang
     /**
      * What is broadcasted when a faction is created.
      */
-    CREATE_BROADCAST("§6Faction §e{faction} §6created by §e{user}§6."),
+    CREATE_BROADCAST("§eThe faction §6{faction} §ewas created by §6{user}§e."),
     /**
      * What is sent to the user when they create a faction.
      */
-    CREATE_SUCCESS("§6Faction §e{faction}§6 created.");
+    CREATE_SUCCESS("§eYou created the faction §6{faction}.");
 
     private String[] message;
 

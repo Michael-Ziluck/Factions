@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.jongo.marshall.jackson.oid.MongoId;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.dnddev.factions.Factions;
 import net.dnddev.factions.base.Faction;
@@ -19,7 +20,7 @@ import net.dnddev.factions.data.LoadUser;
  * 
  * @author Michael Ziluck
  */
-@JsonIgnoreProperties({ "faction" })
+@JsonIgnoreProperties({ "faction", "uuid", "online", "console", "offline" })
 public class MongoUser extends LoadUser
 {
 
@@ -28,12 +29,17 @@ public class MongoUser extends LoadUser
 
     protected long factionId;
 
+    protected UUID uuid;
+
+    @JsonProperty(value = "uid")
+    protected String uuidString;
+
     /**
      * Empty constructor for ORMs
      */
     public MongoUser()
     {
-
+        this.factionId = -1;
     }
 
     /**
@@ -47,7 +53,9 @@ public class MongoUser extends LoadUser
     {
         this.id = id;
         this.uuid = uuid;
+        this.uuidString = uuid.toString();
         this.name = name;
+        this.factionId = -1;
         this.factionRole = Role.FACTIONLESS;
     }
 
@@ -55,6 +63,16 @@ public class MongoUser extends LoadUser
     public long getId()
     {
         return id;
+    }
+
+    @Override
+    public UUID getUniqueId()
+    {
+        if (uuid == null)
+        {
+            uuid = UUID.fromString(uuidString);
+        }
+        return uuid;
     }
 
     @Override
