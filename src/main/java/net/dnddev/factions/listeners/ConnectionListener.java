@@ -5,6 +5,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.UserStore;
 
 /**
@@ -23,7 +24,8 @@ public class ConnectionListener implements Listener
     @EventHandler(priority = EventPriority.LOWEST)
     public void onJoin(PlayerJoinEvent event)
     {
-        UserStore.getInstance().loadUser(event.getPlayer());
+        User user = UserStore.getInstance().loadUser(event.getPlayer());
+        user.setOnline(true);
     }
 
 }

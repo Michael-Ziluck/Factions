@@ -30,6 +30,13 @@ public interface User extends Messageable
     public boolean isOffline();
 
     /**
+     * Sets whether the User is online or not.
+     * 
+     * @param value whether the User is online or not.
+     */
+    public void setOnline(boolean online);
+
+    /**
      * Returns the internal id of the user.
      * 
      * @return the internal id of the user.

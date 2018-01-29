@@ -64,6 +64,12 @@ public abstract class LoadUser implements User
     }
 
     @Override
+    public void setOnline(boolean online)
+    {
+        this.online = online;
+    }
+
+    @Override
     public boolean isOnline()
     {
         return online;
