@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.jongo.MongoCollection;
 
@@ -76,12 +77,14 @@ public class MongoFactionStore extends LoadFactionStore
         {
             faction = searchMap(predicate);
         }
-        return faction == null ? wilderness : faction;
+        return faction;
     }
 
     @Override
     public Faction getFaction(final String name)
     {
+        Validate.notNull(name, "Name can't be null.");
+
         Faction faction = null;
         if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
         {
@@ -91,12 +94,14 @@ public class MongoFactionStore extends LoadFactionStore
         {
             faction = factionsByName.get(name.toLowerCase());
         }
-        return faction == null ? wilderness : faction;
+        return faction;
     }
 
     @Override
     public Faction getCasedFaction(String name)
     {
+        Validate.notNull(name, "Name can't be null.");
+
         Faction faction = null;
         if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
         {
@@ -110,16 +115,18 @@ public class MongoFactionStore extends LoadFactionStore
                 faction = null;
             }
         }
-        return faction == null ? wilderness : faction;
+        return faction;
     }
 
     @Override
     public Faction getFaction(UUID uuid)
     {
+        Validate.notNull(uuid, "Uuid can't be null.");
+
         User user = UserStore.getInstance().getUser(uuid);
         if (user == null)
         {
-            return wilderness;
+            return null;
         }
         return user.getFaction();
     }
@@ -127,12 +134,16 @@ public class MongoFactionStore extends LoadFactionStore
     @Override
     public Faction getFaction(User user)
     {
+        Validate.notNull(user, "User can't be null.");
+
         return user.getFaction();
     }
 
     @Override
     public Faction getFaction(Player player)
     {
+        Validate.notNull(player, "Player can't be null.");
+
         return UserStore.getInstance().getUser(player.getUniqueId(), true).getFaction();
     }
 
@@ -216,12 +227,17 @@ public class MongoFactionStore extends LoadFactionStore
     @Override
     public void save(Faction faction)
     {
+        Validate.notNull(faction, "Faction can't be null.");
         store.save(faction);
     }
 
     @Override
     public FactionCreateEvent createFaction(User creator, String name, Type type)
     {
+        Validate.notNull(creator, "Creator can't be null.");
+        Validate.notNull(name, "Name can't be null.");
+        Validate.notNull(type, "Type can't be null.");
+
         MongoFaction faction = new MongoFaction(nextId, name, creator, type);
 
         FactionCreateEvent event = new FactionCreateEvent(faction, creator, Config.CREATE_COST.doubleValue());

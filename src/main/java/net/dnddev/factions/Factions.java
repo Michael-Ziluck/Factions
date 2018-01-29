@@ -117,7 +117,7 @@ public class Factions extends JavaPlugin
     }
 
     /**
-     * Gets a Faction referenced by its name. If none is found this will return Wilderness, not null.
+     * Gets a Faction referenced by its name. If none is found this will return null.
      * 
      * @param name the name of the Faction.
      * @return the Faction if one exists.
@@ -128,7 +128,8 @@ public class Factions extends JavaPlugin
     }
 
     /**
-     * Gets a Faction referenced by a player's UUID. If none is found this will return Wilderness, not null.
+     * Gets a Faction referenced by a player's UUID. If the user is not found, this will return null. If the User has no
+     * faction, this will return the Wilderness.
      * 
      * @param uuid the uuid of the Player.
      * @return the Faction if one exists.

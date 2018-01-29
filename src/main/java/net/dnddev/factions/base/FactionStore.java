@@ -32,7 +32,7 @@ public interface FactionStore
     }
 
     /**
-     * Get a faction referenced by its internal id. If none is found this will return Wilderness, not null.
+     * Get a faction referenced by its internal id. If none is found this will return null.
      * 
      * @param id the internal id of the Faction.
      * @return the Faction if one exists.
@@ -40,8 +40,8 @@ public interface FactionStore
     public Faction getFaction(long id);
 
     /**
-     * Gets a Faction referenced by its name. If none is found this will return Wilderness, not null. Also, this method
-     * is not case-sensitive. For case sensitive name lookup, use {@link #getCasedFaction(String)}.
+     * Gets a Faction referenced by its name. If none is found this will return null. Also, this method is not
+     * case-sensitive. For case sensitive name lookup, use {@link #getCasedFaction(String)}.
      * 
      * @param name the name of the Faction.
      * @return the Faction if one exists.
