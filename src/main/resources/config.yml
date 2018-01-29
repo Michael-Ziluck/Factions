@@ -27,13 +27,15 @@ storage:
   # If you choose to use a database, remember it is only faster and more efficient if your database
   #    are both hosted on the same server box.
   type: mongodb
-  # Database options. Only relevant if you chose mongodb or mysql.
+  # Database options. Only relevant if you choose to use mongodb or mysql.
   database:
     hostname: localhost
     port: 27017
     username: root
     password: password
     database: factions 
+    timeout: 100
+    description: 'Factions Connection'
 
 # All configuration related to creating a new Faction
 create:

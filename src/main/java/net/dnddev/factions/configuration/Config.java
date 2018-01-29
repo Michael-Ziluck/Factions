@@ -74,6 +74,16 @@ public final class Config
     public static final MutableString DATABASE_DATABASE = new MutableString("factions");
 
     /**
+     * How long the system should wait when trying to connect to a database.
+     */
+    public static final MutableInt DATABASE_TIMEOUT = new MutableInt(100);
+
+    /**
+     * The description given to a connection if the DBMS supports that feature.
+     */
+    public static final MutableString DATABASE_CONNECTION_DESCRIPTION = new MutableString("Factions Connection");
+
+    /**
      * The maximum amount of Factions allowed on the server.
      */
     public static final MutableInt FACTION_LIMIT = new MutableInt(-1);
@@ -123,6 +133,8 @@ public final class Config
         updateValue(config, save, "storage.database.username", DATABASE_USERNAME);
         updateValue(config, save, "storage.database.password", DATABASE_PASSWORD);
         updateValue(config, save, "storage.database.database", DATABASE_DATABASE);
+        updateValue(config, save, "storage.database.timeout", DATABASE_TIMEOUT);
+        updateValue(config, save, "storage.database.description", DATABASE_CONNECTION_DESCRIPTION);
         updateValue(config, save, "max-factions", FACTION_LIMIT);
         updateValue(config, save, "create.cost", CREATE_COST);
         updateValue(config, save, "create.cancellable.enabled", CREATE_CANCELLABLE);

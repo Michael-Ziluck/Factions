@@ -51,7 +51,10 @@ public class MongoWrapper
         LogManager.getLogManager().getLogger(Loggers.getLogger("cluster").getName()).setLevel(Level.WARNING);
         LogManager.getLogManager().getLogger(Loggers.getLogger("connection").getName()).setLevel(Level.WARNING);
 
-        mc = new MongoClient(addr, creds, MongoClientOptions.builder().description("Factions MongoDB Connection").build());
+        mc = new MongoClient(addr, creds, MongoClientOptions.builder()
+                .connectTimeout(Config.DATABASE_TIMEOUT.intValue())
+                .description("Factions Connection")
+                .build());
 
         db = mc.getDB(Config.DATABASE_DATABASE.getValue());
 
