@@ -23,7 +23,7 @@ public class UnusedFactionNameValidator implements Validator<String>
 
         Bukkit.getPluginManager().callEvent(event);
 
-        if (event.isCancelled() || Factions.getFaction(arg) == null)
+        if (event.isCancelled() || Factions.getFaction(arg) != null)
         {
             Lang.USED_FACTION_NAME.send(sender);
             return false;
