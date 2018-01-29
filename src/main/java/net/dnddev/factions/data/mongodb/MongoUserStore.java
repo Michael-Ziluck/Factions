@@ -83,7 +83,7 @@ public class MongoUserStore extends LoadUserStore
         User user = getUser(uuid);
         if (includeOffline && user == null)
         {
-            user = store.findOne("{uuid: '" + uuid.toString() + "'}").as(MongoUser.class);
+            user = store.findOne("{uid: '" + uuid.toString() + "'}").as(MongoUser.class);
         }
         return user;
     }
@@ -126,7 +126,7 @@ public class MongoUserStore extends LoadUserStore
             }
             else if (sender instanceof Player)
             {
-                user = store.findOne("{uuid: '" + ((Player) sender).getUniqueId() + "'}").as(MongoUser.class);
+                user = store.findOne("{uid: '" + ((Player) sender).getUniqueId() + "'}").as(MongoUser.class);
             }
         }
         return user;
