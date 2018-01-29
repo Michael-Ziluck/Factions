@@ -41,7 +41,7 @@ public class MongoUser extends LoadUser
      * 
      * @param id the internal id of the user.
      * @param uuid the uuid of the user.
-     * @param name the nme of the user.
+     * @param name the name of the user.
      */
     public MongoUser(long id, UUID uuid, String name)
     {
@@ -50,11 +50,17 @@ public class MongoUser extends LoadUser
         this.name = name;
         this.factionRole = Role.FACTIONLESS;
     }
-    
+
+    @Override
+    public long getId()
+    {
+        return id;
+    }
+
     @Override
     public Faction getFaction()
     {
-        if (faction== null && factionId > 0)
+        if (faction == null && factionId > 0)
         {
             faction = FactionStore.getInstance().getFaction(factionId);
         }

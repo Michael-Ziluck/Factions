@@ -52,8 +52,6 @@ import net.dnddev.factions.spatial.LazyLocation;
 public abstract class LoadFaction implements Faction
 {
 
-    protected long id;
-
     protected String name;
 
     protected String stub;
@@ -85,38 +83,6 @@ public abstract class LoadFaction implements Faction
     protected List<Claim> claims;
 
     protected boolean loaded;
-
-    /**
-     * An empty constructor for ORMs to use.
-     */
-    protected LoadFaction()
-    {
-        loaded = true;
-    }
-
-    /**
-     * Constructs a new LoadFaction with the given values.
-     * 
-     * @param id the uuid of the Faction.
-     * @param name the name of the Faction.
-     * @param leader the one who created the Faction.
-     * @param type the type of Faction being created.
-     */
-    public LoadFaction(long id, String name, User leader, Type type)
-    {
-        this();
-        this.id = id;
-        this.name = name;
-        this.leader = leader;
-        this.type = type;
-        this.defaultRole = Role.MEMBER;
-    }
-
-    @Override
-    public long getId()
-    {
-        return id;
-    }
 
     @Override
     public String getName()
@@ -560,7 +526,7 @@ public abstract class LoadFaction implements Faction
 
     /**
      * Handle adding a new member to the database. Users are a special case within the system as the entire chunk of
-     * information for a user is not also stored in a Faction. As such, this method allows each individual databsae set
+     * information for a user is not also stored in a Faction. As such, this method allows each individual database set
      * up to handle it manually.
      * 
      * @param user the new user to process
@@ -671,6 +637,11 @@ public abstract class LoadFaction implements Faction
             flags = EnumSet.noneOf(Flag.class);
         }
     }
+
+    /**
+     * Load the leader of the Faction from it's stored id.
+     */
+    public abstract void loadLeader();
 
     @Override
     public int hashCode()

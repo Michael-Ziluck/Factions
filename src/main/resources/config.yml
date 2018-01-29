@@ -9,6 +9,17 @@ optimization: processing
 # Set this to -1 to disable the feature entirely.
 max-factions: -1
 
+# All the options related to the factions themselves
+factions:
+  # The defaults for the factions.
+  defaults:
+    # The default default-role that factions have when they are created.
+    default-role:
+      # Options: trial, member, moderator, admin
+      role: member
+      # Whether or not factions are allowed to change the default-role
+      changeable: true
+
 # Configuration for how the system stores the Faction data.
 storage:
   # The type of storage to use. The options available are:

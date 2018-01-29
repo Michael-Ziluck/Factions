@@ -25,8 +25,6 @@ import net.dnddev.factions.utils.CollectionUtils;
 public abstract class LoadUser implements User
 {
 
-    protected long id;
-
     protected UUID uuid;
 
     protected String name;
@@ -40,12 +38,6 @@ public abstract class LoadUser implements User
     protected Faction faction;
 
     protected LazyLocation lastLocation;
-
-    @Override
-    public long getId()
-    {
-        return id;
-    }
 
     @Override
     public UUID getUniqueId()

@@ -116,17 +116,19 @@ public final class Config
         FileConfiguration config = Factions.getInstance().getConfig();
 
         updateValue(config, "optimization", OPTIMIZATION);
-        updateValue(config, "faction-limit", FACTION_LIMIT);
-        updateValue(config, "create.cost", CREATE_COST);
-        updateValue(config, "create.cancellable.enabled", CREATE_CANCELLABLE);
-        updateValue(config, "create.cancellable.silent", CREATE_SILENT_CANCEL);
-        updateValue(config, "create.broadcast", CREATE_BROADCAST);
         updateValue(config, "storage.type", STORAGE_TYPE);
         updateValue(config, "storage.database.hostname", DATABASE_HOSTNAME);
         updateValue(config, "storage.database.port", DATABASE_PORT);
         updateValue(config, "storage.database.username", DATABASE_USERNAME);
         updateValue(config, "storage.database.password", DATABASE_PASSWORD);
         updateValue(config, "storage.database.database", DATABASE_DATABASE);
+        updateValue(config, "max-factions", FACTION_LIMIT);
+        updateValue(config, "create.cost", CREATE_COST);
+        updateValue(config, "create.cancellable.enabled", CREATE_CANCELLABLE);
+        updateValue(config, "create.cancellable.silent", CREATE_SILENT_CANCEL);
+        updateValue(config, "create.broadcast", CREATE_BROADCAST);
+        updateValue(config, "factions.defaults.default-role.role", FACTION_DEFAULT_ROLE);
+        updateValue(config, "factions.defaults.default-role.changeable", FACTION_DEFAULT_ROLE_CHANGABLE);
     }
 
     /**

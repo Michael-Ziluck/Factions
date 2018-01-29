@@ -151,6 +151,10 @@ public abstract class LoadUserStore implements UserStore
     @Override
     public User loadUser(long id)
     {
+        if (id == -1)
+        {
+            return console;
+        }
         User user = getUser(id, true);
         if (user == null)
         {

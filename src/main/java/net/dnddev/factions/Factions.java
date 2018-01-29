@@ -18,6 +18,7 @@ import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.configuration.struct.Storage;
 import net.dnddev.factions.data.mongodb.MongoFactionStore;
 import net.dnddev.factions.data.mongodb.MongoUserStore;
+import net.dnddev.factions.listeners.ConnectionListener;
 import net.dnddev.factions.spatial.BlockColumn;
 import net.dnddev.factions.spatial.BoundedArea;
 import net.dnddev.factions.spatial.LazyLocation;
@@ -58,6 +59,7 @@ public class Factions extends JavaPlugin
         }
 
         registerCommands();
+        registerListeners();
     }
 
     protected void processFiles()
@@ -72,6 +74,11 @@ public class Factions extends JavaPlugin
         CommandHandler handler = CommandHandler.getInstance();
 
         handler.registerCommand(new FactionsBaseCommand(), this);
+    }
+
+    protected void registerListeners()
+    {
+        Bukkit.getPluginManager().registerEvents(new ConnectionListener(), this);
     }
 
     /**

@@ -1,5 +1,8 @@
 package net.dnddev.factions.data.mongodb;
 
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+
 import org.jongo.Jongo;
 
 import com.mongodb.DB;
@@ -7,6 +10,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.mongodb.diagnostics.logging.Loggers;
 
 import net.dnddev.factions.configuration.Config;
 
@@ -42,6 +46,10 @@ public class MongoWrapper
                 Config.DATABASE_USERNAME.getValue(),
                 Config.DATABASE_DATABASE.getValue(),
                 Config.DATABASE_PASSWORD.getValue().toCharArray());
+
+        // Stop MongoDB from spamming the console.
+        LogManager.getLogManager().getLogger(Loggers.getLogger("cluster").getName()).setLevel(Level.WARNING);
+        LogManager.getLogManager().getLogger(Loggers.getLogger("connection").getName()).setLevel(Level.WARNING);
 
         mc = new MongoClient(addr, creds, MongoClientOptions.builder().description("Factions MongoDB Connection").build());
 

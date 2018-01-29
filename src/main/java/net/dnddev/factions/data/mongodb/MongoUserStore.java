@@ -102,6 +102,10 @@ public class MongoUserStore extends LoadUserStore
     @Override
     public User getUser(long id, boolean includeOffline)
     {
+        if (id == -1)
+        {
+            return console;
+        }
         User user = getUser(id);
         if (includeOffline && user == null)
         {
@@ -131,7 +135,9 @@ public class MongoUserStore extends LoadUserStore
     @Override
     protected void createConsole()
     {
-        this.console = new MongoUser(-1, Factions.consoleUuid, "CONSOLE");
+        long id = -1;
+        this.console = new MongoUser(id, Factions.consoleUuid, "CONSOLE");
+        this.console.save();
     }
 
     @Override

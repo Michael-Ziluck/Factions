@@ -148,7 +148,6 @@ public class MongoFactionStore extends LoadFactionStore
     }
 
     // TODO add javadoc
-    @SuppressWarnings("unused")
     private Faction searchMap(Predicate<Faction> predicate)
     {
         for (Faction faction : factionsByName.values())
@@ -178,11 +177,12 @@ public class MongoFactionStore extends LoadFactionStore
             {
                 factionsList.add(faction);
             }
+            faction.loadLeader();
             // TODO load claims
         }
         if (wilderness == null)
         {
-            wilderness = new MongoFaction(-1, "WILDERNESS", UserStore.getInstance().getConsole(), Type.WILDERNESS);
+            wilderness = new MongoFaction(-1, "Wilderness", UserStore.getInstance().getConsole(), Type.WILDERNESS);
             wilderness.save();
         }
 
@@ -204,7 +204,7 @@ public class MongoFactionStore extends LoadFactionStore
     }
 
     @Override
-    public synchronized FactionCreateEvent createFaction(User creator, String name, Type type)
+    public FactionCreateEvent createFaction(User creator, String name, Type type)
     {
         MongoFaction faction = new MongoFaction(nextId, name, creator, type);
 

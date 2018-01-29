@@ -30,7 +30,7 @@ public class MongoFaction extends LoadFaction
     protected long id;
 
     protected long leaderId;
-    
+
     protected long[] memberIds;
 
     /**
@@ -38,9 +38,6 @@ public class MongoFaction extends LoadFaction
      */
     public MongoFaction()
     {
-        super();
-        
-        this.leader = UserStore.getInstance().loadUser(leaderId);
     }
 
     /**
@@ -54,9 +51,11 @@ public class MongoFaction extends LoadFaction
      */
     public MongoFaction(long id, String name, User leader, Type type)
     {
-        super(id, name, leader, type);
-        
+        this.id = id;
+        this.name = name;
+        this.leader = leader;
         this.leaderId = leader.getId();
+        this.type = type;
     }
 
     @Override
@@ -91,6 +90,18 @@ public class MongoFaction extends LoadFaction
     protected void processNewMember(User user)
     {
         memberIds = ArrayUtils.add(memberIds, user.getId());
+    }
+
+    @Override
+    public long getId()
+    {
+        return id;
+    }
+
+    @Override
+    public void loadLeader()
+    {
+        this.leader = UserStore.getInstance().getUser(leaderId);
     }
 
 }
