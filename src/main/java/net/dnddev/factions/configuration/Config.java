@@ -144,8 +144,6 @@ public final class Config
      * @param config the config file to load/update.
      * @param location the location in the config.
      * @param mutable the mutable value to update.
-     * @return {@code true} if the value loads from the config properly<br>
-     *         {@code false} if the value did not exist in the config or it had an error loading.
      */
     private static <T extends Enum<T>> void updateValue(FileConfiguration config, MutableBoolean save, String location, MutableEnum<T> mutable)
     {
@@ -167,8 +165,6 @@ public final class Config
      * @param config the config file to load/update.
      * @param location the location in the config.
      * @param mutable the mutable value to update.
-     * @return {@code true} if the value loads from the config properly<br>
-     *         {@code false} if the value did not exist in the config or it had an error loading.
      */
     private static void updateValue(FileConfiguration config, MutableBoolean save, String location, MutableString mutable)
     {
@@ -190,8 +186,6 @@ public final class Config
      * @param config the config file to load/update.
      * @param location the location in the config.
      * @param mutable the mutable value to update.
-     * @return {@code true} if the value loads from the config properly<br>
-     *         {@code false} if the value did not exist in the config or it had an error loading.
      */
     private static void updateValue(FileConfiguration config, MutableBoolean save, String location, MutableInt mutable)
     {
@@ -213,8 +207,6 @@ public final class Config
      * @param config the config file to load/update.
      * @param location the location in the config.
      * @param mutable the mutable value to update.
-     * @return {@code true} if the value loads from the config properly<br>
-     *         {@code false} if the value did not exist in the config or it had an error loading.
      */
     private static void updateValue(FileConfiguration config, MutableBoolean save, String location, MutableDouble mutable)
     {
@@ -236,8 +228,6 @@ public final class Config
      * @param config the config file to load/update.
      * @param location the location in the config.
      * @param mutable the mutable value to update.
-     * @return {@code true} if the value loads from the config properly<br>
-     *         {@code false} if the value did not exist in the config or it had an error loading.
      */
     private static void updateValue(FileConfiguration config, MutableBoolean save, String location, MutableBoolean mutable)
     {

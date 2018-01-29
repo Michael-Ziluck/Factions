@@ -32,7 +32,7 @@ public interface User extends Messageable
     /**
      * Sets whether the User is online or not.
      * 
-     * @param value whether the User is online or not.
+     * @param online whether the User is online or not.
      */
     public void setOnline(boolean online);
 
