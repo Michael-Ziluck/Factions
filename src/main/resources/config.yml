@@ -1,9 +1,9 @@
 # This is used to figure out how the system should optimize itself.
 # memory: This mode is only advisable if your system is VERY short on memory.
 #     Almost every other use case this is not the preferable approach.
-# processing: This is the default mode. The system will try to reduce the processing
+# process: This is the default mode. The system will try to reduce the processing
 #    rather than reduce memory usage wherever possible.
-optimization: processing
+optimization: process
 
 # The maximum number of factions allowed on the server.
 # Set this to -1 to disable the feature entirely.

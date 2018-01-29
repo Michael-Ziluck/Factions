@@ -115,41 +115,26 @@ public final class Config
     {
         FileConfiguration config = Factions.getInstance().getConfig();
 
-        updateValue(config, "optimization", OPTIMIZATION);
-        updateValue(config, "storage.type", STORAGE_TYPE);
-        updateValue(config, "storage.database.hostname", DATABASE_HOSTNAME);
-        updateValue(config, "storage.database.port", DATABASE_PORT);
-        updateValue(config, "storage.database.username", DATABASE_USERNAME);
-        updateValue(config, "storage.database.password", DATABASE_PASSWORD);
-        updateValue(config, "storage.database.database", DATABASE_DATABASE);
-        updateValue(config, "max-factions", FACTION_LIMIT);
-        updateValue(config, "create.cost", CREATE_COST);
-        updateValue(config, "create.cancellable.enabled", CREATE_CANCELLABLE);
-        updateValue(config, "create.cancellable.silent", CREATE_SILENT_CANCEL);
-        updateValue(config, "create.broadcast", CREATE_BROADCAST);
-        updateValue(config, "factions.defaults.default-role.role", FACTION_DEFAULT_ROLE);
-        updateValue(config, "factions.defaults.default-role.changeable", FACTION_DEFAULT_ROLE_CHANGABLE);
-    }
+        MutableBoolean save = new MutableBoolean(false);
+        updateValue(config, save, "optimization", OPTIMIZATION);
+        updateValue(config, save, "storage.type", STORAGE_TYPE);
+        updateValue(config, save, "storage.database.hostname", DATABASE_HOSTNAME);
+        updateValue(config, save, "storage.database.port", DATABASE_PORT);
+        updateValue(config, save, "storage.database.username", DATABASE_USERNAME);
+        updateValue(config, save, "storage.database.password", DATABASE_PASSWORD);
+        updateValue(config, save, "storage.database.database", DATABASE_DATABASE);
+        updateValue(config, save, "max-factions", FACTION_LIMIT);
+        updateValue(config, save, "create.cost", CREATE_COST);
+        updateValue(config, save, "create.cancellable.enabled", CREATE_CANCELLABLE);
+        updateValue(config, save, "create.cancellable.silent", CREATE_SILENT_CANCEL);
+        updateValue(config, save, "create.broadcast", CREATE_BROADCAST);
+        updateValue(config, save, "factions.defaults.default-role.role", FACTION_DEFAULT_ROLE);
+        updateValue(config, save, "factions.defaults.default-role.changeable", FACTION_DEFAULT_ROLE_CHANGABLE);
 
-    /**
-     * Updates the configuration with the given information. If the value fails to load from the config because it does
-     * not exist or it is in an invalid format, the system will notify the console.
-     * 
-     * @param config the config file to load/update.
-     * @param location the location in the config.
-     * @param mutable the mutable value to update.
-     * @return {@code true} if the value loads from the config properly<br>
-     *         {@code false} if the value did not exist in the config or it had an error loading.
-     */
-    private static <T extends Enum<T>> boolean updateValue(FileConfiguration config, String location, MutableEnum<T> mutable)
-    {
-        if (!config.isSet(location) || !successful(() -> mutable.setValue(Enum.valueOf(mutable.getType(), config.getString(location)))))
+        if (save.booleanValue())
         {
-            config.set(location, mutable.getValue());
-            error(location);
-            return false;
+            Factions.getInstance().saveConfig();
         }
-        return true;
     }
 
     /**
@@ -162,15 +147,40 @@ public final class Config
      * @return {@code true} if the value loads from the config properly<br>
      *         {@code false} if the value did not exist in the config or it had an error loading.
      */
-    private static <T extends Enum<T>> boolean updateValue(FileConfiguration config, String location, MutableString mutable)
+    private static <T extends Enum<T>> void updateValue(FileConfiguration config, MutableBoolean save, String location, MutableEnum<T> mutable)
+    {
+        if (!config.isSet(location) || !successful(() -> mutable.setValue(Enum.valueOf(mutable.getType(), config.getString(location).toUpperCase()))))
+        {
+            config.set(location, mutable.getValue().toString());
+            error(location);
+            if (!save.booleanValue())
+            {
+                save.setValue(true);
+            }
+        }
+    }
+
+    /**
+     * Updates the configuration with the given information. If the value fails to load from the config because it does
+     * not exist or it is in an invalid format, the system will notify the console.
+     * 
+     * @param config the config file to load/update.
+     * @param location the location in the config.
+     * @param mutable the mutable value to update.
+     * @return {@code true} if the value loads from the config properly<br>
+     *         {@code false} if the value did not exist in the config or it had an error loading.
+     */
+    private static void updateValue(FileConfiguration config, MutableBoolean save, String location, MutableString mutable)
     {
         if (!config.isSet(location) || !successful(() -> mutable.setValue(config.getString(location))))
         {
             config.set(location, mutable.getValue());
             error(location);
-            return false;
+            if (!save.booleanValue())
+            {
+                save.setValue(true);
+            }
         }
-        return true;
     }
 
     /**
@@ -183,15 +193,17 @@ public final class Config
      * @return {@code true} if the value loads from the config properly<br>
      *         {@code false} if the value did not exist in the config or it had an error loading.
      */
-    private static boolean updateValue(FileConfiguration config, String location, MutableInt mutable)
+    private static void updateValue(FileConfiguration config, MutableBoolean save, String location, MutableInt mutable)
     {
         if (!config.isSet(location) || !successful(() -> mutable.setValue(config.getInt(location))))
         {
             config.set(location, mutable.intValue());
             error(location);
-            return false;
+            if (!save.booleanValue())
+            {
+                save.setValue(true);
+            }
         }
-        return true;
     }
 
     /**
@@ -204,15 +216,17 @@ public final class Config
      * @return {@code true} if the value loads from the config properly<br>
      *         {@code false} if the value did not exist in the config or it had an error loading.
      */
-    private static boolean updateValue(FileConfiguration config, String location, MutableDouble mutable)
+    private static void updateValue(FileConfiguration config, MutableBoolean save, String location, MutableDouble mutable)
     {
         if (!config.isSet(location) || !successful(() -> mutable.setValue(config.getDouble(location))))
         {
             config.set(location, mutable.doubleValue());
             error(location);
-            return false;
+            if (!save.booleanValue())
+            {
+                save.setValue(true);
+            }
         }
-        return true;
     }
 
     /**
@@ -225,15 +239,17 @@ public final class Config
      * @return {@code true} if the value loads from the config properly<br>
      *         {@code false} if the value did not exist in the config or it had an error loading.
      */
-    private static boolean updateValue(FileConfiguration config, String location, MutableBoolean mutable)
+    private static void updateValue(FileConfiguration config, MutableBoolean save, String location, MutableBoolean mutable)
     {
         if (!config.isSet(location) || !successful(() -> mutable.setValue(config.getBoolean(location))))
         {
             config.set(location, mutable.booleanValue());
             error(location);
-            return false;
+            if (!save.booleanValue())
+            {
+                save.setValue(true);
+            }
         }
-        return true;
     }
 
     /**
