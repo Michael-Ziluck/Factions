@@ -13,6 +13,7 @@ import net.dnddev.factions.base.FactionStore;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.commands.parsers.StringParser;
+import net.dnddev.factions.commands.validators.SenderFactionlessValidator;
 import net.dnddev.factions.commands.validators.UnusedFactionNameValidator;
 import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.configuration.Lang;
@@ -32,6 +33,8 @@ public class FactionsCreateCommand extends ValidCommand
     public FactionsCreateCommand()
     {
         super("create", "Create a new Faction.", Permission.CREATE, true, new String[] { "new" });
+
+        addSenderValidator(new SenderFactionlessValidator());
 
         addArgument(CommandArgumentBuilder.createBuilder(String.class)
                 .setName("name")

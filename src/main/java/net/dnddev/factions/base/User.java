@@ -89,6 +89,14 @@ public interface User extends Messageable
     public void setFactionRole(Role role);
 
     /**
+     * Checks if the User has a Faction. Remember that {@link #getFaction()} will not return null, it will return
+     * Wilderness.
+     * 
+     * @return {@code true} if this User has a Faction.
+     */
+    public boolean hasFaction();
+
+    /**
      * Retrieves the current Faction that this User is in. If they do not have a Faction, this will return the
      * Wilderness.
      * 

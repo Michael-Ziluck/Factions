@@ -78,9 +78,13 @@ public class MongoUser extends LoadUser
     @Override
     public Faction getFaction()
     {
-        if (faction == null && factionId > 0)
+        if (faction == null && factionId >= 0)
         {
             faction = FactionStore.getInstance().getFaction(factionId);
+        }
+        else if (factionId == -1)
+        {
+            faction = FactionStore.getInstance().getWilderness();
         }
         return faction;
     }

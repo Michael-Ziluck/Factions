@@ -21,6 +21,18 @@ import net.dnddev.factions.events.FactionLookupEvent;
 public class FactionParser implements Parser<Faction>
 {
 
+    private boolean wild;
+
+    /**
+     * Create a new FactionParser which specifies whether or not to include the Wilderness.
+     * 
+     * @param wild the wilderness.
+     */
+    public FactionParser(boolean wild)
+    {
+        this.wild = wild;
+    }
+
     @Override
     public Faction parseArgument(User sender, String[] label, String rawArgument)
     {
@@ -31,8 +43,9 @@ public class FactionParser implements Parser<Faction>
             Lang.FACTION_NOT_FOUND.send(sender);
             return null;
         }
+
         Faction faction = Factions.getFaction(rawArgument);
-        if (faction == null)
+        if (faction == null || (faction.isWilderness() && !wild))
         {
             Lang.FACTION_NOT_FOUND.send(sender);
             return null;

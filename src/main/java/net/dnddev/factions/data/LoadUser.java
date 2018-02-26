@@ -85,6 +85,12 @@ public abstract class LoadUser implements User
     }
 
     @Override
+    public boolean hasFaction()
+    {
+        return !getFaction().isWilderness();
+    }
+
+    @Override
     public long getFactionId()
     {
         return getFaction().getId();

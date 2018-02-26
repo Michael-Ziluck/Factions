@@ -55,6 +55,11 @@ public class CommandHandler implements CommandExecutor, TabCompleter
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
         User user = UserStore.getInstance().getUser(sender);
+        // this should never happen, it is just to make debugging easier
+        if (user == null)
+        {
+            throw new IllegalStateException("User not found for sender.");
+        }
         ValidCommand command = getCommand(label);
         if (command != null)
         {

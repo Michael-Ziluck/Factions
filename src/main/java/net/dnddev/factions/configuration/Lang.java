@@ -60,12 +60,20 @@ public enum Lang
      */
     FACTION_NOT_FOUND("§cNo faction by that name exists."),
     /**
+     * When a player tries to create or join a faction when they already have one.
+     */
+    ALREADY_HAS_FACTION("§cYou already have a faction."),
+    /**
+     * When a player tries to do something that requires having a faction.
+     */
+    HAS_NO_FACTION("§cYou do not have a faction."),
+    /**
      * Display information about a faction.
      */
     FACTION_SHOW("§6______________.[ §a {faction}§6 ].______________",
             "§6Description: §e{description}",
             "§6Age: §e{age}",
-            "§6Flags: {open} §c| {peaceful}",
+            "§6Flags: {open} §e| {peaceful}",
             "§6Balance: §e{balance}");
 
     private String[] message;

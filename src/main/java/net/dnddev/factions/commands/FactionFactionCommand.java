@@ -9,6 +9,7 @@ import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.commands.parsers.FactionParser;
+import net.dnddev.factions.commands.validators.SenderHasFactionValidator;
 import net.dnddev.factions.configuration.Lang;
 import net.dnddev.factions.utils.DateUtils;
 
@@ -20,6 +21,8 @@ import net.dnddev.factions.utils.DateUtils;
 public class FactionFactionCommand extends ValidCommand
 {
 
+    private SenderHasFactionValidator validator = new SenderHasFactionValidator();
+
     /**
      * Constructs a new FactionFactionCommand with default settings.
      */
@@ -29,8 +32,9 @@ public class FactionFactionCommand extends ValidCommand
 
         addArgument(CommandArgumentBuilder.createBuilder(Faction.class)
                 .setName("faction")
-                .setParser(new FactionParser())
+                .setParser(new FactionParser(false))
                 .setAllowsConsole()
+                .setOptional()
                 .build());
     }
 
@@ -44,14 +48,19 @@ public class FactionFactionCommand extends ValidCommand
         }
         else
         {
+            if (!validator.validate(sender))
+            {
+                return;
+            }
             faction = sender.getFaction();
         }
 
         Lang.FACTION_SHOW.send(sender,
                 "{faction}", faction.getName(),
+                "{description}", faction.getDescription(),
                 "{age}", DateUtils.formatDateDiff(faction.getFounded()),
-                "{open}", faction.isOpen(),
-                "{peaceful}", faction.isPeaceful(),
+                "{open}", (faction.isOpen() ? "§a" : "§c") + "open",
+                "{peaceful}", (faction.isPeaceful() ? "§a" : "§c") + "peaceful",
                 "{balance}", "§a$0");
         // TODO add balance
     }

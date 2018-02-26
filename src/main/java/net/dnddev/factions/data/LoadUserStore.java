@@ -79,7 +79,7 @@ public abstract class LoadUserStore implements UserStore
         }
         else if (sender instanceof Player)
         {
-            Predicate<User> predicate = user -> user.getUniqueId() == ((Player) sender).getUniqueId();
+            Predicate<User> predicate = user -> user.getUniqueId().equals(((Player) sender).getUniqueId());
             if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
             {
                 return searchMap(predicate);
