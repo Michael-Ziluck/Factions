@@ -173,17 +173,19 @@ public abstract class ValidCommand
      */
     protected void process(User sender, String[] label, String[] rawArguments)
     {
-        if (rawArguments.length < getMinimumLength() || rawArguments.length > getMaximumLength())
-        {
-            sender.sendMessage(generateUsageMessage(StringUtils.compile(label), (Object[]) getArgumentNames()));
-            return;
-        }
+
         for (SenderValidator senderValidator : senderValidators)
         {
             if (!senderValidator.validate(sender))
             {
                 return;
             }
+        }
+
+        if (rawArguments.length < getMinimumLength() || rawArguments.length > getMaximumLength())
+        {
+            sender.sendMessage(generateUsageMessage(StringUtils.compile(label), (Object[]) getArgumentNames()));
+            return;
         }
 
         if (rawArguments.length == 0 && blocksConsole() && sender.isConsole())
