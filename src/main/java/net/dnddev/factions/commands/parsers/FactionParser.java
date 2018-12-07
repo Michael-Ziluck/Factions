@@ -3,6 +3,7 @@ package net.dnddev.factions.commands.parsers;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.dnddev.factions.configuration.Config;
 import org.bukkit.Bukkit;
 
 import net.dnddev.factions.Factions;
@@ -15,22 +16,22 @@ import net.dnddev.factions.events.FactionLookupEvent;
 
 /**
  * Parses Strings into Factions.
- * 
+ *
  * @author Michael Ziluck
  */
 public class FactionParser implements Parser<Faction>
 {
 
-    private boolean wild;
+    private boolean includeWilderness;
 
     /**
      * Create a new FactionParser which specifies whether or not to include the Wilderness.
-     * 
-     * @param wild the wilderness.
+     *
+     * @param includeWilderness whether or not the wilderness should be returned instead of null.
      */
-    public FactionParser(boolean wild)
+    public FactionParser(boolean includeWilderness)
     {
-        this.wild = wild;
+        this.includeWilderness = includeWilderness;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class FactionParser implements Parser<Faction>
         }
 
         Faction faction = Factions.getFaction(rawArgument);
-        if (faction == null || (faction.isWilderness() && !wild))
+        if (faction == null || (faction.isWilderness() && !includeWilderness))
         {
             Lang.FACTION_NOT_FOUND.send(sender);
             return null;
@@ -57,11 +58,18 @@ public class FactionParser implements Parser<Faction>
     public List<String> getRecommendations(User sender, String lastWord)
     {
         List<String> recs = new ArrayList<>();
-        for (Faction f : FactionStore.getInstance().getFactions())
+        if (Config.FACTION_TAB_COMPLETE.booleanValue() && lastWord.length() >= Config.FACTION_TAB_COMPLETE_MIN.intValue())
         {
-            if (f.getName().startsWith(lastWord))
+            for (Faction f : FactionStore.getInstance().getFactions())
             {
-                recs.add(f.getName());
+                if (f.isWilderness() && !includeWilderness)
+                {
+                    continue;
+                }
+                if (f.getName().startsWith(lastWord))
+                {
+                    recs.add(f.getName());
+                }
             }
         }
         return recs;

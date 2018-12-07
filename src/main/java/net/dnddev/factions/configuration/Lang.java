@@ -109,11 +109,11 @@ public enum Lang
      * String as well.
      *
      * @param messageable the Messageable receiving the message.
-     * @param parameters  all additional arguments to fill placeholders.
+     * @param params  all additional arguments to fill placeholders.
      */
-    public void send(Messageable messageable, Object... parameters)
+    public void send(Messageable messageable, Object... params)
     {
-        messageable.sendMessage(getMessage(parameters));
+        messageable.sendMessage(getMessage(params));
     }
 
     /**

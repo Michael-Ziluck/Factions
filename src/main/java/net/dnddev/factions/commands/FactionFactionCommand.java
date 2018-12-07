@@ -15,7 +15,7 @@ import net.dnddev.factions.utils.DateUtils;
 
 /**
  * Command: /faction faction [faction]
- * 
+ *
  * @author Michael Ziluck
  */
 public class FactionFactionCommand extends ValidCommand
@@ -26,15 +26,15 @@ public class FactionFactionCommand extends ValidCommand
      */
     public FactionFactionCommand()
     {
-        super("faction", "Show information about a Faction", Permission.LOOKUP_SELF, true, new String[] { "f", "fact" });
+        super("faction", "Show information about a Faction", Permission.LOOKUP_SELF, true, new String[]{ "f", "fact" });
 
         addArgument(CommandArgumentBuilder.createBuilder(Faction.class)
-                .setName("faction")
-                .setParser(new FactionParser(false))
-                .addAbsentSenderValidator(new SenderHasFactionValidator(0))
-                .setAllowsConsole()
-                .setOptional()
-                .build());
+                                          .setName("faction")
+                                          .setParser(new FactionParser(false))
+                                          .addAbsentSenderValidator(new SenderHasFactionValidator(0))
+                                          .setAllowsConsole()
+                                          .setOptional()
+                                          .build());
     }
 
     @Override
@@ -50,13 +50,12 @@ public class FactionFactionCommand extends ValidCommand
             faction = sender.getFaction();
         }
 
-        Lang.FACTION_SHOW.send(sender,
-                "{faction}", faction.getName(),
-                "{description}", faction.getDescription(),
-                "{age}", DateUtils.formatDateDiff(faction.getFounded()),
-                "{open}", (faction.isOpen() ? "§a" : "§c") + "open",
-                "{peaceful}", (faction.isPeaceful() ? "§a" : "§c") + "peaceful",
-                "{balance}", "§a$0");
+        Lang.FACTION_SHOW.send(sender, "{faction}", faction.getName(),
+                               "{description}", faction.getDescription(),
+                               "{age}", DateUtils.formatDateDiff(faction.getFounded()),
+                               "{open}", (faction.isOpen() ? "§a" : "§c") + "open",
+                               "{peaceful}", (faction.isPeaceful() ? "§a" : "§c") + "peaceful",
+                               "{balance}", "§a$0");
         // TODO add balance
         // TODO change output based on member,ally,enemy,neutral
     }

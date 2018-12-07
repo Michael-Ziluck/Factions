@@ -1,5 +1,6 @@
 package net.dnddev.factions.configuration;
 
+import org.apache.commons.lang.mutable.Mutable;
 import org.apache.commons.lang.mutable.MutableBoolean;
 import org.apache.commons.lang.mutable.MutableDouble;
 import org.apache.commons.lang.mutable.MutableInt;
@@ -137,6 +138,16 @@ public final class Config
      * The name to reference the faction type "Normal"
      */
     public static final MutableString FACTION_NAME_NORMAL = new MutableString("Normal");
+
+    /**
+     * If Faction names should tab-complete
+     */
+    public static final MutableBoolean FACTION_TAB_COMPLETE = new MutableBoolean(true);
+
+    /**
+     * The minimum character length to enable tab-complete
+     */
+    public static final MutableInt FACTION_TAB_COMPLETE_MIN = new MutableInt(0);
 
     /**
      * Update the values from the database.

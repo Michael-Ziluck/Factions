@@ -24,6 +24,12 @@ factions:
     safezone: Safezone
     wilderness: Wilderness
     normal: Faction
+  # Controls tab completion for faction names in commands
+  tab-complete:
+    # If it is enabled
+    enabled: true
+    # The minimum characters to show tab-complete. If there are a lot of factions, it might be good to increase this
+    minimum-characters: 0
 
 # Configuration for how the system stores the Faction data.
 storage:
