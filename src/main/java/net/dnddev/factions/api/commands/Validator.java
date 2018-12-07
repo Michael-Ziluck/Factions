@@ -8,7 +8,7 @@ import net.dnddev.factions.base.User;
  * @author Michael Ziluck
  * @param <T> the type that this validator can process.
  */
-public interface Validator<T>
+public interface Validator<T> extends CommandElement
 {
 
     /**

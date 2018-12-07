@@ -27,8 +27,12 @@ public class MongoUser extends LoadUser
     @MongoId
     protected long id;
 
+    @JsonProperty("faction_id")
     protected long factionId;
 
+    @JsonProperty("faction_role")
+    protected Role factionRole;
+    
     protected UUID uuid;
 
     @JsonProperty(value = "uid")

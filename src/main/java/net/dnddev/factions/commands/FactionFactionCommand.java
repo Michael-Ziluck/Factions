@@ -21,8 +21,6 @@ import net.dnddev.factions.utils.DateUtils;
 public class FactionFactionCommand extends ValidCommand
 {
 
-    private SenderHasFactionValidator validator = new SenderHasFactionValidator();
-
     /**
      * Constructs a new FactionFactionCommand with default settings.
      */
@@ -33,6 +31,7 @@ public class FactionFactionCommand extends ValidCommand
         addArgument(CommandArgumentBuilder.createBuilder(Faction.class)
                 .setName("faction")
                 .setParser(new FactionParser(false))
+                .addAbsentSenderValidator(new SenderHasFactionValidator(0))
                 .setAllowsConsole()
                 .setOptional()
                 .build());
@@ -48,10 +47,6 @@ public class FactionFactionCommand extends ValidCommand
         }
         else
         {
-            if (!validator.validate(sender))
-            {
-                return;
-            }
             faction = sender.getFaction();
         }
 
@@ -63,6 +58,7 @@ public class FactionFactionCommand extends ValidCommand
                 "{peaceful}", (faction.isPeaceful() ? "§a" : "§c") + "peaceful",
                 "{balance}", "§a$0");
         // TODO add balance
+        // TODO change output based on member,ally,enemy,neutral
     }
 
 }

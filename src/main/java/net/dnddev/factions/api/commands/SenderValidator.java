@@ -7,7 +7,7 @@ import net.dnddev.factions.base.User;
  * 
  * @author Michael Ziluck
  */
-public interface SenderValidator
+public interface SenderValidator extends CommandElement
 {
 
     /**

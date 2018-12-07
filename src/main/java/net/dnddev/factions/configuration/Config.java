@@ -41,12 +41,12 @@ public final class Config
     /**
      * What the plugin is currently optimizing for.
      */
-    public static final MutableEnum<Optimization> OPTIMIZATION = new MutableEnum<Optimization>(Optimization.PROCESS);
+    public static final MutableEnum<Optimization> OPTIMIZATION = new MutableEnum<>(Optimization.PROCESS);
 
     /**
      * The type of Storage the system uses.
      */
-    public static final MutableEnum<Storage> STORAGE_TYPE = new MutableEnum<Storage>(Storage.MONGODB);
+    public static final MutableEnum<Storage> STORAGE_TYPE = new MutableEnum<>(Storage.MONGODB);
 
     /**
      * The hostname of the database if one is used.
@@ -287,6 +287,7 @@ public final class Config
      * Used to check if an operation throws an exception with ease.
      *
      * @param runnable the operation to run.
+     *
      * @return {@code true} if the operation does NOT throw an exception.<br>
      * {@code false} if the operation DOES throw an exception.
      */
@@ -295,12 +296,12 @@ public final class Config
         try
         {
             runnable.run();
-            return true;
         }
         catch (Exception ex)
         {
             return false;
         }
+        return true;
     }
 
     /**

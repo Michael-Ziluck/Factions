@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import net.dnddev.factions.base.struct.FactionType;
 import org.apache.commons.lang.Validate;
 
 import com.google.common.collect.Multimap;
@@ -40,13 +41,9 @@ import net.dnddev.factions.spatial.LazyLocation;
  * Saving is done in the following places:
  * <ul>
  * <li>{@link #createWarp(String, LazyLocation, String)}</li>
- * <li></li>
- * <li></li>
- * <li></li>
- * <li></li>
  * </ul>
  * </p>
- * 
+ *
  * @author Michael Ziluck
  */
 public abstract class LoadFaction implements Faction
@@ -60,7 +57,7 @@ public abstract class LoadFaction implements Faction
 
     protected String motd;
 
-    protected Type type;
+    protected FactionType type;
 
     protected Role defaultRole;
 
@@ -150,8 +147,8 @@ public abstract class LoadFaction implements Faction
     /**
      * Performs the check to see if the User is online. If they are this method will send the announcement immediately.
      * Otherwise it will add it to the pending announcements.
-     * 
-     * @param user the user to check.
+     *
+     * @param user    the user to check.
      * @param message the message to process.
      */
     protected void processAnnouncement(User user, String message)
@@ -172,8 +169,8 @@ public abstract class LoadFaction implements Faction
     /**
      * Performs the check to see if the User is online. If they are this method will send the announcement immediately.
      * Otherwise it will add it to the pending announcements.
-     * 
-     * @param user the user to check.
+     *
+     * @param user     the user to check.
      * @param messages the message to process.
      */
     protected void processAnnouncement(User user, String[] messages)
@@ -194,8 +191,8 @@ public abstract class LoadFaction implements Faction
     /**
      * Performs the check to see if the User is online. If they are this method will send the announcement immediately.
      * Otherwise it will add it to the pending announcements.
-     * 
-     * @param user the user to check.
+     *
+     * @param user     the user to check.
      * @param messages the message to process.
      */
     protected void processAnnouncement(User user, Collection<String> messages)
@@ -372,7 +369,7 @@ public abstract class LoadFaction implements Faction
 
     /**
      * Retrieves the map of the Warps that exist. This is used almost exclusively for lookup and easy access to values.
-     * 
+     *
      * @return the map of Warps and referenced by their stubs.
      */
     protected Map<String, Warp> getWarpsMap()
@@ -468,16 +465,17 @@ public abstract class LoadFaction implements Faction
 
     /**
      * Creates a new Warp object using the proper database implementation.
-     * 
-     * @param name the name of the warp.
+     *
+     * @param name     the name of the warp.
      * @param location the location of the warp.
      * @param password the password for the warp.
+     *
      * @return the newly created warp.
      */
     protected abstract Warp createWarp(String name, LazyLocation location, String password);
 
     @Override
-    public Type getType()
+    public FactionType getType()
     {
         return type;
     }
@@ -485,25 +483,25 @@ public abstract class LoadFaction implements Faction
     @Override
     public boolean isNormal()
     {
-        return getType() == Faction.Type.NORMAL;
+        return getType() == FactionType.NORMAL;
     }
 
     @Override
     public boolean isSafezone()
     {
-        return getType() == Faction.Type.SAFEZONE;
+        return getType() == FactionType.SAFEZONE;
     }
 
     @Override
     public boolean isWarzone()
     {
-        return getType() == Faction.Type.WARZONE;
+        return getType() == FactionType.WARZONE;
     }
 
     @Override
     public boolean isWilderness()
     {
-        return getType() == Faction.Type.WILDERNESS;
+        return getType() == FactionType.WILDERNESS;
     }
 
     @Override
@@ -534,7 +532,7 @@ public abstract class LoadFaction implements Faction
      * Handle adding a new member to the database. Users are a special case within the system as the entire chunk of
      * information for a user is not also stored in a Faction. As such, this method allows each individual database set
      * up to handle it manually.
-     * 
+     *
      * @param user the new user to process
      */
     protected abstract void processNewMember(User user);

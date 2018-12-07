@@ -1,6 +1,5 @@
 package net.dnddev.factions.commands.validators;
 
-import net.dnddev.factions.api.commands.SenderValidator;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.configuration.Lang;
 
@@ -9,8 +8,17 @@ import net.dnddev.factions.configuration.Lang;
  * 
  * @author Michael Ziluck
  */
-public class SenderHasFactionValidator implements SenderValidator
+public class SenderHasFactionValidator extends SenderFactionlessValidator
 {
+
+    /**
+     * @see PrioritizedSenderValidator#PrioritizedSenderValidator(int)
+     * @param priority the priority.
+     */
+    public SenderHasFactionValidator(int priority)
+    {
+        super(priority);
+    }
 
     @Override
     public boolean validate(User sender)

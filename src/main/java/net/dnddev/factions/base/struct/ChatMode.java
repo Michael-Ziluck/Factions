@@ -2,7 +2,7 @@ package net.dnddev.factions.base.struct;
 
 /**
  * Represents where a User is talking to.
- * 
+ *
  * @author Michael Ziluck
  */
 public enum ChatMode
@@ -23,6 +23,6 @@ public enum ChatMode
     /**
      * When nearby Users can hear a User.
      */
-    LOCAL;
+    LOCAL
 
 }

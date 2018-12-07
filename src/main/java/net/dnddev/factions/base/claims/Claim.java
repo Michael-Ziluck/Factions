@@ -33,7 +33,7 @@ public interface Claim extends Purchasable
      * 
      * @return the faction this claim belongs to.
      */
-    public Faction getFaction();
+    Faction getFaction();
 
     /**
      * Utility method to get a {@link Collection} of all {@link User Users} that are currently physically inside this
@@ -41,7 +41,7 @@ public interface Claim extends Purchasable
      * 
      * @return all {@link User Users} within the claim.
      */
-    public Collection<User> getWithin();
+    Collection<User> getWithin();
 
     /**
      * All users who have ownership of the Claim. If the Server does not have the option to allow owners of a Claim then
@@ -49,7 +49,7 @@ public interface Claim extends Purchasable
      * 
      * @return the {@link Claim} owners.
      */
-    public Collection<User> getOwners();
+    Collection<User> getOwners();
 
     /**
      * Checks whether or not the given {@link User} is within this Claim. If the {@link User} is offline this method
@@ -58,7 +58,7 @@ public interface Claim extends Purchasable
      * @param user the User to check.
      * @return {@code true} if the User is within the Claim.
      */
-    public boolean isWithin(User user);
+    boolean isWithin(User user);
 
     /**
      * Checks whether or not the given {@link Location} is within this Claim.
@@ -66,14 +66,14 @@ public interface Claim extends Purchasable
      * @param location the Location to check.
      * @return {@code true} if the Location is within the Claim.
      */
-    public boolean isWithin(Location location);
+    boolean isWithin(Location location);
 
     /**
      * Get the Blocks that make up the walls of this Claim. It also includes the floor and roof.
      * 
      * @return the Blocks of the walls.
      */
-    public Set<Block> getWalls();
+    Set<Block> getWalls();
 
     /**
      * Get the geometric center of the Claim. Important to note that this will most likely not be a whole number as it
@@ -81,6 +81,6 @@ public interface Claim extends Purchasable
      * 
      * @return the center of the Claim.
      */
-    public LazyLocation getCenter();
+    LazyLocation getCenter();
 
 }

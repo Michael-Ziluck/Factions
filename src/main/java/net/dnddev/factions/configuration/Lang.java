@@ -9,7 +9,7 @@ import net.dnddev.factions.utils.CollectionUtils;
 
 /**
  * The system for processing and sending messages to players.
- * 
+ *
  * @author Michael Ziluck
  */
 public enum Lang
@@ -71,14 +71,14 @@ public enum Lang
      * Display information about a faction.
      */
     FACTION_SHOW("§6______________.[ §a {faction}§6 ].______________",
-            "§6Description: §e{description}",
-            "§6Age: §e{age}",
-            "§6Flags: {open} §e| {peaceful}",
-            "§6Balance: §e{balance}");
+                 "§6Description: §e{description}",
+                 "§6Age: §e{age}",
+                 "§6Flags: {open} §e| {peaceful}",
+                 "§6Balance: §e{balance}");
 
     private String[] message;
 
-    private Lang(String... message)
+    Lang(String... message)
     {
         this.message = message;
     }
@@ -86,7 +86,7 @@ public enum Lang
     /**
      * Retrieves the message for this Lang object. This can be changed by editing the language configuration files, so
      * they should NOT be treated as constants. Additionally their Strings should NOT be stored to reference anything.
-     * 
+     *
      * @return the message for this Lang object.
      */
     public String[] getRawMessage()
@@ -96,7 +96,7 @@ public enum Lang
 
     /**
      * Sets the message for this Lang object. This should not be done after startup to ensure data security.
-     * 
+     *
      * @param message the new message.
      */
     public void setRawMessage(String... message)
@@ -107,9 +107,9 @@ public enum Lang
     /**
      * Sends this Lang object to the Messageable target. The parameters replace all placeholders that exist in the
      * String as well.
-     * 
+     *
      * @param messageable the Messageable receiving the message.
-     * @param parameters all additional arguments to fill placeholders.
+     * @param parameters  all additional arguments to fill placeholders.
      */
     public void send(Messageable messageable, Object... parameters)
     {
@@ -119,8 +119,8 @@ public enum Lang
     /**
      * Sends this Lang object to the CommandSender target. The parameters replace all placeholders that exist in the
      * String as well.
-     * 
-     * @param sender the CommandSender receiving the message.
+     *
+     * @param sender     the CommandSender receiving the message.
      * @param parameters all additional arguments to fill placeholders.
      */
     public void send(CommandSender sender, Object... parameters)
@@ -131,8 +131,9 @@ public enum Lang
     /**
      * Renders this message and returns it. Similar behavior to {@link #send(CommandSender, Object...)} and
      * {@link #send(Messageable, Object...)}, but instead of sending the message, it simply returns it.
-     * 
+     *
      * @param parameters all additional arguments to fill placeholders.
+     *
      * @return the compiled message.
      */
     public String[] getMessage(Object... parameters)
@@ -149,7 +150,8 @@ public enum Lang
      * Render a string with the proper parameters.
      *
      * @param string the rendered string.
-     * @param args the placeholders and proper content.
+     * @param args   the placeholders and proper content.
+     *
      * @return the rendered string.
      */
     protected String renderString(String string, Object... args)

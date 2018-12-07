@@ -62,7 +62,7 @@ public class CommandArgumentBuilder<T>
      */
     public CommandArgumentBuilder<T> addValidator(Validator<T> validator)
     {
-        argument.addValidator(validator);
+        argument.addValidator(validator, validator.getPriority());
         return this;
     }
 
@@ -74,7 +74,19 @@ public class CommandArgumentBuilder<T>
      */
     public CommandArgumentBuilder<T> addSenderValidator(SenderValidator senderValidator)
     {
-        argument.addSenderValidator(senderValidator);
+        argument.addSenderValidator(senderValidator, senderValidator.getPriority());
+        return this;
+    }
+
+    /**
+     * Adds a sender validator to be used if the argument does not exist.
+     * 
+     * @param absentSenderValidator the new absent sender validator.
+     * @return the same builder.
+     */
+    public CommandArgumentBuilder<T> addAbsentSenderValidator(SenderValidator absentSenderValidator)
+    {
+        argument.addSenderValidator(absentSenderValidator, absentSenderValidator.getPriority());
         return this;
     }
 
@@ -143,7 +155,7 @@ public class CommandArgumentBuilder<T>
      */
     public static <T> CommandArgumentBuilder<T> createBuilder(Class<T> type)
     {
-        return new CommandArgumentBuilder<T>();
+        return new CommandArgumentBuilder<>();
     }
 
 }

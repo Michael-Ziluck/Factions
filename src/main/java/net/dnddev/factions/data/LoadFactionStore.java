@@ -2,6 +2,7 @@ package net.dnddev.factions.data;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -26,7 +27,7 @@ import net.dnddev.factions.spatial.LazyLocation;
  * To help reduce clutter and duplicate code, FactionStores have an additional middle step between the interface and the
  * implementation that loads information to the database.
  * </p>
- * 
+ *
  * @author Michael Ziluck
  */
 public abstract class LoadFactionStore implements FactionStore
@@ -128,7 +129,7 @@ public abstract class LoadFactionStore implements FactionStore
         if (tree == null)
         {
             claims.put(area.getWorld().getName(), RTree.create());
-            return Arrays.asList(wilderness);
+            return Collections.singletonList(wilderness);
         }
 
         ArrayList<Faction> values = new ArrayList<>();
@@ -146,7 +147,7 @@ public abstract class LoadFactionStore implements FactionStore
         if (tree == null)
         {
             claims.put(area.getWorld().getName(), RTree.create());
-            return Arrays.asList();
+            return Collections.emptyList();
         }
 
         ArrayList<Claim> values = new ArrayList<>();

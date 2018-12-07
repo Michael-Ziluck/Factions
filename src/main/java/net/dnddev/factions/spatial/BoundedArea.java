@@ -19,42 +19,25 @@ import net.dnddev.factions.utils.GeometryUtils;
  * BoundedArea also implements the R-Tree interface {@link Rectangle}. This allows spatial and geometric operations to
  * be performed on it with ease.
  * </p>
- * 
+ *
  * @author Michael Ziluck
  */
 public class BoundedArea implements Rectangle
 {
 
-    protected int x1;
-    protected int z1;
-    protected int x2;
-    protected int z2;
+    protected float x1;
+    protected float z1;
+    protected float x2;
+    protected float z2;
 
     protected String world;
 
-    protected World parsedWorld;
-
-    /**
-     * Constructs a new BoundedArea with the given coordinates.
-     * 
-     * @param x1 the lowest x.
-     * @param x2 the greatest x.
-     * @param z1 the lowest z.
-     * @param z2 the greatest z.
-     * @param world the world.
-     */
-    public BoundedArea(int x1, int x2, int z1, int z2, World world)
-    {
-        this.x1 = Math.min(x1, x2);
-        this.x2 = Math.max(x1, x2);
-        this.z1 = Math.min(z1, z2);
-        this.z2 = Math.max(z1, z2);
-    }
+    private World parsedWorld;
 
     /**
      * Constructs a new BoundedArea with the two given bounds. If the two bounds are in different worlds, an
      * {@link IllegalArgumentException} will be thrown.
-     * 
+     *
      * @param pointOne the first point.
      * @param pointTwo the second point.
      */
@@ -86,22 +69,28 @@ public class BoundedArea implements Rectangle
 
     /**
      * Constructs a new BoundedArea with the given coordinates.
-     * 
-     * @param x1 the lowest x.
-     * @param x2 the greatest x.
-     * @param z1 the lowest z.
-     * @param z2 the greatest z.
+     *
+     * @param x1    the lowest x.
+     * @param x2    the greatest x.
+     * @param z1    the lowest z.
+     * @param z2    the greatest z.
      * @param world the world.
      */
     public BoundedArea(float x1, float x2, float z1, float z2, World world)
     {
-        this((int) x1, (int) x2, (int) x1, (int) x2, world);
+
+        this.x1 = Math.min(x1, x2);
+        this.x2 = Math.max(x1, x2);
+        this.z1 = Math.min(z1, z2);
+        this.z2 = Math.max(z1, z2);
+
+        setWorld(world);
     }
 
     /**
      * @return the minX
      */
-    public final int getMinX()
+    public final float getMinX()
     {
         return x1;
     }
@@ -109,7 +98,7 @@ public class BoundedArea implements Rectangle
     /**
      * @param minX the minX to set
      */
-    public final void setMinX(int minX)
+    public final void setMinX(float minX)
     {
         this.x1 = minX;
     }
@@ -117,7 +106,7 @@ public class BoundedArea implements Rectangle
     /**
      * @return the minZ
      */
-    public final int getMinZ()
+    public final float getMinZ()
     {
         return z1;
     }
@@ -125,7 +114,7 @@ public class BoundedArea implements Rectangle
     /**
      * @param minZ the minZ to set
      */
-    public final void setMinZ(int minZ)
+    public final void setMinZ(float minZ)
     {
         this.z1 = minZ;
     }
@@ -133,7 +122,7 @@ public class BoundedArea implements Rectangle
     /**
      * @return the maxX
      */
-    public final int getMaxX()
+    public final float getMaxX()
     {
         return x2;
     }
@@ -141,7 +130,7 @@ public class BoundedArea implements Rectangle
     /**
      * @param maxX the maxX to set
      */
-    public final void setMaxX(int maxX)
+    public final void setMaxX(float maxX)
     {
         this.x2 = maxX;
     }
@@ -149,7 +138,7 @@ public class BoundedArea implements Rectangle
     /**
      * @return the maxZ
      */
-    public final int getMaxZ()
+    public final float getMaxZ()
     {
         return z2;
     }
@@ -164,40 +153,35 @@ public class BoundedArea implements Rectangle
 
     /**
      * Check if the given location is within the bounded area.
-     * 
+     *
      * @param location the location to check.
+     *
      * @return {@code true} if this location is within the bounded area.
      */
     public final boolean contains(Location location)
     {
-        if (location.getWorld() != getWorld())
-        {
-            return false;
-        }
-        if (location.getX() >= getMinX() && location.getX() <= getMaxX() && location.getZ() >= getMinZ() && location.getZ() <= getMaxZ())
-        {
-            return true;
-        }
-        return false;
+        return containsHelper(location.getWorld(), location.getX(), location.getZ());
     }
 
     /**
      * Check if the given block column is within the bounded area.
-     * 
+     *
      * @param blockColumn the block column to check.
+     *
      * @return {@code true} if this block column is within the bounded area.
      */
     public final boolean contains(BlockColumn blockColumn)
     {
-        if (blockColumn.getWorld() != getWorld())
+        return containsHelper(blockColumn.getWorld(), blockColumn.getX(), blockColumn.getZ());
+    }
+
+    private boolean containsHelper(World world, double x, double z)
+    {
+        if (world != getWorld())
         {
             return false;
         }
-        if (blockColumn.getX() >= getMinX() && blockColumn.getX() <= getMaxX() && blockColumn.getZ() >= getMinZ() && blockColumn.getZ() <= getMaxZ())
-        {
-            return true;
-        }
-        return false;
+        return x >= getMinX() && x <= getMaxX() && z >= getMinZ() && z <= getMaxZ();
     }
 
     /**
@@ -267,9 +251,13 @@ public class BoundedArea implements Rectangle
     public final float intersectionArea(Rectangle r)
     {
         if (!intersects(r))
+        {
             return 0;
+        }
         else
+        {
             return GeometryUtils.create(Math.max(x1(), r.x1()), Math.max(y1(), r.y1()), Math.min(x2, r.x2()), Math.min(y2(), r.y2())).area();
+        }
     }
 
     @Override
@@ -304,7 +292,7 @@ public class BoundedArea implements Rectangle
 
     /**
      * Get the length of the BoundedArea.
-     * 
+     *
      * @return the length.
      */
     public final float getLength()
@@ -314,7 +302,7 @@ public class BoundedArea implements Rectangle
 
     /**
      * Get the width of the BoundedArea;
-     * 
+     *
      * @return the width;
      */
     public final float getWidth()
@@ -324,37 +312,37 @@ public class BoundedArea implements Rectangle
 
     /**
      * Get the Blocks that make up the walls of this BoundedArea. This will also return the floor and roof.
-     * 
+     *
      * @return the Blocks of the walls.
      */
     public Set<Block> getWalls()
     {
         HashSet<Block> walls = new HashSet<>();
-        int i, j;
-        World w = getWorld();
+        float          i, j;
+        World          w     = getWorld();
 
         for (i = this.x1; i <= this.x2; i++)
         {
             for (j = 0; j <= w.getMaxHeight(); j++)
             {
-                walls.add(w.getBlockAt(i, j, getMinZ()));
-                walls.add(w.getBlockAt(i, j, getMaxZ()));
+                walls.add(w.getBlockAt((int) i, (int) j, (int) getMinZ()));
+                walls.add(w.getBlockAt((int) i, (int) j, (int) getMaxZ()));
             }
         }
         for (i = this.z1; i <= this.z2; i++)
         {
             for (j = 0; j <= w.getMaxHeight(); j++)
             {
-                walls.add(w.getBlockAt(getMinX(), j, i));
-                walls.add(w.getBlockAt(getMaxX(), j, i));
+                walls.add(w.getBlockAt((int) getMinX(), (int) j, (int) i));
+                walls.add(w.getBlockAt((int) getMaxX(), (int) j, (int) i));
             }
         }
         for (i = this.x1; i <= this.x2; i++)
         {
             for (j = this.z1; j <= this.z2; j++)
             {
-                walls.add(w.getBlockAt(i, 0, j));
-                walls.add(w.getBlockAt(i, w.getMaxHeight(), j));
+                walls.add(w.getBlockAt((int) i, 0, (int) j));
+                walls.add(w.getBlockAt((int) i, w.getMaxHeight(), (int) j));
             }
         }
         return walls;

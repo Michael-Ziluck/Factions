@@ -16,7 +16,7 @@ import net.dnddev.factions.configuration.Config;
 
 /**
  * Stores the main connection to MongoDB.
- * 
+ *
  * @author Michael Ziluck
  */
 public class MongoWrapper
@@ -24,10 +24,6 @@ public class MongoWrapper
 
     private static MongoWrapper instance;
 
-    private ServerAddress addr;
-    private MongoCredential creds;
-    private MongoClient mc;
-    private DB db;
     private Jongo jongo;
 
     /**
@@ -38,11 +34,11 @@ public class MongoWrapper
     {
         instance = this;
 
-        addr = new ServerAddress(
+        ServerAddress addr = new ServerAddress(
                 Config.DATABASE_HOSTNAME.getValue(),
                 Config.DATABASE_PORT.intValue());
 
-        creds = MongoCredential.createCredential(
+        MongoCredential creds = MongoCredential.createCredential(
                 Config.DATABASE_USERNAME.getValue(),
                 Config.DATABASE_DATABASE.getValue(),
                 Config.DATABASE_PASSWORD.getValue().toCharArray());
@@ -51,19 +47,19 @@ public class MongoWrapper
         LogManager.getLogManager().getLogger(Loggers.getLogger("cluster").getName()).setLevel(Level.WARNING);
         LogManager.getLogManager().getLogger(Loggers.getLogger("connection").getName()).setLevel(Level.WARNING);
 
-        mc = new MongoClient(addr, creds, MongoClientOptions.builder()
-                .connectTimeout(Config.DATABASE_TIMEOUT.intValue())
-                .description("Factions Connection")
-                .build());
+        MongoClient mc = new MongoClient(addr, creds, MongoClientOptions.builder()
+                                                                        .connectTimeout(Config.DATABASE_TIMEOUT.intValue())
+                                                                        .description("Factions Connection")
+                                                                        .build());
 
-        db = mc.getDB(Config.DATABASE_DATABASE.getValue());
+        DB db = mc.getDB(Config.DATABASE_DATABASE.getValue());
 
         jongo = new Jongo(db);
     }
 
     /**
      * Returns the active Jongo instance.
-     * 
+     *
      * @return the Jongo instance.
      */
     public Jongo getJongo()
@@ -73,7 +69,7 @@ public class MongoWrapper
 
     /**
      * Returns the singleton instance of this MongoWrapper.
-     * 
+     *
      * @return the singleton instance of this MongoWrapper.
      */
     public static MongoWrapper getInstance()

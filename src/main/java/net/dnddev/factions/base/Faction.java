@@ -6,8 +6,8 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
-
 import net.dnddev.factions.base.claims.Claim;
+import net.dnddev.factions.base.struct.FactionType;
 import net.dnddev.factions.base.struct.Flag;
 import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.spatial.LazyLocation;
@@ -21,7 +21,7 @@ import net.dnddev.factions.spatial.LazyLocation;
  *
  * @author Michael Ziluck
  */
-public interface Faction extends Messageable
+public interface Faction extends Messageable, Nameable
 {
 
     /**
@@ -30,21 +30,6 @@ public interface Faction extends Messageable
      * @return the id of the Faction.
      */
     public long getId();
-
-    /**
-     * Retrieves the case-sensitive name of the Faction. This should not be used for lookup as requiring
-     * case-sensitivity is a pain for users. For lookup, use {@link #getStub()}.
-     *
-     * @return the name of the Faction.
-     */
-    public String getName();
-
-    /**
-     * Retrieves the lower cased name of the Faction. This should be used primarily for lookup.
-     *
-     * @return the lower case name of the Faction
-     */
-    public String getStub();
 
     /**
      * Retrieves the description for the Faction. Colors for this can be toggled on and off in the config.yml.
@@ -236,6 +221,7 @@ public interface Faction extends Messageable
      * returns null.
      *
      * @param name the name to search for.
+     *
      * @return the warp.
      */
     public Warp getWarp(String name);
@@ -246,6 +232,7 @@ public interface Faction extends Messageable
      * {@link #getWarp(String)} should give the exact same behavior.
      *
      * @param name the name to search for.
+     *
      * @return {@code true} if the warp exists.
      */
     public boolean isWarp(String name);
@@ -257,6 +244,7 @@ public interface Faction extends Messageable
      * @param name     the name of the warp.
      * @param location the location of the warp.
      * @param password the password for the warp.
+     *
      * @return the newly created warp.
      */
     public Warp setWarp(String name, LazyLocation location, String password);
@@ -266,6 +254,7 @@ public interface Faction extends Messageable
      *
      * @param name     the name of the warp.
      * @param location the location of the warp.
+     *
      * @return the newly created warp.
      */
     public Warp setWarp(String name, LazyLocation location);
@@ -275,6 +264,7 @@ public interface Faction extends Messageable
      * This action is permanent so be sure that all necessary checks are done first.
      *
      * @param name the name to search for.
+     *
      * @return {@code true} if there was a Faction to remove.
      */
     public boolean removeWarp(String name);
@@ -363,6 +353,7 @@ public interface Faction extends Messageable
      * role.
      *
      * @param role the role to look for.
+     *
      * @return the members with the given faction role.
      */
     public Set<User> getMembers(Role role);
@@ -377,11 +368,11 @@ public interface Faction extends Messageable
     public Set<User> getTrialMembers();
 
     /**
-     * Retrieves the {@link Type} of the Faction.
+     * Retrieves the {@link FactionType} of the Faction.
      *
      * @return the Faction Type.
      */
-    public Type getType();
+    public FactionType getType();
 
     /**
      * Returns all the areas claimed by the Faction.
@@ -470,6 +461,7 @@ public interface Faction extends Messageable
      * Checks if the given User has an existing invite.
      *
      * @param user the user to check.
+     *
      * @return {@code true} if the User has an invite.
      */
     public boolean hasInvite(User user);

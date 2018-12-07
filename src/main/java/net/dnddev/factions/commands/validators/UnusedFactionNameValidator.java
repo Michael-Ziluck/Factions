@@ -3,7 +3,6 @@ package net.dnddev.factions.commands.validators;
 import org.bukkit.Bukkit;
 
 import net.dnddev.factions.Factions;
-import net.dnddev.factions.api.commands.Validator;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.configuration.Lang;
 import net.dnddev.factions.events.FactionUnusedNameCheckEvent;
@@ -13,8 +12,17 @@ import net.dnddev.factions.events.FactionUnusedNameCheckEvent;
  * 
  * @author Michael Ziluck
  */
-public class UnusedFactionNameValidator implements Validator<String>
+public class UnusedFactionNameValidator extends PrioritizedValidator<String>
 {
+
+    /**
+     * @see PrioritizedSenderValidator#PrioritizedSenderValidator(int)
+     * @param priority the priority.
+     */
+    public UnusedFactionNameValidator(int priority)
+    {
+        super(priority);
+    }
 
     @Override
     public boolean validateArgument(User sender, String[] label, String arg)

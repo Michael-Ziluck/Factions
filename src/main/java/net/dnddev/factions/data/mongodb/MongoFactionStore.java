@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
+import net.dnddev.factions.base.struct.FactionType;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.jongo.MongoCollection;
 
 import net.dnddev.factions.base.Faction;
-import net.dnddev.factions.base.Faction.Type;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.UserStore;
 import net.dnddev.factions.configuration.Config;
@@ -23,7 +23,7 @@ import net.dnddev.factions.events.FactionCreateEvent;
 
 /**
  * Faction implementation for processing Factions from MongoDB.
- * 
+ *
  * @author Michael Ziluck
  */
 public class MongoFactionStore extends LoadFactionStore
@@ -67,7 +67,7 @@ public class MongoFactionStore extends LoadFactionStore
     @Override
     public Faction getFaction(long id)
     {
-        Faction faction = null;
+        Faction            faction   = null;
         Predicate<Faction> predicate = f -> f.getId() == id;
         if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
         {
@@ -209,7 +209,7 @@ public class MongoFactionStore extends LoadFactionStore
         }
         if (wilderness == null)
         {
-            wilderness = new MongoFaction(-1, "Wilderness", UserStore.getInstance().getConsole(), Type.WILDERNESS);
+            wilderness = new MongoFaction(-1, "Wilderness", UserStore.getInstance().getConsole(), FactionType.WILDERNESS);
             wilderness.save();
         }
 
@@ -232,7 +232,7 @@ public class MongoFactionStore extends LoadFactionStore
     }
 
     @Override
-    public FactionCreateEvent createFaction(User creator, String name, Type type)
+    public FactionCreateEvent createFaction(User creator, String name, FactionType type)
     {
         Validate.notNull(creator, "Creator can't be null.");
         Validate.notNull(name, "Name can't be null.");
@@ -240,9 +240,7 @@ public class MongoFactionStore extends LoadFactionStore
 
         MongoFaction faction = new MongoFaction(nextId, name, creator, type);
 
-        FactionCreateEvent event = new FactionCreateEvent(faction, creator, Config.CREATE_COST.doubleValue());
-
-        return event;
+        return new FactionCreateEvent(faction, creator, Config.CREATE_COST.doubleValue());
     }
 
 }

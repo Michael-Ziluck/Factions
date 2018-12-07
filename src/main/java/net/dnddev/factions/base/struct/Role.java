@@ -2,7 +2,7 @@ package net.dnddev.factions.base.struct;
 
 /**
  * Represents the role that a User takes in a Faction.
- * 
+ *
  * @author Michael Ziluck
  */
 public enum Role
@@ -35,7 +35,7 @@ public enum Role
 
     private int value;
 
-    private Role(int value)
+    Role(int value)
     {
         this.value = value;
     }
@@ -43,7 +43,7 @@ public enum Role
     /**
      * The value or power level of each Role. This allows it to be much easier to keep track of the hierarchy in the
      * rank tiers.
-     * 
+     *
      * @return the value of the rank.
      */
     public int getValue()
@@ -54,8 +54,9 @@ public enum Role
     /**
      * Checks if the given Role is a superior of this Role. If the Roles are the same it will still return
      * {@code false}.
-     * 
+     *
      * @param role the Role to check.
+     *
      * @return {@code true} if the given Role outranks this Role.
      */
     public boolean superior(Role role)
@@ -66,8 +67,9 @@ public enum Role
     /**
      * Checks if the given Role is an inferior of this Role. If the Roles are the same it will still return
      * {@code false}.
-     * 
+     *
      * @param role the Role to check.
+     *
      * @return {@code true} if the given Role below this Role.
      */
     public boolean inferior(Role role)

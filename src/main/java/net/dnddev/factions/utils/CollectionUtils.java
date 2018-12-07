@@ -2,6 +2,7 @@ package net.dnddev.factions.utils;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -69,7 +70,7 @@ public class CollectionUtils
     {
         if (values == null || values.size() == 0)
         {
-            return Arrays.asList();
+            return Collections.emptyList();
         }
         List<String> list = new LinkedList<>();
         for (Object o : values)
@@ -114,7 +115,7 @@ public class CollectionUtils
      */
     public static String[] toArray(Collection<String> collection)
     {
-        return collection.toArray(new String[collection.size()]);
+        return collection.toArray(new String[0]);
     }
 
 }

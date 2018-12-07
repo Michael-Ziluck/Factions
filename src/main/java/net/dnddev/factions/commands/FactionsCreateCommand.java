@@ -2,15 +2,13 @@ package net.dnddev.factions.commands;
 
 import java.util.List;
 
-import org.bukkit.Bukkit;
-
 import net.dnddev.factions.Factions;
 import net.dnddev.factions.api.commands.CommandArgument;
 import net.dnddev.factions.api.commands.CommandArgumentBuilder;
 import net.dnddev.factions.api.commands.ValidCommand;
-import net.dnddev.factions.base.Faction.Type;
 import net.dnddev.factions.base.FactionStore;
 import net.dnddev.factions.base.User;
+import net.dnddev.factions.base.struct.FactionType;
 import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.commands.parsers.StringParser;
 import net.dnddev.factions.commands.validators.SenderFactionlessValidator;
@@ -18,10 +16,11 @@ import net.dnddev.factions.commands.validators.UnusedFactionNameValidator;
 import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.configuration.Lang;
 import net.dnddev.factions.events.FactionCreateEvent;
+import org.bukkit.Bukkit;
 
 /**
  * Command to create a new Faction.
- * 
+ *
  * @author Michael Ziluck
  */
 public class FactionsCreateCommand extends ValidCommand
@@ -32,15 +31,15 @@ public class FactionsCreateCommand extends ValidCommand
      */
     public FactionsCreateCommand()
     {
-        super("create", "Create a new Faction.", Permission.CREATE, true, new String[] { "new" });
+        super("create", "Create a new Faction.", Permission.CREATE, true, new String[]{ "new" });
 
-        addSenderValidator(new SenderFactionlessValidator());
+        addSenderValidator(new SenderFactionlessValidator(0));
 
         addArgument(CommandArgumentBuilder.createBuilder(String.class)
-                .setName("name")
-                .setParser(new StringParser())
-                .addValidator(new UnusedFactionNameValidator())
-                .build());
+                                          .setName("name")
+                                          .setParser(new StringParser())
+                                          .addValidator(new UnusedFactionNameValidator(0))
+                                          .build());
     }
 
     @Override
@@ -48,7 +47,7 @@ public class FactionsCreateCommand extends ValidCommand
     {
         String name = (String) args.get(0).getValue();
 
-        FactionCreateEvent event = FactionStore.getInstance().createFaction(sender, name, Type.NORMAL);
+        FactionCreateEvent event = FactionStore.getInstance().createFaction(sender, name, FactionType.NORMAL);
 
         Bukkit.getPluginManager().callEvent(event);
 
@@ -72,7 +71,7 @@ public class FactionsCreateCommand extends ValidCommand
         else
         {
             Lang.CREATE_SUCCESS.send(sender,
-                    "{faction}", event.getFaction().getName());
+                                     "{faction}", event.getFaction().getName());
         }
     }
 

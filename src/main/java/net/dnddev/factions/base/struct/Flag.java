@@ -25,6 +25,6 @@ public enum Flag
     /**
      * A {@link Faction} that is owned by the server, not a player.
      */
-    SYSTEM;
+    SYSTEM
 
 }

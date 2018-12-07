@@ -18,7 +18,7 @@ import net.dnddev.factions.utils.CollectionUtils;
  * To help reduce clutter and duplicate code, Users have an additional middle step between the interface and the
  * implementation that loads information to the database.
  * </p>
- * 
+ *
  * @author Michael Ziluck
  */
 public abstract class LoadUser implements User
@@ -146,7 +146,7 @@ public abstract class LoadUser implements User
         }
         else if (isConsole())
         {
-            Bukkit.getConsoleSender().sendMessage(messages.toArray(new String[messages.size()]));
+            Bukkit.getConsoleSender().sendMessage(messages.toArray(new String[0]));
         }
         else
         {

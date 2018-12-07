@@ -1,16 +1,19 @@
 package net.dnddev.factions.api.commands;
 
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.configuration.Lang;
+import net.dnddev.factions.utils.PriorityPair;
 
 /**
- * @author Michael Ziluck
  * @param <T> the type the argument will be after being parsed.
+ *
+ * @author Michael Ziluck
  */
 public class CommandArgument<T>
 {
@@ -29,9 +32,11 @@ public class CommandArgument<T>
 
     protected int ordinal;
 
-    protected List<SenderValidator> senderValidators;
+    protected Queue<PriorityPair<SenderValidator>> senderValidators;
 
-    protected List<Validator<T>> validators;
+    protected Queue<PriorityPair<SenderValidator>> absentSenderValidators;
+
+    protected Queue<PriorityPair<Validator<T>>> validators;
 
     protected Parser<T> parser;
 
@@ -44,18 +49,20 @@ public class CommandArgument<T>
      */
     protected CommandArgument()
     {
-        this.senderValidators = new LinkedList<>();
-        this.validators = new LinkedList<>();
+        this.senderValidators = new PriorityQueue<>();
+        this.absentSenderValidators = new PriorityQueue<>();
+        this.validators = new PriorityQueue<>();
     }
 
     /**
      * Process the given argument. This will parse it into it's appropriate form, as well as validate that it is in the
      * proper state. The value returned represents whether or not the process was successful. No error message is
      * required beyond what was already sent within the parsers and validators.
-     * 
-     * @param sender the sender of the command.
-     * @param label the label of the command.
+     *
+     * @param sender   the sender of the command.
+     * @param label    the label of the command.
      * @param argument the raw string argument to be processed.
+     *
      * @return {@code true} if the process was successful. Otherwise, returns {@code false}.
      */
     protected boolean process(User sender, String[] label, String argument)
@@ -66,9 +73,9 @@ public class CommandArgument<T>
             return false;
         }
 
-        for (SenderValidator senderValidator : senderValidators)
+        for (PriorityPair<SenderValidator> pair : senderValidators)
         {
-            if (!senderValidator.validate(sender))
+            if (!pair.getValue().validate(sender))
             {
                 return false;
             }
@@ -81,9 +88,9 @@ public class CommandArgument<T>
             return false;
         }
 
-        for (Validator<T> validator : validators)
+        for (PriorityPair<Validator<T>> pair : validators)
         {
-            if (!validator.validateArgument(sender, label, value))
+            if (!pair.getValue().validateArgument(sender, label, value))
             {
                 return false;
             }
@@ -96,9 +103,10 @@ public class CommandArgument<T>
      * Retrieves all potential options a player can have when trying to tab-complete this argument. This should always
      * be implemented. However, because that most likely will not happen, it defaults to the same behavior that Bukkit
      * uses which is to list off the names of all visible connected players.
-     * 
-     * @param sender the sender who is tab-completing.
+     *
+     * @param sender   the sender who is tab-completing.
      * @param lastWord the last word in the player's tab complete.
+     *
      * @return all argument options.
      */
     protected List<String> getRecommendations(User sender, String lastWord)
@@ -130,7 +138,7 @@ public class CommandArgument<T>
     /**
      * The ability to use an argument might differ from the ability to use a command in general. This is the rank
      * required to use this argument within a command.
-     * 
+     *
      * @return the rank required to use this argument.
      */
     public Permission getPermission()
@@ -141,7 +149,7 @@ public class CommandArgument<T>
     /**
      * Sets the required permission for this argument. This should only be set once, and should only be changed from the
      * CommandArgumentBuilder. Will throw an {@link IllegalStateException} if set a second time.
-     * 
+     *
      * @param permission the required permission.
      */
     public void setPermission(Permission permission)
@@ -164,7 +172,7 @@ public class CommandArgument<T>
     /**
      * Sets the parser for this argument. This should only be set once, and should only be changed from the
      * CommandArgumentBuilder. Will throw an {@link IllegalStateException} if set a second time.
-     * 
+     *
      * @param parser the argument's parser.
      */
     protected void setParser(Parser<T> parser)
@@ -178,48 +186,107 @@ public class CommandArgument<T>
 
     /**
      * Returns a view of the validators. This view can't be changed, and will throw exceptions if it is attempted.
-     * 
+     *
      * @return the validators for this argument.
      */
     public List<Validator<T>> getValidators()
     {
-        return Collections.unmodifiableList(validators);
+        List<Validator<T>> list = new ArrayList<>(validators.size());
+        for (PriorityPair<Validator<T>> pair : validators)
+        {
+            list.add(pair.getValue());
+        }
+        return list;
     }
 
     /**
      * Adds a new validator to the argument.
-     * 
+     *
      * @param validator the new validator.
+     * @param priority  the priority of the validator
      */
-    public void addValidator(Validator<T> validator)
+    public void addValidator(Validator<T> validator, int priority)
     {
-        this.validators.add(validator);
+        this.validators.add(new PriorityPair<>(validator, priority));
     }
 
     /**
-     * Returns a view of the sender validators. This view can't be changed, and will throw exception if it is attempted.
-     * 
+     * Returns a view of the sender validators. This view can't be changed, and will throw an exception if it is
+     * attempted.
+     *
      * @return the sender validators for this argument
      */
     public List<SenderValidator> getSenderValidators()
     {
-        return Collections.unmodifiableList(senderValidators);
+        List<SenderValidator> list = new ArrayList<>(senderValidators.size());
+        for (PriorityPair<SenderValidator> pair : senderValidators)
+        {
+            list.add(pair.getValue());
+        }
+        return list;
     }
 
     /**
      * Adds a new sender validator to the argument.
-     * 
+     *
      * @param senderValidator the new sender validator.
+     * @param priority        the priority of the validator.
      */
-    public void addSenderValidator(SenderValidator senderValidator)
+    public void addSenderValidator(SenderValidator senderValidator, int priority)
     {
-        this.senderValidators.add(senderValidator);
+        this.senderValidators.add(new PriorityPair<>(senderValidator, priority));
+    }
+
+    /**
+     * Returns a view of the sender validators that are run when the argument is absent. This view can't be changed, and
+     * will throw an exception if it is attempted.
+     *
+     * @return the absent sender validators for this argument.
+     */
+    public List<SenderValidator> getAbsentSenderValidators()
+    {
+        List<SenderValidator> list = new ArrayList<>(absentSenderValidators.size());
+        for (PriorityPair<SenderValidator> pair : absentSenderValidators)
+        {
+            list.add(pair.getValue());
+        }
+        return list;
+    }
+
+    /**
+     * Adds a new absent sender validator to the argument.
+     *
+     * @param absentSenderValidator the new absent sender validator.
+     * @param priority              the priority of the validator.
+     */
+    public void addAbsentSenderValidator(SenderValidator absentSenderValidator, int priority)
+    {
+        this.absentSenderValidators.add(new PriorityPair<>(absentSenderValidator, priority));
+    }
+
+    /**
+     * Called to validate the sender when this argument is absent. It will call all the absent sender validators.
+     *
+     * @param sender the sender of the command.
+     *
+     * @return {@code true} if the absent validators pass.
+     */
+    public boolean absent(User sender)
+    {
+        for (PriorityPair<SenderValidator> pair : absentSenderValidators)
+        {
+            if (!pair.getValue().validate(sender))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
      * Gets where in the order of arguments this argument falls for a particular command. The default is -1, so if -1 is
      * returned it means that this argument has not yet been assigned to a command.
-     * 
+     *
      * @return the argument ordinal.
      */
     public int getOrdinal()
@@ -230,7 +297,7 @@ public class CommandArgument<T>
     /**
      * Sets the order that this argument falls for a particular command. This method is protected to make sure that the
      * CommandHandler does not break when managing the argument system.
-     * 
+     *
      * @param ordinal the new argument ordinal.
      */
     protected void setOrdinal(int ordinal)
@@ -297,7 +364,7 @@ public class CommandArgument<T>
     /**
      * Sets the name for the argument. This should only be set once, and should only be changed from the
      * CommandArgumentBuilder. Will throw an {@link IllegalStateException} if set a second time.
-     * 
+     *
      * @param name the name of the argument.
      */
     public void setName(String name)
@@ -311,7 +378,7 @@ public class CommandArgument<T>
 
     /**
      * This should only be used to check if an optional argument has a value.
-     * 
+     *
      * @return {@code true} if this argument has a value.
      */
     public boolean hasValue()
@@ -321,7 +388,7 @@ public class CommandArgument<T>
 
     /**
      * Gets the value that was just parsed and validated.
-     * 
+     *
      * @return the value.
      */
     public T getValue()

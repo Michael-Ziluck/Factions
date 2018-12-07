@@ -2,7 +2,7 @@ package net.dnddev.factions.base.struct;
 
 /**
  * Permissions that Users must have in order to interact with the plugin.
- * 
+ *
  * @author Michael Ziluck
  */
 public enum Permission
@@ -29,12 +29,12 @@ public enum Permission
 
     private boolean excludePrefix;
 
-    private Permission(String permission)
+    Permission(String permission)
     {
         this.permission = permission;
     }
 
-    private Permission(String permission, boolean excludePrefix)
+    Permission(String permission, boolean excludePrefix)
     {
         this.permission = permission;
         this.excludePrefix = excludePrefix;

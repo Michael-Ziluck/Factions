@@ -15,7 +15,7 @@ import net.dnddev.factions.spatial.LazyLocation;
 
 /**
  * The two-dimensional implementation of a {@link Claim}.
- * 
+ *
  * @author Michael Ziluck
  */
 public abstract class Claim2D extends BoundedArea implements Claim
@@ -80,7 +80,7 @@ public abstract class Claim2D extends BoundedArea implements Claim
     @Override
     public LazyLocation getCenter()
     {
-        return new LazyLocation((x1 + x2) / 2, (0 + getWorld().getMaxHeight()) / 2, (z1 + z2) / 2, getWorld());
+        return new LazyLocation((x1 + x2) / 2, getWorld().getMaxHeight() / 2.0f, (z1 + z2) / 2, getWorld());
     }
 
 }

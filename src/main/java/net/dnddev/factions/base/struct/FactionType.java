@@ -35,7 +35,7 @@ public enum FactionType
 
     private MutableString name;
 
-    private FactionType(MutableString name)
+    FactionType(MutableString name)
     {
         this.name = name;
     }

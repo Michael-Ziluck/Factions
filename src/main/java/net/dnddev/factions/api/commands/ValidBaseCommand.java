@@ -12,7 +12,7 @@ import net.dnddev.factions.utils.StringUtils;
 
 /**
  * A type of {@link ValidCommand} that has added sub-commands.
- * 
+ *
  * @author Michael Ziluck
  */
 public abstract class ValidBaseCommand extends ValidCommand
@@ -22,11 +22,11 @@ public abstract class ValidBaseCommand extends ValidCommand
 
     /**
      * Constructs a new base command.
-     * 
-     * @param name the name of the command.
+     *
+     * @param name        the name of the command.
      * @param description the description of the command.
-     * @param permission the required rank to use this command.
-     * @param aliases any aliases for this command.
+     * @param permission  the required rank to use this command.
+     * @param aliases     any aliases for this command.
      */
     protected ValidBaseCommand(String name, String description, Permission permission, String[] aliases)
     {
@@ -37,10 +37,10 @@ public abstract class ValidBaseCommand extends ValidCommand
 
     /**
      * Constructs a new base command with no aliases.
-     * 
-     * @param name the name of the command.
+     *
+     * @param name        the name of the command.
      * @param description the description of the command.
-     * @param permission the required rank to use this command.
+     * @param permission  the required rank to use this command.
      */
     protected ValidBaseCommand(String name, String description, Permission permission)
     {
@@ -49,10 +49,10 @@ public abstract class ValidBaseCommand extends ValidCommand
 
     /**
      * Constructs a new base command with no required permission.
-     * 
-     * @param name the name of the command.
+     *
+     * @param name        the name of the command.
      * @param description the description of the command.
-     * @param aliases any aliases for this command.
+     * @param aliases     any aliases for this command.
      */
     protected ValidBaseCommand(String name, String description, String[] aliases)
     {
@@ -61,8 +61,8 @@ public abstract class ValidBaseCommand extends ValidCommand
 
     /**
      * Constructs a new base command with no aliases and no required permission.
-     * 
-     * @param name the name of the command.
+     *
+     * @param name        the name of the command.
      * @param description the description of the command.
      */
     protected ValidBaseCommand(String name, String description)
@@ -107,7 +107,7 @@ public abstract class ValidBaseCommand extends ValidCommand
 
     /**
      * Add a new sub command to this base command.
-     * 
+     *
      * @param subCommand the sub command to add.
      */
     public void addSubCommand(ValidCommand subCommand)
@@ -117,8 +117,9 @@ public abstract class ValidBaseCommand extends ValidCommand
 
     /**
      * Searches for a sub command by the given name. This can be either the command's name or one of it's aliases.
-     * 
+     *
      * @param label the label sent by the player.
+     *
      * @return the sub command if one is found.
      */
     public ValidCommand getSubCommand(String label)
@@ -136,9 +137,10 @@ public abstract class ValidBaseCommand extends ValidCommand
     /**
      * Get the name all sub commands whose name or one if it's aliases starts with the given string. The name for each
      * command will be whichever piece was provided, whether that be the alias or the name.
-     * 
+     *
      * @param sender the person trying to access the sub commands.
-     * @param start the beginning of the label.
+     * @param start  the beginning of the label.
+     *
      * @return the command labels if any are found.
      */
     public List<String> getSubCommandNames(User sender, String start)
@@ -161,7 +163,7 @@ public abstract class ValidBaseCommand extends ValidCommand
 
     /**
      * Get a view of all the sub commands. This is not able to be modified and doing so will throw an exception.
-     * 
+     *
      * @return all the sub commands.
      */
     public List<ValidCommand> getSubCommands()
@@ -171,11 +173,11 @@ public abstract class ValidBaseCommand extends ValidCommand
 
     /**
      * Sends the help content to the player.
-     * 
+     *
      * @param sender the one who is sending the command.
-     * @param label the previous pieces of the command and the current alias.
+     * @param label  the previous pieces of the command and the current alias.
      */
-    public void help(User sender, String label[])
+    public void help(User sender, String[] label)
     {
         List<ValidCommand> allowedSubs = new LinkedList<>();
         for (ValidCommand sub : subCommands)
