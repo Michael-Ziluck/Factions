@@ -8,7 +8,7 @@ import java.util.Queue;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.struct.Permission;
 import net.dnddev.factions.configuration.Lang;
-import net.dnddev.factions.utils.PriorityPair;
+import net.dnddev.factions.utils.PriorityValue;
 
 /**
  * @param <T> the type the argument will be after being parsed.
@@ -32,11 +32,11 @@ public class CommandArgument<T>
 
     protected int ordinal;
 
-    protected Queue<PriorityPair<SenderValidator>> senderValidators;
+    protected Queue<PriorityValue<SenderValidator>> senderValidators;
 
-    protected Queue<PriorityPair<SenderValidator>> absentSenderValidators;
+    protected Queue<PriorityValue<SenderValidator>> absentSenderValidators;
 
-    protected Queue<PriorityPair<Validator<T>>> validators;
+    protected Queue<PriorityValue<Validator<T>>> validators;
 
     protected Parser<T> parser;
 
@@ -73,7 +73,7 @@ public class CommandArgument<T>
             return false;
         }
 
-        for (PriorityPair<SenderValidator> pair : senderValidators)
+        for (PriorityValue<SenderValidator> pair : senderValidators)
         {
             if (!pair.getValue().validate(sender))
             {
@@ -88,7 +88,7 @@ public class CommandArgument<T>
             return false;
         }
 
-        for (PriorityPair<Validator<T>> pair : validators)
+        for (PriorityValue<Validator<T>> pair : validators)
         {
             if (!pair.getValue().validateArgument(sender, label, value))
             {
@@ -192,7 +192,7 @@ public class CommandArgument<T>
     public List<Validator<T>> getValidators()
     {
         List<Validator<T>> list = new ArrayList<>(validators.size());
-        for (PriorityPair<Validator<T>> pair : validators)
+        for (PriorityValue<Validator<T>> pair : validators)
         {
             list.add(pair.getValue());
         }
@@ -207,7 +207,7 @@ public class CommandArgument<T>
      */
     public void addValidator(Validator<T> validator, int priority)
     {
-        this.validators.add(new PriorityPair<>(validator, priority));
+        this.validators.add(new PriorityValue<>(validator, priority));
     }
 
     /**
@@ -219,7 +219,7 @@ public class CommandArgument<T>
     public List<SenderValidator> getSenderValidators()
     {
         List<SenderValidator> list = new ArrayList<>(senderValidators.size());
-        for (PriorityPair<SenderValidator> pair : senderValidators)
+        for (PriorityValue<SenderValidator> pair : senderValidators)
         {
             list.add(pair.getValue());
         }
@@ -234,7 +234,7 @@ public class CommandArgument<T>
      */
     public void addSenderValidator(SenderValidator senderValidator, int priority)
     {
-        this.senderValidators.add(new PriorityPair<>(senderValidator, priority));
+        this.senderValidators.add(new PriorityValue<>(senderValidator, priority));
     }
 
     /**
@@ -246,7 +246,7 @@ public class CommandArgument<T>
     public List<SenderValidator> getAbsentSenderValidators()
     {
         List<SenderValidator> list = new ArrayList<>(absentSenderValidators.size());
-        for (PriorityPair<SenderValidator> pair : absentSenderValidators)
+        for (PriorityValue<SenderValidator> pair : absentSenderValidators)
         {
             list.add(pair.getValue());
         }
@@ -261,7 +261,7 @@ public class CommandArgument<T>
      */
     public void addAbsentSenderValidator(SenderValidator absentSenderValidator, int priority)
     {
-        this.absentSenderValidators.add(new PriorityPair<>(absentSenderValidator, priority));
+        this.absentSenderValidators.add(new PriorityValue<>(absentSenderValidator, priority));
     }
 
     /**
@@ -273,7 +273,7 @@ public class CommandArgument<T>
      */
     public boolean absent(User sender)
     {
-        for (PriorityPair<SenderValidator> pair : absentSenderValidators)
+        for (PriorityValue<SenderValidator> pair : absentSenderValidators)
         {
             if (!pair.getValue().validate(sender))
             {

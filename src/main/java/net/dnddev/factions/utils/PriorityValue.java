@@ -6,7 +6,7 @@ package net.dnddev.factions.utils;
  * @author Michael Ziluck
  * @param <T> the type of the pair.
  */
-public class PriorityPair<T> implements Comparable<PriorityPair<T>>
+public class PriorityValue<T> implements Comparable<PriorityValue<T>>
 {
     private T value;
     private int priority;
@@ -15,7 +15,7 @@ public class PriorityPair<T> implements Comparable<PriorityPair<T>>
      * @param value the value.
      * @param priority the priority of the value.
      */
-    public PriorityPair(T value, int priority)
+    public PriorityValue(T value, int priority)
     {
         this.value = value;
         this.priority = priority;
@@ -59,7 +59,7 @@ public class PriorityPair<T> implements Comparable<PriorityPair<T>>
     }
 
     @Override
-    public int compareTo(PriorityPair<T> o)
+    public int compareTo(PriorityValue<T> o)
     {
         return Integer.compare(getPriority(), o.getPriority());
     }
