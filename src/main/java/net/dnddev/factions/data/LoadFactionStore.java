@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.World;
 
@@ -61,45 +62,17 @@ public abstract class LoadFactionStore implements FactionStore
     @Override
     public Faction getFaction(Location location)
     {
-        RTree<Faction, Claim2D> tree = claims.get(location.getWorld().getName());
-        if (tree == null)
-        {
-            claims.put(location.getWorld().getName(), RTree.create());
-            return wilderness;
-        }
+        Validate.notNull(location, "Location can't be null.");
 
-        BlockColumn blockColumn = new BlockColumn(location.getBlockX(), location.getBlockZ(), location.getWorld());
-
-        try
-        {
-            return tree.search(blockColumn).toBlocking().toFuture().get().value();
-        }
-        catch (InterruptedException | ExecutionException ex)
-        {
-            return wilderness;
-        }
+        return getFaction(new BlockColumn(location.getBlockX(), location.getBlockZ(), location.getWorld()));
     }
 
     @Override
     public Faction getFaction(LazyLocation location)
     {
-        RTree<Faction, Claim2D> tree = claims.get(location.getWorld().getName());
-        if (tree == null)
-        {
-            claims.put(location.getWorld().getName(), RTree.create());
-            return wilderness;
-        }
+        Validate.notNull(location, "Location can't be null.");
 
-        BlockColumn blockColumn = new BlockColumn((int) location.getX(), (int) location.getZ(), location.getWorld());
-
-        try
-        {
-            return tree.search(blockColumn).toBlocking().toFuture().get().value();
-        }
-        catch (InterruptedException | ExecutionException ex)
-        {
-            return wilderness;
-        }
+        return getFaction(new BlockColumn((int) location.getX(), (int) location.getZ(), location.getWorld()));
     }
 
     @Override
@@ -121,7 +94,7 @@ public abstract class LoadFactionStore implements FactionStore
             return wilderness;
         }
     }
-
+    
     @Override
     public List<Faction> getFactions(BoundedArea area)
     {

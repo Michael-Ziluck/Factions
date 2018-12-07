@@ -14,7 +14,7 @@ import net.dnddev.factions.spatial.LazyLocation;
  * To help reduce clutter and duplicate code, Warps have an additional middle step between the interface and the
  * implementation that loads information to the database.
  * </p>
- * 
+ *
  * @author Michael Ziluck
  */
 public abstract class LoadWarp implements Warp
@@ -46,6 +46,7 @@ public abstract class LoadWarp implements Warp
         return name;
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public String getStub()
     {
@@ -53,10 +54,12 @@ public abstract class LoadWarp implements Warp
         {
             return getName().toLowerCase();
         }
-        else if (stub == null)
+
+        if (stub == null)
         {
             stub = getName().toLowerCase();
         }
+
         return stub;
     }
 

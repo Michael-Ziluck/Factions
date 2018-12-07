@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import net.dnddev.factions.base.struct.FactionType;
+import net.dnddev.factions.utils.CollectionUtils;
 import org.apache.commons.lang.Validate;
 
 import com.google.common.collect.Multimap;
@@ -88,13 +89,21 @@ public abstract class LoadFaction implements Faction
     }
 
     @Override
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    @SuppressWarnings("Duplicates")
+    @Override
     public String getStub()
     {
         if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
         {
             return getName().toLowerCase();
         }
-        else if (stub == null)
+
+        if (stub == null)
         {
             stub = getName().toLowerCase();
         }
@@ -175,17 +184,7 @@ public abstract class LoadFaction implements Faction
      */
     protected void processAnnouncement(User user, String[] messages)
     {
-        Validate.notNull(user, "User can't be null.");
-        Validate.notNull(messages, "Message can't be null.");
-
-        if (user.isOnline())
-        {
-            user.sendMessage(messages);
-        }
-        else
-        {
-            getAnnouncements().putAll(user.getUniqueId(), Arrays.asList(messages));
-        }
+        processAnnouncement(user, Arrays.asList(messages));
     }
 
     /**
@@ -406,9 +405,6 @@ public abstract class LoadFaction implements Faction
     @Override
     public Warp setWarp(String name, LazyLocation location)
     {
-        Validate.notNull(name, "Name can't be null.");
-        Validate.notNull(location, "Location can't be null.");
-
         return setWarp(name, location, null);
     }
 
@@ -469,7 +465,6 @@ public abstract class LoadFaction implements Faction
      * @param name     the name of the warp.
      * @param location the location of the warp.
      * @param password the password for the warp.
-     *
      * @return the newly created warp.
      */
     protected abstract Warp createWarp(String name, LazyLocation location, String password);
@@ -582,40 +577,36 @@ public abstract class LoadFaction implements Faction
     }
 
     @Override
-    public void sendMessage(String message)
+    public void sendMessage(String... messages)
     {
-        Validate.notNull(message, "Message can't be null.");
+        Validate.notNull(messages, "Messages can't be null.");
 
-        addAnnouncement(message);
+        for (String message : messages)
+        {
+            addAnnouncement(message);
+        }
     }
 
     @Override
     public void sendMessage(Collection<String> messages)
     {
-        Validate.notNull(messages, "Messages can't be null.");
-
-        for (String message : messages)
-        {
-            addAnnouncement(message);
-        }
-    }
-
-    @Override
-    public void sendMessage(String[] messages)
-    {
-        Validate.notNull(messages, "Messages can't be null.");
-
-        for (String message : messages)
-        {
-            addAnnouncement(message);
-        }
+        sendMessage(CollectionUtils.toArray(messages));
     }
 
     @Override
     public Collection<Claim> getClaims()
     {
-        // TODO Auto-generated method stub
-        return null;
+        assertClaims();
+        
+        return claims;
+    }
+
+    protected void assertClaims()
+    {
+        if (claims == null)
+        {
+            claims = new ArrayList<>();
+        }
     }
 
     @Override

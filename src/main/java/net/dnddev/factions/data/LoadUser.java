@@ -103,24 +103,7 @@ public abstract class LoadUser implements User
     }
 
     @Override
-    public void sendMessage(String message)
-    {
-        if (isOnline())
-        {
-            getPlayer().sendMessage(message);
-        }
-        else if (isConsole())
-        {
-            Bukkit.getConsoleSender().sendMessage(message);
-        }
-        else
-        {
-            getFaction().addAnnouncement(message, this);
-        }
-    }
-
-    @Override
-    public void sendMessage(String[] messages)
+    public void sendMessage(String... messages)
     {
         if (isOnline())
         {
@@ -139,19 +122,7 @@ public abstract class LoadUser implements User
     @Override
     public void sendMessage(Collection<String> messages)
     {
-        String[] array = CollectionUtils.toArray(messages);
-        if (isOnline())
-        {
-            getPlayer().sendMessage(array);
-        }
-        else if (isConsole())
-        {
-            Bukkit.getConsoleSender().sendMessage(messages.toArray(new String[0]));
-        }
-        else
-        {
-            getFaction().addAnnouncements(array, this);
-        }
+        sendMessage(CollectionUtils.toArray(messages));
     }
 
     @Override
