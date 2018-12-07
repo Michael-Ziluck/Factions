@@ -19,6 +19,11 @@ factions:
       role: member
       # Whether or not factions are allowed to change the default-role
       changeable: true
+  names:
+    warzone: Warzone
+    safezone: Safezone
+    wilderness: Wilderness
+    normal: Faction
 
 # Configuration for how the system stores the Faction data.
 storage:

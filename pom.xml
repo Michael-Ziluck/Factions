@@ -112,7 +112,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.3.1</version>
                 <configuration>
-                    <outputDirectory>C:\Users\Michael\Documents\TestServer\plugins</outputDirectory>
+                    <outputDirectory>${user.home}\Documents\TestServer\plugins</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>

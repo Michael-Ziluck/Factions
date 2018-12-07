@@ -170,7 +170,10 @@ public final class Config
         updateValue(config, save, "create.broadcast", CREATE_BROADCAST);
         updateValue(config, save, "factions.defaults.default-role.role", FACTION_DEFAULT_ROLE);
         updateValue(config, save, "factions.defaults.default-role.changeable", FACTION_DEFAULT_ROLE_CHANGEABLE);
-        updateValue(config, save, "factions.names.warzone", FACTION_DEFAULT_ROLE);
+        updateValue(config, save, "factions.names.warzone", FACTION_NAME_WARZONE);
+        updateValue(config, save, "factions.names.safezone", FACTION_NAME_SAFEZONE);
+        updateValue(config, save, "factions.names.wilderness", FACTION_NAME_WILDERNESS);
+        updateValue(config, save, "factions.names.normal", FACTION_NAME_NORMAL);
 
         if (save.booleanValue())
         {
