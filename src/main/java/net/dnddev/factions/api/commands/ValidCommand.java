@@ -225,9 +225,10 @@ public abstract class ValidCommand
             }
         }
 
+        // if the argument does not have a value, and the absent argument validators fail, return
         for (CommandArgument<?> arg : arguments)
         {
-            if (!arg.hasValue() && arg.absent(sender))
+            if (!arg.hasValue() && !arg.absent(sender))
             {
                 return;
             }

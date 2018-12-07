@@ -5,15 +5,16 @@ import net.dnddev.factions.configuration.Lang;
 
 /**
  * Checks if Users do not have a Faction.
- * 
+ *
  * @author Michael Ziluck
  */
 public class SenderFactionlessValidator extends PrioritizedSenderValidator
 {
 
     /**
-     * @see PrioritizedSenderValidator#PrioritizedSenderValidator(int)
      * @param priority the priority.
+     *
+     * @see PrioritizedSenderValidator#PrioritizedSenderValidator(int)
      */
     public SenderFactionlessValidator(int priority)
     {
