@@ -15,7 +15,6 @@ import net.dnddev.factions.Factions;
  */
 public interface UserStore
 {
-
     /**
      * @return the singleton instance stored in the Factions main class.
      */

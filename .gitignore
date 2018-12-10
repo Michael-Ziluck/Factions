@@ -6,3 +6,8 @@ target/
 bin/
 /target/
 *.iml
+users/
+users.json
+output/
+
+users\.db

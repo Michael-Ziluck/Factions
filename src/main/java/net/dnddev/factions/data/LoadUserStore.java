@@ -6,14 +6,13 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.entity.Player;
-
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.base.UserStore;
 import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.configuration.struct.Optimization;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
 
 /**
  * The in-memory implementation of a UserStore
@@ -26,7 +25,7 @@ public abstract class LoadUserStore implements UserStore
     protected User console;
 
     protected HashMap<UUID, User> onlineUsersMap;
-    protected List<User> onlineUsersList;
+    protected List<User>          onlineUsersList;
 
     protected abstract void createConsole();
 
@@ -101,6 +100,7 @@ public abstract class LoadUserStore implements UserStore
      * is not found, this returns null.
      *
      * @param predicate the predicate to match.
+     *
      * @return the found user if one exists.
      */
     private User searchMap(Predicate<User> predicate)
@@ -113,6 +113,7 @@ public abstract class LoadUserStore implements UserStore
      * is not found, this returns null.
      *
      * @param predicate the predicate to match.
+     *
      * @return the found user if one exists.
      */
     private User searchList(Predicate<User> predicate)
@@ -123,6 +124,10 @@ public abstract class LoadUserStore implements UserStore
     @Override
     public User getConsole()
     {
+        if (console == null)
+        {
+            createConsole();
+        }
         return console;
     }
 
@@ -176,9 +181,21 @@ public abstract class LoadUserStore implements UserStore
     }
 
     @Override
+    public Collection<User> getOnlineUsers()
+    {
+        if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
+        {
+            return this.onlineUsersMap.values();
+        }
+        else
+        {
+            return this.onlineUsersList;
+        }
+    }
+
+    @Override
     public void initialize()
     {
-        createConsole();
     }
 
 }
