@@ -40,7 +40,7 @@ public class JsonTimeTest
         Charset set = Charset.forName("UTF-8");
         MongoUser user;
         System.out.println("Starting setup...");
-        for (int i = 0; i < 1_000_000; i++)
+        for (int i = 0; i < 10_000; i++)
         {
             user = generateUser(r, set);
             users.put(user.getUniqueId(), user);
@@ -88,6 +88,12 @@ public class JsonTimeTest
             users.put(UUID.fromString(file.getName()), mapper.readValue(file, MongoUser.class));
         }
         System.out.println("Finished bulk read: " + (System.nanoTime() - start));
+    }
+
+    @Test
+    public void testSingleLoad() throws IOException
+    {
+        File file = new File("users.json");
     }
 
     private MongoUser generateUser(Random r, Charset charset)
