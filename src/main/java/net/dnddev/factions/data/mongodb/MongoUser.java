@@ -2,29 +2,26 @@ package net.dnddev.factions.data.mongodb;
 
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
-import org.jongo.marshall.jackson.oid.MongoId;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import net.dnddev.factions.Factions;
 import net.dnddev.factions.base.Faction;
 import net.dnddev.factions.base.FactionStore;
 import net.dnddev.factions.base.UserStore;
 import net.dnddev.factions.base.struct.Role;
 import net.dnddev.factions.data.LoadUser;
+import org.dizitart.no2.objects.Id;
+import org.jongo.marshall.jackson.oid.MongoId;
 
 /**
  * An implementation of a LoadUser that is stored in MongoDB.
- * 
+ *
  * @author Michael Ziluck
  */
 @JsonIgnoreProperties({ "faction", "uuid", "online", "console", "offline" })
 public class MongoUser extends LoadUser
 {
-
     @MongoId
+    @Id
     protected long id;
 
     @JsonProperty("faction_id")
@@ -32,7 +29,7 @@ public class MongoUser extends LoadUser
 
     @JsonProperty("faction_role")
     protected Role factionRole;
-    
+
     protected UUID uuid;
 
     @JsonProperty(value = "uid")
@@ -48,8 +45,8 @@ public class MongoUser extends LoadUser
 
     /**
      * Creates a new MongoUser with the given values.
-     * 
-     * @param id the internal id of the user.
+     *
+     * @param id   the internal id of the user.
      * @param uuid the uuid of the user.
      * @param name the name of the user.
      */
@@ -103,7 +100,7 @@ public class MongoUser extends LoadUser
     @Override
     public void save()
     {
-        Bukkit.getScheduler().runTaskAsynchronously(Factions.getInstance(), () -> UserStore.getInstance().save(this));
+        UserStore.getInstance().save(this);
     }
 
 }

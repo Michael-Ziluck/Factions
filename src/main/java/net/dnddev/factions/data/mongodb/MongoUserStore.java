@@ -1,25 +1,23 @@
 package net.dnddev.factions.data.mongodb;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
-
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.entity.Player;
-import org.jongo.MongoCollection;
 
 import net.dnddev.factions.Factions;
 import net.dnddev.factions.base.User;
 import net.dnddev.factions.configuration.Config;
 import net.dnddev.factions.configuration.struct.Optimization;
 import net.dnddev.factions.data.LoadUserStore;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
+import org.jongo.MongoCollection;
 
 /**
  * The UserStore for interacting with MongoDB.
- * 
+ *
  * @author Michael Ziluck
  */
 public class MongoUserStore extends LoadUserStore
@@ -62,19 +60,6 @@ public class MongoUserStore extends LoadUserStore
         }
 
         initialize();
-    }
-
-    @Override
-    public Collection<User> getOnlineUsers()
-    {
-        if (Config.OPTIMIZATION.getValue() == Optimization.PROCESS)
-        {
-            return this.onlineUsersMap.values();
-        }
-        else
-        {
-            return this.onlineUsersList;
-        }
     }
 
     @Override
@@ -143,7 +128,11 @@ public class MongoUserStore extends LoadUserStore
     @Override
     public void save(User user)
     {
-        store.save(user);
+        if (!(user instanceof MongoUser))
+        {
+            return;
+        }
+        Bukkit.getScheduler().runTaskAsynchronously(Factions.getInstance(), () -> store.save(user));
     }
 
     @Override

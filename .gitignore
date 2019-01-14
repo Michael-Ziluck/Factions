@@ -8,3 +8,6 @@ bin/
 *.iml
 users/
 users.json
+output/
+
+users\.db
