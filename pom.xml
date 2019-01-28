@@ -144,7 +144,7 @@
                 <version>1.7</version>
                 <executions>
                     <execution>
-                        <phase>install</phase>
+                        <phase>test</phase>
                         <configuration>
                             <tasks>
                                 <javadoc access="package" author="true"
