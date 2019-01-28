@@ -81,7 +81,7 @@ public class MongoFaction extends LoadFaction
     public void withdraw(User user, double amount)
     {
         balance -= amount;
-        transactions.add(new MongoTransaction(user, new Date(), -amount));
+        getTransactionHistory().add(new MongoTransaction(user, new Date(), -amount));
         save();
     }
 
@@ -89,7 +89,7 @@ public class MongoFaction extends LoadFaction
     public void deposit(User user, double amount)
     {
         balance += amount;
-        transactions.add(new MongoTransaction(user, new Date(), amount));
+        getTransactionHistory().add(new MongoTransaction(user, new Date(), amount));
         save();
     }
 

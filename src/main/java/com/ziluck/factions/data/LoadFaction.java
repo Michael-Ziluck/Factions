@@ -651,6 +651,10 @@ public abstract class LoadFaction implements Faction
     @Override
     public List<Transaction> getTransactionHistory()
     {
+        if (transactions == null)
+        {
+            transactions = new ArrayList<>();
+        }
         return transactions;
     }
 
