@@ -1,4 +1,4 @@
-main: net.dnddev.factions.Factions
+main: com.ziluck.factions.Factions
 version: 0.1
 name: Factions
 author: Doctor_Zee
