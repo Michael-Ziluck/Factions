@@ -24,6 +24,8 @@ public class MongoWrapper
 
     private static MongoWrapper instance;
 
+    private MongoClient client;
+
     private Jongo jongo;
 
     /**
@@ -47,24 +49,34 @@ public class MongoWrapper
         LogManager.getLogManager().getLogger(Loggers.getLogger("cluster").getName()).setLevel(Level.WARNING);
         LogManager.getLogManager().getLogger(Loggers.getLogger("connection").getName()).setLevel(Level.WARNING);
 
-        MongoClient mc = new MongoClient(addr, creds, MongoClientOptions.builder()
-                                                                        .connectTimeout(Config.DATABASE_TIMEOUT.intValue())
-                                                                        .description("Factions Connection")
-                                                                        .build());
+        client = new MongoClient(addr, creds, MongoClientOptions.builder()
+                                                      .connectTimeout(Config.DATABASE_TIMEOUT.intValue())
+                                                      .description("Factions Connection")
+                                                      .build());
 
-        DB db = mc.getDB(Config.DATABASE_DATABASE.getValue());
+        DB db = client.getDB(Config.DATABASE_DATABASE.getValue());
 
         jongo = new Jongo(db);
     }
 
     /**
-     * Returns the active Jongo instance.
+     * Returns the active {@link Jongo} instance.
      *
-     * @return the Jongo instance.
+     * @return the active {@link Jongo} instance.
      */
     public Jongo getJongo()
     {
         return jongo;
+    }
+
+    /**
+     * Returns the active {@link MongoClient} instance.
+     *
+     * @return the active {@link MongoClient} instance.
+     */
+    public MongoClient getMongoClient()
+    {
+        return client;
     }
 
     /**

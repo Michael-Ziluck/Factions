@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import com.ziluck.factions.base.Transaction;
 import com.ziluck.factions.base.struct.FactionType;
 import com.ziluck.factions.utils.CollectionUtils;
 import org.apache.commons.lang.Validate;
@@ -75,11 +76,13 @@ public abstract class LoadFaction implements Faction
 
     protected List<UUID> invites;
 
+    protected double balance;
+
     protected Set<Flag> flags;
 
     protected List<Claim> claims;
 
-    protected boolean loaded;
+    protected List<Transaction> transactions;
 
     @Override
     public String getName()
@@ -637,6 +640,18 @@ public abstract class LoadFaction implements Faction
         {
             flags = EnumSet.noneOf(Flag.class);
         }
+    }
+
+    @Override
+    public double getBalance()
+    {
+        return balance;
+    }
+
+    @Override
+    public List<Transaction> getTransactionHistory()
+    {
+        return transactions;
     }
 
     /**

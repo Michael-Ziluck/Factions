@@ -159,23 +159,29 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
-<td class="colLast"><span class="typeNameLabel">Factions.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/Factions.html#getFaction-org.bukkit.entity.Player-">getFaction</a></span>(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html?is-external=true" title="class or interface in org.bukkit.entity">Player</a>&nbsp;player)</code>
-<div class="block">Gets the Faction of the given Player.</div>
+<td class="colLast"><span class="typeNameLabel">Factions.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/Factions.html#getFaction-long-">getFaction</a></span>(long&nbsp;id)</code>
+<div class="block">Gets a <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> referenced by its id.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
-<td class="colLast"><span class="typeNameLabel">Factions.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/Factions.html#getFaction-java.lang.String-">getFaction</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</code>
-<div class="block">Gets a Faction referenced by its name.</div>
+<td class="colLast"><span class="typeNameLabel">Factions.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/Factions.html#getFaction-org.bukkit.entity.Player-">getFaction</a></span>(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html?is-external=true" title="class or interface in org.bukkit.entity">Player</a>&nbsp;player)</code>
+<div class="block">Gets the Faction of the given Player.</div>
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
+<td class="colLast"><span class="typeNameLabel">Factions.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/Factions.html#getFaction-java.lang.String-">getFaction</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</code>
+<div class="block">Gets a <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> referenced by its name.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">Factions.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/Factions.html#getFaction-com.ziluck.factions.base.User-">getFaction</a></span>(<a href="../../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user)</code>
 <div class="block">Gets the Faction of the given User.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">Factions.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/Factions.html#getFaction-java.util.UUID-">getFaction</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;uuid)</code>
 <div class="block">Gets a Faction referenced by a player's UUID.</div>
@@ -218,65 +224,59 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
-<td class="colLast"><span class="typeNameLabel">Warp.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/Warp.html#getFaction--">getFaction</a></span>()</code>
-<div class="block">Retrieves the <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> this warp is attached to.</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">User.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/User.html#getFaction--">getFaction</a></span>()</code>
 <div class="block">Retrieves the current Faction that this User is in.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">FactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/FactionStore.html#getFaction-com.ziluck.factions.spatial.BlockColumn-">getFaction</a></span>(<a href="../../../../../com/ziluck/factions/spatial/BlockColumn.html" title="class in com.ziluck.factions.spatial">BlockColumn</a>&nbsp;column)</code>
 <div class="block">Gets a Faction that has a claim at a particular BlockColumn.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">FactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/FactionStore.html#getFaction-com.ziluck.factions.spatial.LazyLocation-">getFaction</a></span>(<a href="../../../../../com/ziluck/factions/spatial/LazyLocation.html" title="class in com.ziluck.factions.spatial">LazyLocation</a>&nbsp;location)</code>
 <div class="block">Gets a Faction that has a claim at a particular LazyLocation.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">FactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/FactionStore.html#getFaction-org.bukkit.Location-">getFaction</a></span>(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Location.html?is-external=true" title="class or interface in org.bukkit">Location</a>&nbsp;location)</code>
 <div class="block">Gets a Faction that has a claim at a particular Location.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">FactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/FactionStore.html#getFaction-long-">getFaction</a></span>(long&nbsp;id)</code>
 <div class="block">Get a faction referenced by its internal id.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">FactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/FactionStore.html#getFaction-org.bukkit.entity.Player-">getFaction</a></span>(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html?is-external=true" title="class or interface in org.bukkit.entity">Player</a>&nbsp;player)</code>
 <div class="block">Gets the Faction of the given Player.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">FactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/FactionStore.html#getFaction-java.lang.String-">getFaction</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</code>
 <div class="block">Gets a Faction referenced by its name.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">FactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/FactionStore.html#getFaction-com.ziluck.factions.base.User-">getFaction</a></span>(<a href="../../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user)</code>
 <div class="block">Gets the Faction of the given User.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">FactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/FactionStore.html#getFaction-java.util.UUID-">getFaction</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;uuid)</code>
 <div class="block">Gets a Faction referenced by a player's UUID.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">FactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/base/FactionStore.html#getWilderness--">getWilderness</a></span>()</code>
 <div class="block">Returns the Wilderness.</div>
@@ -412,13 +412,9 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
-<td class="colLast"><span class="typeNameLabel">LoadWarp.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/LoadWarp.html#faction">faction</a></span></code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>protected <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">LoadUser.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/LoadUser.html#faction">faction</a></span></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">LoadFactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/LoadFactionStore.html#wilderness">wilderness</a></span></code>
 <div class="block">The Wilderness.</div>
@@ -450,21 +446,17 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
-<td class="colLast"><span class="typeNameLabel">LoadWarp.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/LoadWarp.html#getFaction--">getFaction</a></span>()</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">LoadFactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/LoadFactionStore.html#getFaction-com.ziluck.factions.spatial.BlockColumn-">getFaction</a></span>(<a href="../../../../../com/ziluck/factions/spatial/BlockColumn.html" title="class in com.ziluck.factions.spatial">BlockColumn</a>&nbsp;column)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">LoadFactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/LoadFactionStore.html#getFaction-com.ziluck.factions.spatial.LazyLocation-">getFaction</a></span>(<a href="../../../../../com/ziluck/factions/spatial/LazyLocation.html" title="class in com.ziluck.factions.spatial">LazyLocation</a>&nbsp;location)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">LoadFactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/LoadFactionStore.html#getFaction-org.bukkit.Location-">getFaction</a></span>(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Location.html?is-external=true" title="class or interface in org.bukkit">Location</a>&nbsp;location)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><span class="typeNameLabel">LoadFactionStore.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/LoadFactionStore.html#getWilderness--">getWilderness</a></span>()</code>&nbsp;</td>
 </tr>
@@ -567,23 +559,6 @@
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><span class="typeNameLabel">MongoUser.</span><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/mongodb/MongoUser.html#setFaction-com.ziluck.factions.base.Faction-">setFaction</a></span>(<a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&nbsp;faction)</code>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-<table class="useSummary" border="0" cellpadding="3" cellspacing="0" summary="Use table, listing constructors, and an explanation">
-<caption><span>Constructors in <a href="../../../../../com/ziluck/factions/data/mongodb/package-summary.html">com.ziluck.factions.data.mongodb</a> with parameters of type <a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tbody>
-<tr class="altColor">
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/mongodb/MongoWarp.html#MongoWarp-com.ziluck.factions.base.Faction-java.lang.String-com.ziluck.factions.spatial.LazyLocation-boolean-java.lang.String-">MongoWarp</a></span>(<a href="../../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&nbsp;faction,
-         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name,
-         <a href="../../../../../com/ziluck/factions/spatial/LazyLocation.html" title="class in com.ziluck.factions.spatial">LazyLocation</a>&nbsp;location,
-         boolean&nbsp;locked,
-         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;password)</code>
-<div class="block">Creates a new Warp with the given parameters.</div>
-</td>
 </tr>
 </tbody>
 </table>

@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":10,"i10":9,"i11":10,"i12":10,"i13":10};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":10,"i11":9,"i12":9,"i13":10,"i14":10,"i15":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -215,53 +215,65 @@ extends <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getFaction-org.bukkit.entity.Player-">getFaction</a></span>(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html?is-external=true" title="class or interface in org.bukkit.entity">Player</a>&nbsp;player)</code>
-<div class="block">Gets the Faction of the given Player.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getFaction-long-">getFaction</a></span>(long&nbsp;id)</code>
+<div class="block">Gets a <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> referenced by its id.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getFaction-java.lang.String-">getFaction</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</code>
-<div class="block">Gets a Faction referenced by its name.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getFaction-org.bukkit.entity.Player-">getFaction</a></span>(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html?is-external=true" title="class or interface in org.bukkit.entity">Player</a>&nbsp;player)</code>
+<div class="block">Gets the Faction of the given Player.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
+<td class="colFirst"><code>static <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getFaction-java.lang.String-">getFaction</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</code>
+<div class="block">Gets a <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> referenced by its name.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getFaction-com.ziluck.factions.base.User-">getFaction</a></span>(<a href="../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user)</code>
 <div class="block">Gets the Faction of the given User.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getFaction-java.util.UUID-">getFaction</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;uuid)</code>
 <div class="block">Gets a Faction referenced by a player's UUID.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getFactions-com.ziluck.factions.spatial.BoundedArea-">getFactions</a></span>(<a href="../../../com/ziluck/factions/spatial/BoundedArea.html" title="class in com.ziluck.factions.spatial">BoundedArea</a>&nbsp;area)</code>
 <div class="block">Gets all Factions that have claims within the given bounded area.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../com/ziluck/factions/base/FactionStore.html" title="interface in com.ziluck.factions.base">FactionStore</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getFactionStore--">getFactionStore</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../com/ziluck/factions/Factions.html" title="class in com.ziluck.factions">Factions</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getInstance--">getInstance</a></span>()</code>
-<div class="block">Retrieves the current singleton instance of Factions.</div>
+<div class="block">Retrieves the current singleton instance of <a href="../../../com/ziluck/factions/Factions.html" title="class in com.ziluck.factions"><code>Factions</code></a>.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>static <a href="../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getUser-java.util.UUID-">getUser</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;uuid)</code>
+<div class="block">Gets the <a href="../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base"><code>User</code></a> with the given <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util"><code>UUID</code></a>.</div>
+</td>
+</tr>
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../com/ziluck/factions/base/UserStore.html" title="interface in com.ziluck.factions.base">UserStore</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#getUserStore--">getUserStore</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#onDisable--">onDisable</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/ziluck/factions/Factions.html#onEnable--">onEnable</a></span>()</code>&nbsp;</td>
 </tr>
@@ -399,12 +411,28 @@ extends <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java
 <li class="blockList">
 <h4>getInstance</h4>
 <pre>public static&nbsp;<a href="../../../com/ziluck/factions/Factions.html" title="class in com.ziluck.factions">Factions</a>&nbsp;getInstance()</pre>
-<div class="block">Retrieves the current singleton instance of Factions. It is important to note that this is set in the
+<div class="block">Retrieves the current singleton instance of <a href="../../../com/ziluck/factions/Factions.html" title="class in com.ziluck.factions"><code>Factions</code></a>. It is important to note that this is set in the
  <a href="../../../com/ziluck/factions/Factions.html#onEnable--"><code>onEnable()</code></a>, so all other plugins must have a dependency or soft-dependency for Factions for this to be
  reliable.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the current singleton instance of Factions.</dd>
+</dl>
+</li>
+</ul>
+<a name="getFaction-long-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFaction</h4>
+<pre>public static&nbsp;<a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&nbsp;getFaction(long&nbsp;id)</pre>
+<div class="block">Gets a <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> referenced by its id. If one is not found, this will return null.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>id</code> - the id of the <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a>.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> if one exists.</dd>
 </dl>
 </li>
 </ul>
@@ -415,12 +443,12 @@ extends <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java
 <li class="blockList">
 <h4>getFaction</h4>
 <pre>public static&nbsp;<a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&nbsp;getFaction(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</pre>
-<div class="block">Gets a Faction referenced by its name. If none is found this will return null.</div>
+<div class="block">Gets a <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> referenced by its name. If one is not found, this will return null.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>name</code> - the name of the Faction.</dd>
+<dd><code>name</code> - the name of the <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a>.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the Faction if one exists.</dd>
+<dd>the <a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> if one exists.</dd>
 </dl>
 </li>
 </ul>
@@ -448,7 +476,7 @@ extends <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java
 <li class="blockList">
 <h4>getFaction</h4>
 <pre>public static&nbsp;<a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&nbsp;getFaction(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Location.html?is-external=true" title="class or interface in org.bukkit">Location</a>&nbsp;location)</pre>
-<div class="block">Gets a Faction that has a claim at a particular Location. If none is found this will return Wilderness, not null.</div>
+<div class="block">Gets a Faction that has a claim at a particular Location. If one is not found, this will return Wilderness, not null.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>location</code> - the location of the faction.</dd>
@@ -464,7 +492,7 @@ extends <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java
 <li class="blockList">
 <h4>getFaction</h4>
 <pre>public static&nbsp;<a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&nbsp;getFaction(<a href="../../../com/ziluck/factions/spatial/LazyLocation.html" title="class in com.ziluck.factions.spatial">LazyLocation</a>&nbsp;location)</pre>
-<div class="block">Gets a Faction that has a claim at a particular LazyLocation. If none is found this will return Wilderness, not
+<div class="block">Gets a Faction that has a claim at a particular LazyLocation. If one is not found, this will return Wilderness, not
  null.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -481,7 +509,7 @@ extends <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java
 <li class="blockList">
 <h4>getFaction</h4>
 <pre>public static&nbsp;<a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&nbsp;getFaction(<a href="../../../com/ziluck/factions/spatial/BlockColumn.html" title="class in com.ziluck.factions.spatial">BlockColumn</a>&nbsp;column)</pre>
-<div class="block">Gets a Faction that has a claim at a particular BlockColumn. If none is found this will return Wilderness, not
+<div class="block">Gets a Faction that has a claim at a particular BlockColumn. If one is not found, this will return Wilderness, not
  null.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -498,7 +526,7 @@ extends <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java
 <li class="blockList">
 <h4>getFactions</h4>
 <pre>public static&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&gt;&nbsp;getFactions(<a href="../../../com/ziluck/factions/spatial/BoundedArea.html" title="class in com.ziluck.factions.spatial">BoundedArea</a>&nbsp;area)</pre>
-<div class="block">Gets all Factions that have claims within the given bounded area. If none are found, this returns an <b>EMPTY</b>
+<div class="block">Gets all Factions that have claims within the given bounded area. If one is not found, this returns an <b>EMPTY</b>
  List; it will not return a List with the Wilderness in it. This method will never return null.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -515,7 +543,7 @@ extends <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java
 <li class="blockList">
 <h4>getFaction</h4>
 <pre>public static&nbsp;<a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&nbsp;getFaction(<a href="../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user)</pre>
-<div class="block">Gets the Faction of the given User. If none is found this will return Wilderness, not null.</div>
+<div class="block">Gets the Faction of the given User. If one is not found, this will return Wilderness, not null.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>user</code> - the user.</dd>
@@ -531,12 +559,28 @@ extends <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java
 <li class="blockList">
 <h4>getFaction</h4>
 <pre>public static&nbsp;<a href="../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base">Faction</a>&nbsp;getFaction(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html?is-external=true" title="class or interface in org.bukkit.entity">Player</a>&nbsp;player)</pre>
-<div class="block">Gets the Faction of the given Player. If none is found this will return Wilderness, not null.</div>
+<div class="block">Gets the Faction of the given Player. If one is not found, this will return Wilderness, not null.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>player</code> - the player.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the Faction if one exists.</dd>
+</dl>
+</li>
+</ul>
+<a name="getUser-java.util.UUID-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getUser</h4>
+<pre>public static&nbsp;<a href="../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;getUser(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;uuid)</pre>
+<div class="block">Gets the <a href="../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base"><code>User</code></a> with the given <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util"><code>UUID</code></a>. If one is not found, this will return null.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>uuid</code> - the uuid of the <a href="../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base"><code>User</code></a>.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the <a href="../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base"><code>User</code></a> with the given <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util"><code>UUID</code></a>.</dd>
 </dl>
 </li>
 </ul>

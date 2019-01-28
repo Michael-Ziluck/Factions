@@ -1,10 +1,13 @@
 package com.ziluck.factions.data.mongodb;
 
+import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ziluck.factions.Factions;
 import com.ziluck.factions.base.FactionStore;
+import com.ziluck.factions.base.Transaction;
 import com.ziluck.factions.base.User;
 import com.ziluck.factions.base.UserStore;
 import com.ziluck.factions.base.Warp;
@@ -24,7 +27,6 @@ import org.jongo.marshall.jackson.oid.MongoId;
 @JsonIgnoreProperties({ "stub", "announcements", "loaded", "members", "leader" })
 public class MongoFaction extends LoadFaction
 {
-
     @MongoId
     protected long id;
 
@@ -66,13 +68,29 @@ public class MongoFaction extends LoadFaction
     @Override
     protected Warp createWarp(String name, LazyLocation location, String password)
     {
-        MongoWarp warp = new MongoWarp(this, name, location, password != null, DigestUtils.md5Hex(password));
+        MongoWarp warp = new MongoWarp(name, location, password != null, DigestUtils.md5Hex(password));
 
         getWarpsMap().put(warp.getStub(), warp);
 
         save();
 
         return warp;
+    }
+
+    @Override
+    public void withdraw(User user, double amount)
+    {
+        balance -= amount;
+        transactions.add(new MongoTransaction(user, new Date(), -amount));
+        save();
+    }
+
+    @Override
+    public void deposit(User user, double amount)
+    {
+        balance += amount;
+        transactions.add(new MongoTransaction(user, new Date(), amount));
+        save();
     }
 
     @Override
@@ -102,5 +120,4 @@ public class MongoFaction extends LoadFaction
     {
         this.leader = UserStore.getInstance().getUser(leaderId);
     }
-
 }

@@ -105,7 +105,7 @@ public class Factions extends JavaPlugin
     }
 
     /**
-     * Retrieves the current singleton instance of Factions. It is important to note that this is set in the
+     * Retrieves the current singleton instance of {@link Factions}. It is important to note that this is set in the
      * {@link #onEnable()}, so all other plugins must have a dependency or soft-dependency for Factions for this to be
      * reliable.
      *
@@ -117,10 +117,23 @@ public class Factions extends JavaPlugin
     }
 
     /**
-     * Gets a Faction referenced by its name. If none is found this will return null.
+     * Gets a {@link Faction} referenced by its id. If one is not found, this will return null.
      *
-     * @param name the name of the Faction.
-     * @return the Faction if one exists.
+     * @param id the id of the {@link Faction}.
+     *
+     * @return the {@link Faction} if one exists.
+     */
+    public static Faction getFaction(long id)
+    {
+        return getInstance().getFactionStore().getFaction(id);
+    }
+
+    /**
+     * Gets a {@link Faction} referenced by its name. If one is not found, this will return null.
+     *
+     * @param name the name of the {@link Faction}.
+     *
+     * @return the {@link Faction} if one exists.
      */
     public static Faction getFaction(String name)
     {
@@ -132,6 +145,7 @@ public class Factions extends JavaPlugin
      * faction, this will return the Wilderness.
      *
      * @param uuid the uuid of the Player.
+     *
      * @return the Faction if one exists.
      */
     public static Faction getFaction(UUID uuid)
@@ -140,9 +154,10 @@ public class Factions extends JavaPlugin
     }
 
     /**
-     * Gets a Faction that has a claim at a particular Location. If none is found this will return Wilderness, not null.
+     * Gets a Faction that has a claim at a particular Location. If one is not found, this will return Wilderness, not null.
      *
      * @param location the location of the faction.
+     *
      * @return the Faction if one exists.
      */
     public static Faction getFaction(Location location)
@@ -151,10 +166,11 @@ public class Factions extends JavaPlugin
     }
 
     /**
-     * Gets a Faction that has a claim at a particular LazyLocation. If none is found this will return Wilderness, not
+     * Gets a Faction that has a claim at a particular LazyLocation. If one is not found, this will return Wilderness, not
      * null.
      *
      * @param location the location of the faction.
+     *
      * @return the Faction if one exists.
      */
     public static Faction getFaction(LazyLocation location)
@@ -163,10 +179,11 @@ public class Factions extends JavaPlugin
     }
 
     /**
-     * Gets a Faction that has a claim at a particular BlockColumn. If none is found this will return Wilderness, not
+     * Gets a Faction that has a claim at a particular BlockColumn. If one is not found, this will return Wilderness, not
      * null.
      *
      * @param column the BlockColumn of the faction.
+     *
      * @return the Faction if one exists.
      */
     public static Faction getFaction(BlockColumn column)
@@ -175,10 +192,11 @@ public class Factions extends JavaPlugin
     }
 
     /**
-     * Gets all Factions that have claims within the given bounded area. If none are found, this returns an <b>EMPTY</b>
+     * Gets all Factions that have claims within the given bounded area. If one is not found, this returns an <b>EMPTY</b>
      * List; it will not return a List with the Wilderness in it. This method will never return null.
      *
      * @param area the area to search within.
+     *
      * @return all Factions if any exist.
      */
     public static List<Faction> getFactions(BoundedArea area)
@@ -187,9 +205,10 @@ public class Factions extends JavaPlugin
     }
 
     /**
-     * Gets the Faction of the given User. If none is found this will return Wilderness, not null.
+     * Gets the Faction of the given User. If one is not found, this will return Wilderness, not null.
      *
      * @param user the user.
+     *
      * @return the Faction if one exists.
      */
     public static Faction getFaction(User user)
@@ -198,14 +217,27 @@ public class Factions extends JavaPlugin
     }
 
     /**
-     * Gets the Faction of the given Player. If none is found this will return Wilderness, not null.
+     * Gets the Faction of the given Player. If one is not found, this will return Wilderness, not null.
      *
      * @param player the player.
+     *
      * @return the Faction if one exists.
      */
     public static Faction getFaction(Player player)
     {
         return getInstance().getFactionStore().getFaction(player);
+    }
+
+    /**
+     * Gets the {@link User} with the given {@link UUID}. If one is not found, this will return null.
+     *
+     * @param uuid the uuid of the {@link User}.
+     *
+     * @return the {@link User} with the given {@link UUID}.
+     */
+    public static User getUser(UUID uuid)
+    {
+        return getInstance().getUserStore().getUser(uuid);
     }
 
     /**

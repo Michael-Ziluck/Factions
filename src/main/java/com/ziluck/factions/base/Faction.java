@@ -2,6 +2,7 @@ package com.ziluck.factions.base;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -474,7 +475,36 @@ public interface Faction extends Messageable, Nameable
      */
     public List<UUID> getInvites();
 
-    // comment copied from User
+    /**
+     * Returns the current balance this {@link Faction} has.
+     *
+     * @return the current balance this {@link Faction} has.
+     */
+    public double getBalance();
+
+
+    /**
+     * Deposits the given amount into this {@link Faction}'s balance.
+     *
+     * @param user   the {@link User} that made the transaction.
+     * @param amount the amount to deposit.
+     */
+    public void deposit(User user, double amount);
+
+    /**
+     * Withdraws the given amount from this {@link Faction}'s balance.
+     *
+     * @param user   the {@link User} that made the transaction.
+     * @param amount the amount to withdraw.
+     */
+    public void withdraw(User user, double amount);
+
+    /**
+     * Returns a history of all transactions made by this {@link Faction}.
+     *
+     * @return a history of all transactions made by this {@link Faction}.
+     */
+    public List<Transaction> getTransactionHistory();
 
     /**
      * Saves this Faction instance to the designated form of storage. This method will run asynchronously to ensure that

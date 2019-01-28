@@ -23,7 +23,6 @@ import com.ziluck.factions.utils.CollectionUtils;
  */
 public abstract class LoadUser implements User
 {
-
     protected String name;
 
     protected boolean online;

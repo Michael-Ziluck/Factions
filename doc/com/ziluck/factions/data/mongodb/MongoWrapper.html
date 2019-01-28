@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":10};
+var methods = {"i0":9,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -161,7 +161,13 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="http://ziluckmichael.github.io/jongo-1.4.0-javadoc/org/jongo/Jongo.html?is-external=true" title="class or interface in org.jongo">Jongo</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/mongodb/MongoWrapper.html#getJongo--">getJongo</a></span>()</code>
-<div class="block">Returns the active Jongo instance.</div>
+<div class="block">Returns the active <a href="http://ziluckmichael.github.io/jongo-1.4.0-javadoc/org/jongo/Jongo.html?is-external=true" title="class or interface in org.jongo"><code>Jongo</code></a> instance.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="http://mongodb.github.io/mongo-java-driver/3.7/javadoc/com/mongodb/MongoClient.html?is-external=true" title="class or interface in com.mongodb">MongoClient</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/ziluck/factions/data/mongodb/MongoWrapper.html#getMongoClient--">getMongoClient</a></span>()</code>
+<div class="block">Returns the active <a href="http://mongodb.github.io/mongo-java-driver/3.7/javadoc/com/mongodb/MongoClient.html?is-external=true" title="class or interface in com.mongodb"><code>MongoClient</code></a> instance.</div>
 </td>
 </tr>
 </table>
@@ -211,10 +217,24 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <li class="blockList">
 <h4>getJongo</h4>
 <pre>public&nbsp;<a href="http://ziluckmichael.github.io/jongo-1.4.0-javadoc/org/jongo/Jongo.html?is-external=true" title="class or interface in org.jongo">Jongo</a>&nbsp;getJongo()</pre>
-<div class="block">Returns the active Jongo instance.</div>
+<div class="block">Returns the active <a href="http://ziluckmichael.github.io/jongo-1.4.0-javadoc/org/jongo/Jongo.html?is-external=true" title="class or interface in org.jongo"><code>Jongo</code></a> instance.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the Jongo instance.</dd>
+<dd>the active <a href="http://ziluckmichael.github.io/jongo-1.4.0-javadoc/org/jongo/Jongo.html?is-external=true" title="class or interface in org.jongo"><code>Jongo</code></a> instance.</dd>
+</dl>
+</li>
+</ul>
+<a name="getMongoClient--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMongoClient</h4>
+<pre>public&nbsp;<a href="http://mongodb.github.io/mongo-java-driver/3.7/javadoc/com/mongodb/MongoClient.html?is-external=true" title="class or interface in com.mongodb">MongoClient</a>&nbsp;getMongoClient()</pre>
+<div class="block">Returns the active <a href="http://mongodb.github.io/mongo-java-driver/3.7/javadoc/com/mongodb/MongoClient.html?is-external=true" title="class or interface in com.mongodb"><code>MongoClient</code></a> instance.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the active <a href="http://mongodb.github.io/mongo-java-driver/3.7/javadoc/com/mongodb/MongoClient.html?is-external=true" title="class or interface in com.mongodb"><code>MongoClient</code></a> instance.</dd>
 </dl>
 </li>
 </ul>

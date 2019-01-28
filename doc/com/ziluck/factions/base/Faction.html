@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6,"i21":6,"i22":6,"i23":6,"i24":6,"i25":6,"i26":6,"i27":6,"i28":6,"i29":6,"i30":6,"i31":6,"i32":6,"i33":6,"i34":6,"i35":6,"i36":6,"i37":6,"i38":6,"i39":6,"i40":6,"i41":6,"i42":6,"i43":6,"i44":6,"i45":6,"i46":6,"i47":6,"i48":6,"i49":6,"i50":6,"i51":6,"i52":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6,"i21":6,"i22":6,"i23":6,"i24":6,"i25":6,"i26":6,"i27":6,"i28":6,"i29":6,"i30":6,"i31":6,"i32":6,"i33":6,"i34":6,"i35":6,"i36":6,"i37":6,"i38":6,"i39":6,"i40":6,"i41":6,"i42":6,"i43":6,"i44":6,"i45":6,"i46":6,"i47":6,"i48":6,"i49":6,"i50":6,"i51":6,"i52":6,"i53":6,"i54":6,"i55":6,"i56":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -240,240 +240,266 @@ extends <a href="../../../../com/ziluck/factions/base/Messageable.html" title="i
 </td>
 </tr>
 <tr id="i14" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#deposit-com.ziluck.factions.base.User-double-">deposit</a></span>(<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user,
+       double&nbsp;amount)</code>
+<div class="block">Deposits the given amount into this <a href="../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a>'s balance.</div>
+</td>
+</tr>
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getAdmins--">getAdmins</a></span>()</code>
 <div class="block">Retrieves all the admins of the Faction.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>com.google.common.collect.Multimap&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getAnnouncements--">getAnnouncements</a></span>()</code>
 <div class="block">Retrieves all announcements for each player.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getBalance--">getBalance</a></span>()</code>
+<div class="block">Returns the current balance this <a href="../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> has.</div>
+</td>
+</tr>
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="../../../../com/ziluck/factions/base/claims/Claim.html" title="interface in com.ziluck.factions.base.claims">Claim</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getClaims--">getClaims</a></span>()</code>
 <div class="block">Returns all the areas claimed by the Faction.</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../com/ziluck/factions/base/struct/Role.html" title="enum in com.ziluck.factions.base.struct">Role</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getDefaultRole--">getDefaultRole</a></span>()</code>
 <div class="block">Gets the default Role of a new member.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getDescription--">getDescription</a></span>()</code>
 <div class="block">Retrieves the description for the Faction.</div>
 </td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="../../../../com/ziluck/factions/base/struct/Flag.html" title="enum in com.ziluck.factions.base.struct">Flag</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getFlags--">getFlags</a></span>()</code>
 <div class="block">Returns all the flags that the Faction has.</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getFounded--">getFounded</a></span>()</code>
 <div class="block">Returns the Unix timestamp from when this Faction was made.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="../../../../com/ziluck/factions/spatial/LazyLocation.html" title="class in com.ziluck.factions.spatial">LazyLocation</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getHome--">getHome</a></span>()</code>
 <div class="block">Get the LazyLocation for the Faction's home.</div>
 </td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code>long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getId--">getId</a></span>()</code>
 <div class="block">Retrieves the id of the Faction.</div>
 </td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getInvites--">getInvites</a></span>()</code>
 <div class="block">Retrieves all existing invites for this Faction.</div>
 </td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code><a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getLeader--">getLeader</a></span>()</code>
 <div class="block">Retrieves the leader of the Faction.</div>
 </td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getMembers--">getMembers</a></span>()</code>
 <div class="block">Retrieves all the members of the Faction.</div>
 </td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getMembers-com.ziluck.factions.base.struct.Role-">getMembers</a></span>(<a href="../../../../com/ziluck/factions/base/struct/Role.html" title="enum in com.ziluck.factions.base.struct">Role</a>&nbsp;role)</code>
 <div class="block">Retrieves all the members who have the specific rank.</div>
 </td>
 </tr>
-<tr id="i27" class="rowColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getModerators--">getModerators</a></span>()</code>
 <div class="block">Retrieves all the moderators of the Faction.</div>
 </td>
 </tr>
-<tr id="i28" class="altColor">
+<tr id="i30" class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getMOTD--">getMOTD</a></span>()</code>
 <div class="block">Retrieves the message of the day for the Faction.</div>
 </td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i31" class="rowColor">
+<td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../com/ziluck/factions/base/Transaction.html" title="interface in com.ziluck.factions.base">Transaction</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getTransactionHistory--">getTransactionHistory</a></span>()</code>
+<div class="block">Returns a history of all transactions made by this <a href="../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a>.</div>
+</td>
+</tr>
+<tr id="i32" class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getTrialMembers--">getTrialMembers</a></span>()</code>
 <div class="block">Retrieves all the trials members of the Faction.</div>
 </td>
 </tr>
-<tr id="i30" class="altColor">
+<tr id="i33" class="rowColor">
 <td class="colFirst"><code><a href="../../../../com/ziluck/factions/base/struct/FactionType.html" title="enum in com.ziluck.factions.base.struct">FactionType</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getType--">getType</a></span>()</code>
 <div class="block">Retrieves the <a href="../../../../com/ziluck/factions/base/struct/FactionType.html" title="enum in com.ziluck.factions.base.struct"><code>FactionType</code></a> of the Faction.</div>
 </td>
 </tr>
-<tr id="i31" class="rowColor">
+<tr id="i34" class="altColor">
 <td class="colFirst"><code><a href="../../../../com/ziluck/factions/base/Warp.html" title="interface in com.ziluck.factions.base">Warp</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getWarp-java.lang.String-">getWarp</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</code>
 <div class="block">Gets a warp by the given name.</div>
 </td>
 </tr>
-<tr id="i32" class="altColor">
+<tr id="i35" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="../../../../com/ziluck/factions/base/Warp.html" title="interface in com.ziluck.factions.base">Warp</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#getWarps--">getWarps</a></span>()</code>
 <div class="block">Retrieves all the warps that this Faction has saved.</div>
 </td>
 </tr>
-<tr id="i33" class="rowColor">
+<tr id="i36" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#hasHome--">hasHome</a></span>()</code>
 <div class="block">Checks if this Faction has a Home set.</div>
 </td>
 </tr>
-<tr id="i34" class="altColor">
+<tr id="i37" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#hasInvite-com.ziluck.factions.base.User-">hasInvite</a></span>(<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user)</code>
 <div class="block">Checks if the given User has an existing invite.</div>
 </td>
 </tr>
-<tr id="i35" class="rowColor">
+<tr id="i38" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#isNormal--">isNormal</a></span>()</code>
 <div class="block">Checks if this is a Normal Faction.</div>
 </td>
 </tr>
-<tr id="i36" class="altColor">
+<tr id="i39" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#isOpen--">isOpen</a></span>()</code>
 <div class="block">Checks if this Faction is open.</div>
 </td>
 </tr>
-<tr id="i37" class="rowColor">
+<tr id="i40" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#isPeaceful--">isPeaceful</a></span>()</code>
 <div class="block">Checks if this Faction is peaceful.</div>
 </td>
 </tr>
-<tr id="i38" class="altColor">
+<tr id="i41" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#isPermanent--">isPermanent</a></span>()</code>
 <div class="block">Checks if this Faction is permanent.</div>
 </td>
 </tr>
-<tr id="i39" class="rowColor">
+<tr id="i42" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#isSafezone--">isSafezone</a></span>()</code>
 <div class="block">Checks if this is a Safezone.</div>
 </td>
 </tr>
-<tr id="i40" class="altColor">
+<tr id="i43" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#isWarp-java.lang.String-">isWarp</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</code>
 <div class="block">Checks if there is a warp by the given name.</div>
 </td>
 </tr>
-<tr id="i41" class="rowColor">
+<tr id="i44" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#isWarzone--">isWarzone</a></span>()</code>
 <div class="block">Checks if this is a Warzone.</div>
 </td>
 </tr>
-<tr id="i42" class="altColor">
+<tr id="i45" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#isWilderness--">isWilderness</a></span>()</code>
 <div class="block">Checks if this is the Wilderness.</div>
 </td>
 </tr>
-<tr id="i43" class="rowColor">
+<tr id="i46" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#loadMembers--">loadMembers</a></span>()</code>
 <div class="block">Loads all the Users that are a member of this Faction.</div>
 </td>
 </tr>
-<tr id="i44" class="altColor">
+<tr id="i47" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#removeAnnouncements-com.ziluck.factions.base.User-">removeAnnouncements</a></span>(<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user)</code>
 <div class="block">Remove all announcements for the specified user.</div>
 </td>
 </tr>
-<tr id="i45" class="rowColor">
+<tr id="i48" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#removeInvite-com.ziluck.factions.base.User-">removeInvite</a></span>(<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user)</code>
 <div class="block">Remove an existing invite for the given User.</div>
 </td>
 </tr>
-<tr id="i46" class="altColor">
+<tr id="i49" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#removeWarp-java.lang.String-">removeWarp</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</code>
 <div class="block">Removes the warp referenced by the given name.</div>
 </td>
 </tr>
-<tr id="i47" class="rowColor">
+<tr id="i50" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#save--">save</a></span>()</code>
 <div class="block">Saves this Faction instance to the designated form of storage.</div>
 </td>
 </tr>
-<tr id="i48" class="altColor">
+<tr id="i51" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#setDefaultRole-com.ziluck.factions.base.struct.Role-">setDefaultRole</a></span>(<a href="../../../../com/ziluck/factions/base/struct/Role.html" title="enum in com.ziluck.factions.base.struct">Role</a>&nbsp;role)</code>
 <div class="block">Sets the Role that new members are set to when they join a Faction.</div>
 </td>
 </tr>
-<tr id="i49" class="rowColor">
+<tr id="i52" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#setFounded-long-">setFounded</a></span>(long&nbsp;created)</code>
 <div class="block">Sets when the Faction was created.</div>
 </td>
 </tr>
-<tr id="i50" class="altColor">
+<tr id="i53" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#setHome-com.ziluck.factions.spatial.LazyLocation-">setHome</a></span>(<a href="../../../../com/ziluck/factions/spatial/LazyLocation.html" title="class in com.ziluck.factions.spatial">LazyLocation</a>&nbsp;home)</code>
 <div class="block">Sets a new LazyLocation for the Faction's home.</div>
 </td>
 </tr>
-<tr id="i51" class="rowColor">
+<tr id="i54" class="altColor">
 <td class="colFirst"><code><a href="../../../../com/ziluck/factions/base/Warp.html" title="interface in com.ziluck.factions.base">Warp</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#setWarp-java.lang.String-com.ziluck.factions.spatial.LazyLocation-">setWarp</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name,
        <a href="../../../../com/ziluck/factions/spatial/LazyLocation.html" title="class in com.ziluck.factions.spatial">LazyLocation</a>&nbsp;location)</code>
 <div class="block">Creates a new password-less warp for the Faction with the given name and location.</div>
 </td>
 </tr>
-<tr id="i52" class="altColor">
+<tr id="i55" class="rowColor">
 <td class="colFirst"><code><a href="../../../../com/ziluck/factions/base/Warp.html" title="interface in com.ziluck.factions.base">Warp</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#setWarp-java.lang.String-com.ziluck.factions.spatial.LazyLocation-java.lang.String-">setWarp</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name,
        <a href="../../../../com/ziluck/factions/spatial/LazyLocation.html" title="class in com.ziluck.factions.spatial">LazyLocation</a>&nbsp;location,
        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;password)</code>
 <div class="block">Creates a new warp for the Faction with the given name, location, and password.</div>
+</td>
+</tr>
+<tr id="i56" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/ziluck/factions/base/Faction.html#withdraw-com.ziluck.factions.base.User-double-">withdraw</a></span>(<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user,
+        double&nbsp;amount)</code>
+<div class="block">Withdraws the given amount from this <a href="../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a>'s balance.</div>
 </td>
 </tr>
 </table>
@@ -1318,6 +1344,66 @@ extends <a href="../../../../com/ziluck/factions/base/Messageable.html" title="i
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the invites for this faction.</dd>
+</dl>
+</li>
+</ul>
+<a name="getBalance--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getBalance</h4>
+<pre>double&nbsp;getBalance()</pre>
+<div class="block">Returns the current balance this <a href="../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> has.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the current balance this <a href="../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a> has.</dd>
+</dl>
+</li>
+</ul>
+<a name="deposit-com.ziluck.factions.base.User-double-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>deposit</h4>
+<pre>void&nbsp;deposit(<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user,
+             double&nbsp;amount)</pre>
+<div class="block">Deposits the given amount into this <a href="../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a>'s balance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>user</code> - the <a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base"><code>User</code></a> that made the transaction.</dd>
+<dd><code>amount</code> - the amount to deposit.</dd>
+</dl>
+</li>
+</ul>
+<a name="withdraw-com.ziluck.factions.base.User-double-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withdraw</h4>
+<pre>void&nbsp;withdraw(<a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base">User</a>&nbsp;user,
+              double&nbsp;amount)</pre>
+<div class="block">Withdraws the given amount from this <a href="../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a>'s balance.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>user</code> - the <a href="../../../../com/ziluck/factions/base/User.html" title="interface in com.ziluck.factions.base"><code>User</code></a> that made the transaction.</dd>
+<dd><code>amount</code> - the amount to withdraw.</dd>
+</dl>
+</li>
+</ul>
+<a name="getTransactionHistory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTransactionHistory</h4>
+<pre><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../com/ziluck/factions/base/Transaction.html" title="interface in com.ziluck.factions.base">Transaction</a>&gt;&nbsp;getTransactionHistory()</pre>
+<div class="block">Returns a history of all transactions made by this <a href="../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a>.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a history of all transactions made by this <a href="../../../../com/ziluck/factions/base/Faction.html" title="interface in com.ziluck.factions.base"><code>Faction</code></a>.</dd>
 </dl>
 </li>
 </ul>

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Indexes;
 import com.ziluck.factions.Factions;
 import com.ziluck.factions.base.User;
 import com.ziluck.factions.configuration.Config;
@@ -32,7 +34,6 @@ public class MongoUserStore extends LoadUserStore
      */
     public MongoUserStore()
     {
-
         store = MongoWrapper.getInstance().getJongo().getCollection("users");
 
         if (Config.OPTIMIZATION.getValue() == Optimization.MEMORY)
@@ -60,6 +61,9 @@ public class MongoUserStore extends LoadUserStore
         }
 
         initialize();
+        
+        store.ensureIndex("{name: 1}");
+        store.ensureIndex("{uid: 1}");
     }
 
     @Override

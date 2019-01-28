@@ -1,12 +1,10 @@
 package com.ziluck.factions.data;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
-import com.ziluck.factions.base.Faction;
 import com.ziluck.factions.base.Warp;
 import com.ziluck.factions.configuration.Config;
 import com.ziluck.factions.configuration.struct.Optimization;
 import com.ziluck.factions.spatial.LazyLocation;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * The in-memory representation of a Warp.
@@ -19,9 +17,6 @@ import com.ziluck.factions.spatial.LazyLocation;
  */
 public abstract class LoadWarp implements Warp
 {
-
-    protected Faction faction;
-
     protected String name;
 
     protected String stub;
@@ -31,14 +26,6 @@ public abstract class LoadWarp implements Warp
     protected boolean locked;
 
     protected String password;
-
-    protected boolean loaded;
-
-    @Override
-    public Faction getFaction()
-    {
-        return faction;
-    }
 
     @Override
     public String getName()
