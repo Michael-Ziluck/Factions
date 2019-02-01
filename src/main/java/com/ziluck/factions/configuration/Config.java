@@ -149,6 +149,11 @@ public final class Config
     public static final MutableInt FACTION_TAB_COMPLETE_MIN = new MutableInt(0);
 
     /**
+     * The Locale to use for the internal Java operations
+     */
+    public static final MutableString LOCALE = new MutableString("en-US");
+
+    /**
      * Update the values from the database.
      */
     public static void update()
@@ -160,10 +165,13 @@ public final class Config
         // how to optimize operations
         updateValue(config, save, "optimization", OPTIMIZATION);
 
+        // the locale
+        updateValue(config, save, "locale", LOCALE);
+
         // the storage type to be used internally
         updateValue(config, save, "storage.type", STORAGE_TYPE);
 
-        // database connection informatin
+        // database connection information
         updateValue(config, save, "storage.database.hostname", DATABASE_HOSTNAME);
         updateValue(config, save, "storage.database.port", DATABASE_PORT);
         updateValue(config, save, "storage.database.username", DATABASE_USERNAME);
@@ -184,6 +192,10 @@ public final class Config
         updateValue(config, save, "factions.names.safezone", FACTION_NAME_SAFEZONE);
         updateValue(config, save, "factions.names.wilderness", FACTION_NAME_WILDERNESS);
         updateValue(config, save, "factions.names.normal", FACTION_NAME_NORMAL);
+
+        // tab complete options
+        updateValue(config, save, "factions.tab-complete.enabled", FACTION_TAB_COMPLETE);
+        updateValue(config, save, "factions.tab-complete.minimum-characters", FACTION_TAB_COMPLETE_MIN);
 
         if (save.booleanValue())
         {

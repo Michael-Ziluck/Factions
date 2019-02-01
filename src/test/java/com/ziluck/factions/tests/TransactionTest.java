@@ -3,7 +3,6 @@ package com.ziluck.factions.tests;
 import java.util.Collections;
 
 import com.ziluck.factions.Factions;
-import com.ziluck.factions.base.Faction;
 import com.ziluck.factions.base.struct.FactionType;
 import com.ziluck.factions.data.mongodb.MongoFaction;
 import com.ziluck.factions.data.mongodb.MongoUser;
@@ -65,6 +64,7 @@ public class TransactionTest
         faction.deposit(users[0], 100);
 
         assertEquals(100, faction.getBalance(), 0);
+        assertEquals(1, faction.getTransactionHistory().size());
     }
 
 }

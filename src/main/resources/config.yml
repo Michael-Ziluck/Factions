@@ -9,6 +9,10 @@ optimization: process
 # Set this to -1 to disable the feature entirely.
 max-factions: -1
 
+# The locale from Java to use besides the languages defined in their own file.
+# A full list can be found here: https://www.oracle.com/technetwork/java/javase/java8locales-2095355.html
+locale: 'en-US'
+
 # All the options related to the factions themselves
 factions:
   # The defaults for the factions.
@@ -19,6 +23,7 @@ factions:
       role: member
       # Whether or not factions are allowed to change the default-role
       changeable: true
+  # The names of the default factions
   names:
     warzone: Warzone
     safezone: Safezone
@@ -44,7 +49,7 @@ storage:
     port: 27017
     username: root
     password: password
-    database: factions 
+    database: factions
     timeout: 100
     description: 'Factions Connection'
 
