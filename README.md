@@ -61,15 +61,17 @@ Explain what these tests test and why
 Give an example
 ```
 
+## Code Scene
+
+[![](https://codescene.io/projects/4491/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/4491/jobs/latest-successful/results)
+
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
 
