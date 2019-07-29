@@ -20,13 +20,13 @@
             <artifactId>spigot-api</artifactId>
             <version>1.13.2-R0.1-SNAPSHOT</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+        <!-- Commons Codec -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>LATEST</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jongo/jongo -->
+        <!-- Jongo -->
         <dependency>
             <groupId>org.jongo</groupId>
             <artifactId>jongo</artifactId>
@@ -54,13 +54,13 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.9.8</version>
+            <version>[2.10)</version>
         </dependency>
         <!-- Jackson Databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.9.8</version>
+            <version>[2.10)</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
@@ -76,13 +76,13 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.9.8</version>
+            <version>[2.10)</version>
         </dependency>
         <!-- Bson -->
         <dependency>
             <groupId>de.undercouch</groupId>
             <artifactId>bson4jackson</artifactId>
-            <version>2.9.2</version>
+            <version>[2.9)</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
@@ -98,31 +98,31 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+        <!-- Mongo Java Driver -->
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
-            <version>3.9.1</version>
+            <version>[3.10)</version>
         </dependency>
         <!-- Power Mock JUnit -->
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.7.4</version>
+            <version>[1.7)</version>
             <scope>test</scope>
         </dependency>
         <!-- Power Mockito -->
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-mockito2</artifactId>
-            <version>1.7.4</version>
+            <version>[1.7)</version>
             <scope>test</scope>
         </dependency>
         <!-- Nitrite DB -->
         <dependency>
             <groupId>org.dizitart</groupId>
             <artifactId>nitrite</artifactId>
-            <version>3.1.0</version>
+            <version>[3.2)</version>
         </dependency>
         <!-- Fix Logging Errors -->
         <dependency>
